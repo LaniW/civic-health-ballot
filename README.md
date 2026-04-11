@@ -1,6 +1,6 @@
 # 🗳️ Civic Health Alliance: Official Health Ballot
 
-![Civic Health Alliance Banner](images/placeholder-banner.png)
+![Civic Health Alliance Banner](image.png)
 *(Replace with a screenshot of the main envelope or intro screen)*
 
 An interactive, ballot-style web experience exploring the critical intersection of civic participation and healthcare outcomes in the United States. 
@@ -11,27 +11,26 @@ This project visualizes how voter turnout correlates with life expectancy and un
 
 *“Civic engagement isn't abstract. It is the mechanism by which need becomes law, and law becomes care, and care becomes survival.”*
 
-This visual investigation demonstrates that states and neighborhoods where residents vote more frequently tend to have lower uninsured rates and higher life expectancies. The experience is designed to mimic an official election ballot (inspired by MIT Election Lab best practices) to emphasize that health policy is shaped directly at the ballot box.
+This visual investigation demonstrates that states and neighborhoods where residents vote more frequently tend to have lower uninsured rates and higher life expectancies. The experience is designed to mimic an official election ballot to emphasize that health policy is shaped directly at the ballot box.
 
 ## ✨ Key Features & Walkthrough
 
 ### 1. The National Picture (US Map)
-![US Partisan Map](images/placeholder-us-map.png)
-*(Replace with a screenshot of the US Map section with the stats panel open)*
+![US Partisan Map](image-1.png)
 
 * Interactive tile map of the United States.
 * Displays 2020 voter turnout, uninsured rates, and life expectancy for each state.
 * Highlights the correlation between high civic engagement and stronger health metrics.
 
 ### 2. The Local Picture (NYC Map)
-![NYC Local Map](images/placeholder-nyc-map.png)
+![NYC Local Map](image-2.png)
 *(Replace with a screenshot of the NYC Neighborhood Map)*
 
 * Brings the national data down to a granular, local level using New York City neighborhoods.
 * Shows the stark life expectancy gaps (e.g., the 12-year gap between adjacent neighborhoods) and how they map to local voter turnout.
 
 ### 3. Legislative Measures (Patient Stories)
-![Patient Stories](images/placeholder-stories.png)
+![Patient Stories](image-3.png)
 *(Replace with a screenshot of an expanded patient story on the Legislative side)*
 
 * Grounds the statistical data in real human experiences.
