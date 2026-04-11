@@ -1,7 +1,6 @@
 # 🗳️ Civic Health Alliance: Official Health Ballot
 
 ![Civic Health Alliance Banner](image.png)
-*(Replace with a screenshot of the main envelope or intro screen)*
 
 An interactive, ballot-style web experience exploring the critical intersection of civic participation and healthcare outcomes in the United States. 
 
@@ -24,14 +23,12 @@ This visual investigation demonstrates that states and neighborhoods where resid
 
 ### 2. The Local Picture (NYC Map)
 ![NYC Local Map](image-2.png)
-*(Replace with a screenshot of the NYC Neighborhood Map)*
 
 * Brings the national data down to a granular, local level using New York City neighborhoods.
 * Shows the stark life expectancy gaps (e.g., the 12-year gap between adjacent neighborhoods) and how they map to local voter turnout.
 
 ### 3. Legislative Measures (Patient Stories)
 ![Patient Stories](image-3.png)
-*(Replace with a screenshot of an expanded patient story on the Legislative side)*
 
 * Grounds the statistical data in real human experiences.
 * Features interactive patient records documenting how civic failures (like Medicaid benefit limits or state-level housing policies) result in direct, often fatal, health outcomes.
