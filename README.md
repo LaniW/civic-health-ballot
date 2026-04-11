@@ -6,13 +6,13 @@ An interactive, ballot-style web experience exploring the critical intersection 
 
 This project visualizes how voter turnout correlates with life expectancy and uninsured rates, taking the user on a journey from national state-level trends down to local New York City neighborhoods, and finally grounding the data in real human stories.
 
-## 📖 About the Project
+## About the Project
 
 *“Civic engagement isn't abstract. It is the mechanism by which need becomes law, and law becomes care, and care becomes survival.”*
 
-This visual investigation demonstrates that states and neighborhoods where residents vote more frequently tend to have lower uninsured rates and higher life expectancies. The experience is designed to mimic an official election ballot to emphasize that health policy is shaped directly at the ballot box.
+This visual investigation demonstrates that states and neighborhoods where residents vote more frequently tend to have lower uninsured rates and higher life expectancies. The experience is designed to mimic an official election ballot ([inspired by MIT Election Lab best practices](https://electionlab.mit.edu/research/ballot-design)) to emphasize that health policy is shaped directly at the ballot box.
 
-## ✨ Key Features & Walkthrough
+## Key Features & Walkthrough
 
 ### 1. The National Picture (US Map)
 ![US Partisan Map](image-1.png)
@@ -33,7 +33,7 @@ This visual investigation demonstrates that states and neighborhoods where resid
 * Grounds the statistical data in real human experiences.
 * Features interactive patient records documenting how civic failures (like Medicaid benefit limits or state-level housing policies) result in direct, often fatal, health outcomes.
 
-## 📊 Data Sources
+## Data Sources
 
 The data driving this visualization is sourced from official public health and electoral databases:
 
@@ -46,14 +46,14 @@ The data driving this visualization is sourced from official public health and e
 * **Voter Turnout:** [NYC Campaign Finance Board (CFB) Community Profiles](https://www.nyccfb.info/nyc-votes/community-profiles/), 2020
 * **Life Expectancy:** [NYC DOHMH Community Health Profiles](https://a816-health.nyc.gov/hdi/profiles/), 2021 (2010-2019 average)
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 * **HTML5** (Semantic structure)
 * **CSS3** (Custom properties, grid/flexbox layouts, CSS animations, 3D transforms for ballot flipping)
 * **Vanilla JavaScript** (DOM manipulation, state management, SVG generation)
 * **SVG** (Scalable Vector Graphics for the tile maps)
 
-## 🚀 Running the Project Locally
+## Running the Project Locally
 
 Because this project is built entirely with plain HTML, CSS, and JavaScript without external build tools or frameworks, running it is incredibly simple:
 
