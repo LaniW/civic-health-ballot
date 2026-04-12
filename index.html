@@ -68,8 +68,8 @@ h1, h2, h3, .official-serif {
 /* ─── ENVELOPE ANIMATION ─── */
 .env-container {
   position: relative;
-  width: min(700px, 95vw);
-  height: 400px;
+  width: min(700px, 96vw);
+  height: min(480px, 60vh); /* Constrained height to keep it on screen */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +78,8 @@ h1, h2, h3, .official-serif {
 .envelope {
   position: absolute;
   width: 100%;
-  background: #f0eada;
+  height: 100%; /* Fills the new responsive container height */
+  background: #E1C699; 
   border: var(--border-med);
   box-shadow: 10px 10px 0 rgba(0,0,0,.5);
   z-index: 2;
@@ -87,8 +88,8 @@ h1, h2, h3, .official-serif {
 
 .env-flap {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 50%;
-  background: #e6dfc8;
+  top: 0; left: 0; width: 100%; height: 35%; /* Made flap shorter */
+  background: #D1B482; 
   border-bottom: var(--border-med);
   transform-origin: top;
   transition: transform 0.6s ease;
@@ -102,7 +103,7 @@ h1, h2, h3, .official-serif {
 
 .env-paper {
   position: absolute;
-  top: 10px; left: 5%; width: 90%; height: 95%;
+  top: 10px; left: 5%; width: 90%; height: 80%; /* Slightly shorter paper */
   background: white;
   border: var(--border-thin);
   z-index: 3;
@@ -110,7 +111,7 @@ h1, h2, h3, .official-serif {
 }
 
 .envelope.open .env-paper {
-  transform: translateY(-80%);
+  transform: translateY(-35%); /* Peeks out instead of shooting too far up */
 }
 
 .envelope.fade-out {
@@ -120,15 +121,36 @@ h1, h2, h3, .official-serif {
 
 /* Envelope Interior Styling */
 .env-stripe { height: 12px; background: repeating-linear-gradient(90deg, #111 0 20px, #fff 20px 40px); border-bottom: var(--border-med); }
-.env-body { padding: 30px; }
-.env-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 11px; text-transform: uppercase; }
-.env-from strong { font-size: 13px; }
-.env-vbm { border: var(--border-thick); padding: 10px; text-align: center; font-weight: bold; font-size: 14px; margin: 0 20px; }
-.env-to { text-align: right; }
+.env-body { 
+  padding: 40px; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  height: 100%; /* Make sure it takes full height of the envelope to space contents */
+  position: relative; 
+  z-index: 5; 
+  background: #E1C699; 
+}
+.env-row { display: flex; justify-content: space-between; font-size: 14px; text-transform: uppercase; }
+
+.cha-brand {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.env-vbm { border: var(--border-thick); padding: 15px 20px; text-align: center; font-weight: bold; font-size: 18px; margin: 0 20px; flex-shrink: 0; }
+.env-to { text-align: right; font-size: 16px; margin-top: 10px; }
+.env-to strong { font-size: 24px; display: block; margin-bottom: 5px; }
+
 .env-btn {
-  display: block; width: 100%; padding: 15px; background: var(--ink); color: white;
-  font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;
-  cursor: pointer; border: none; margin-top: 20px;
+  display: block; width: 100%; padding: 18px; background: var(--ink); color: white;
+  font-weight: bold; font-size: 18px; text-transform: uppercase; letter-spacing: 2px;
+  cursor: pointer; border: none; margin-top: 30px;
 }
 .env-btn:hover { background: #333; }
 
@@ -253,7 +275,7 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
 
 /* Source Notes */
 .source-notes {
-  margin-top: auto; /* Pushes it to the bottom if the container is flex */
+  margin-top: auto;
   padding-top: 15px;
   border-top: var(--border-thin);
   font-family: monospace;
@@ -263,7 +285,7 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
   text-transform: uppercase;
 }
 .source-notes a {
-  color: var(--civic-blue, #2563eb); /* Uses the blue from your stories, or falls back */
+  color: var(--civic-blue, #2563eb);
   text-decoration: none;
   display: block;
   margin-bottom: 6px;
@@ -283,7 +305,6 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
 .story-body { display: none; }
 .story-body.on { display: block; }
 
-/* New Story Styles -> Adjusted to Ballot Aesthetic */
 .new-story-body { padding: 30px; background: var(--paper-shade); border-top: var(--border-thin); }
 .story-detail-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
 .story-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold; font-family: 'Arial', sans-serif; border: 2px solid var(--ink); }
@@ -316,6 +337,10 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
   .ballot-cols { flex-direction: column; }
   .bleft { flex: none; border-right: none; border-bottom: var(--border-thick); }
   .new-story-body { padding: 25px 15px; }
+  
+  .env-body { padding: 20px; }
+  .cha-brand { font-size: 20px; }
+  .env-vbm { font-size: 14px; padding: 10px; margin: 0 10px; }
 }
 </style>
 </head>
@@ -337,23 +362,25 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
         <div class="env-stripe"></div>
       </div>
       <div class="env-paper"></div>
-      <div class="env-body" style="position:relative; z-index:5; background:#f0eada; height:100%;">
-        <div class="env-row" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+      <div class="env-body">
+        <div class="env-row" style="border-bottom: 2px solid var(--ink); padding-bottom: 12px; font-weight: bold;">
           <span>Official Election Mail</span>
           <span>United States Postal Service</span>
         </div>
-        <div class="env-row" style="align-items:center;">
+        <div class="env-row" style="align-items:flex-start; flex: 1; margin-top: 30px;">
           <div class="env-from">
-            <strong>CIVIC HEALTH ALLIANCE</strong><br>
-            Commissioner of Civic Engagement<br>
+            <span class="cha-brand">CIVIC HEALTH ALLIANCE</span>
+            <span style="font-weight:bold; font-size: 15px;">Commissioner of Civic Engagement</span><br>
             Middletown, DE 19709
           </div>
           <div class="env-vbm">
             OFFICIAL BALLOTING MATERIAL<br>
             DO NOT BEND
           </div>
+        </div>
+        <div class="env-row" style="justify-content: flex-end;">
           <div class="env-to">
-            <strong>TO: YOU</strong><br>
+            <strong>TO: YOU</strong>
             UNITED STATES OF AMERICA
           </div>
         </div>
