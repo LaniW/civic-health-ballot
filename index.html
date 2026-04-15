@@ -8,20 +8,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* MIT Election Lab style: High contrast, clear, mostly black and white */
+  /* MIT Election Lab & Provided Palette */
+  --brand-blue: #1a428a;
+  --brand-purple: #744c6e;
+  --brand-gray-dark: #58595b;
+  --brand-gray-med: #808285;
+  --brand-gray-light: #a7a9ac;
+  --brand-teal: #27606b;
+  --brand-teal-light: #5c878f;
+  --brand-red: #c14729;
+  --brand-red-light: #d7765a;
+  --brand-pink: #ffb7ae;
+  --brand-yellow: #fee5a5;
+  --brand-brown: #824d20;
+
   --paper: #ffffff;
   --paper-dark: #e8e8e8;
   --paper-shade: #f5f5f5;
   --ink: #000000;
+  
   --border-thin: 1px solid #000000;
   --border-med: 2px solid #000000;
   --border-thick: 4px solid #000000;
   
-  /* Map Data Colors - High contrast grays/blues */
-  --t-low: #d3d3d3;
-  --t-med-low: #a9a9a9;
-  --t-med: #696969;
-  --t-high: #2f4f4f;
+  /* Map Data Colors - Vivid Palette */
+  --t-low: var(--brand-pink);
+  --t-med-low: var(--brand-yellow);
+  --t-med: var(--brand-teal-light);
+  --t-high: var(--brand-blue);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,9 +43,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
-  background: #333333;
+  background: #222;
   min-height: 100vh;
   color: var(--ink);
+  overflow: hidden; /* Prevents body scroll, allowing internal panel scrolling */
 }
 
 h1, h2, h3, .official-serif {
@@ -40,7 +55,7 @@ h1, h2, h3, .official-serif {
 
 /* ─── SCREENS ─── */
 .screen { display: none; }
-#screen-envelope.active  { display: flex; min-height: 100vh; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, #555 0%, #222 100%); overflow: hidden; }
+#screen-envelope.active  { display: flex; min-height: 100vh; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, #444 0%, #111 100%); overflow: hidden; }
 #screen-intro.active     { display: flex; min-height: 100vh; align-items: center; justify-content: center; background: #333333; padding: 20px; }
 #screen-ballot-wrap.active { display: block; }
 
@@ -55,7 +70,7 @@ h1, h2, h3, .official-serif {
   border-bottom: 2px solid white;
 }
 #navbar.on { display: flex; }
-.nav-inner { display: flex; width: 100%; max-width: 1200px; margin: 0 auto; }
+.nav-inner { display: flex; width: 100%; max-width: 1400px; margin: 0 auto; }
 .nav-item {
   flex: 1; padding: 12px 10px; text-align: center;
   font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
@@ -63,23 +78,33 @@ h1, h2, h3, .official-serif {
   transition: background .2s, color .2s; user-select: none;
 }
 .nav-item:last-child { border-right: none; }
-.nav-item:hover, .nav-item.on { background: #444; color: white; }
+.nav-item:hover, .nav-item.on { background: var(--brand-blue); color: white; }
 
 /* ─── ENVELOPE ANIMATION ─── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px) rotate(-1deg); }
+  20%, 40%, 60%, 80% { transform: translateX(4px) rotate(1deg); }
+}
+
 .env-container {
   position: relative;
   width: min(700px, 96vw);
-  height: min(480px, 60vh); /* Constrained height to keep it on screen */
+  height: min(480px, 60vh);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.shake-anim {
+  animation: shake 2.5s infinite;
+}
+
 .envelope {
   position: absolute;
   width: 100%;
-  height: 100%; /* Fills the new responsive container height */
-  background: #E1C699; 
+  height: 100%;
+  background: var(--brand-yellow); 
   border: var(--border-med);
   box-shadow: 10px 10px 0 rgba(0,0,0,.5);
   z-index: 2;
@@ -88,8 +113,8 @@ h1, h2, h3, .official-serif {
 
 .env-flap {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 35%; /* Made flap shorter */
-  background: #D1B482; 
+  top: 0; left: 0; width: 100%; height: 35%;
+  background: #e8c984; 
   border-bottom: var(--border-med);
   transform-origin: top;
   transition: transform 0.6s ease;
@@ -103,7 +128,7 @@ h1, h2, h3, .official-serif {
 
 .env-paper {
   position: absolute;
-  top: 10px; left: 5%; width: 90%; height: 80%; /* Slightly shorter paper */
+  top: 10px; left: 5%; width: 90%; height: 80%;
   background: white;
   border: var(--border-thin);
   z-index: 3;
@@ -111,25 +136,25 @@ h1, h2, h3, .official-serif {
 }
 
 .envelope.open .env-paper {
-  transform: translateY(-35%); /* Peeks out instead of shooting too far up */
+  transform: translateY(-35%);
 }
 
 .envelope.fade-out {
   opacity: 0;
-  transform: translateY(50px);
+  transform: scale(1.1) translateY(50px);
 }
 
 /* Envelope Interior Styling */
-.env-stripe { height: 12px; background: repeating-linear-gradient(90deg, #111 0 20px, #fff 20px 40px); border-bottom: var(--border-med); }
+.env-stripe { height: 12px; background: repeating-linear-gradient(90deg, var(--brand-purple) 0 20px, #fff 20px 40px); border-bottom: var(--border-med); }
 .env-body { 
   padding: 40px; 
   display: flex; 
   flex-direction: column; 
   justify-content: space-between; 
-  height: 100%; /* Make sure it takes full height of the envelope to space contents */
+  height: 100%; 
   position: relative; 
   z-index: 5; 
-  background: #E1C699; 
+  background: var(--brand-yellow); 
 }
 .env-row { display: flex; justify-content: space-between; font-size: 14px; text-transform: uppercase; }
 
@@ -143,34 +168,16 @@ h1, h2, h3, .official-serif {
   color: var(--ink);
 }
 
-.env-vbm { border: var(--border-thick); padding: 15px 20px; text-align: center; font-weight: bold; font-size: 18px; margin: 0 20px; flex-shrink: 0; }
+.env-vbm { border: var(--border-thick); padding: 15px 20px; text-align: center; font-weight: bold; font-size: 18px; margin: 0 20px; flex-shrink: 0; background: white; color: var(--brand-blue);}
 .env-to { text-align: right; font-size: 16px; margin-top: 10px; }
 .env-to strong { font-size: 24px; display: block; margin-bottom: 5px; }
 
 .env-btn {
-  display: block; width: 100%; padding: 18px; background: var(--ink); color: white;
+  display: block; width: 100%; padding: 18px; background: var(--brand-red); color: white;
   font-weight: bold; font-size: 18px; text-transform: uppercase; letter-spacing: 2px;
-  cursor: pointer; border: none; margin-top: 30px;
+  cursor: pointer; border: 2px solid var(--ink); margin-top: 30px; transition: 0.2s;
 }
-.env-btn:hover { background: #333; }
-
-/* ─── INTRO PAGE ─── */
-.intro-card {
-  width: min(700px, 96vw);
-  background: var(--paper);
-  border: var(--border-thick);
-  padding: 40px;
-  box-shadow: 8px 8px 0 rgba(0,0,0,.6);
-}
-.intro-h1 { font-size: 32px; font-weight: bold; border-bottom: var(--border-thick); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
-.intro-body { font-size: 15px; line-height: 1.6; margin-bottom: 30px; }
-.intro-body p { margin-bottom: 15px; }
-.begin-btn {
-  padding: 15px 40px; background: var(--ink); color: white;
-  font-size: 14px; font-weight: bold; text-transform: uppercase;
-  letter-spacing: 2px; cursor: pointer; border: none;
-}
-.begin-btn:hover { background: #444; }
+.env-btn:hover { background: var(--brand-red-light); }
 
 /* ─── BALLOT FLIPPER ─── */
 #ballot-flipper {
@@ -186,34 +193,64 @@ h1, h2, h3, .official-serif {
 
 /* ─── BALLOT SHARED ─── */
 .ballot-page {
-  max-width: 1200px; margin: 20px auto;
+  max-width: 1400px;
+  width: 96vw;
+  height: 90vh; /* Constrains height to force inner scrolling */
+  margin: 2vh auto;
   background: var(--paper);
   border: var(--border-thick);
   box-shadow: 10px 10px 0 rgba(0,0,0,.5);
+  display: flex;
+  flex-direction: column;
 }
 .ballot-header {
   display: flex; justify-content: space-between; align-items: center;
   background: var(--ink); color: white; padding: 15px 20px;
-  text-transform: uppercase; font-weight: bold;
+  text-transform: uppercase; font-weight: bold; flex-shrink: 0;
 }
 .bh-title { font-size: 20px; letter-spacing: 1px; }
-.bh-sub { font-size: 12px; color: #ccc; }
-.ballot-instructions {
-  background: var(--paper-shade); border-bottom: var(--border-thick);
-  padding: 15px 20px; font-size: 13px; line-height: 1.5;
-}
-.ballot-instructions strong { background: var(--ink); color: white; padding: 2px 6px; margin-right: 5px; }
 
-.ballot-cols { display: flex; }
-.bleft { flex: 0 0 350px; border-right: var(--border-thick); padding: 20px; display: flex; flex-direction: column; gap: 20px; }
-.bright { flex: 1; padding: 0; }
+.subtitle-banner {
+  padding: 12px 20px; 
+  font-size: 16px; 
+  font-weight: bold; 
+  text-align: center;
+  color: white;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ballot-cols { 
+  display: flex; 
+  flex: 1; 
+  overflow: hidden; /* Contains the inner scroll panels */
+}
+.bleft { 
+  flex: 1; 
+  border-right: var(--border-thick); 
+  padding: 20px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 20px; 
+  overflow-y: auto; 
+  background: white;
+}
+.bright { 
+  flex: 1; 
+  padding: 0; 
+  overflow-y: auto; 
+  background: var(--paper-shade);
+  position: relative;
+}
 
 .section-header {
   background: var(--paper-dark); border-bottom: var(--border-med);
   padding: 10px 20px; font-size: 16px; font-weight: bold; text-transform: uppercase;
 }
 .race-header {
-  border-bottom: var(--border-thin); padding: 10px 20px; background: #fafafa;
+  border-bottom: var(--border-thin); padding: 10px 20px; background: #fff;
+  position: sticky; top: 0; z-index: 5;
 }
 .race-title { font-size: 14px; font-weight: bold; text-transform: uppercase; }
 
@@ -222,122 +259,117 @@ h1, h2, h3, .official-serif {
   display: flex; align-items: center; gap: 15px;
   padding: 12px 20px; border-bottom: var(--border-thin);
   cursor: pointer; transition: background .1s;
+  background: white;
 }
 .bopt:hover { background: #f0f0f0; }
-.bopt.sel { background: #e0e0e0; font-weight: bold; }
+.bopt.sel { background: #f8f8f8; font-weight: bold; } /* Subtle background */
 
 .oval {
   width: 24px; height: 16px; border: 2px solid var(--ink); border-radius: 50%;
-  background: white; flex-shrink: 0; transition: background .1s;
+  background: white; flex-shrink: 0; transition: background .1s, border-color .1s;
 }
-.bopt.sel .oval { background: var(--ink); }
+/* Oval fills dynamically based on custom property injected in JS */
+.bopt.sel .oval { background: var(--sel-color); border-color: var(--sel-color); }
 
 .opt-body { flex: 1; }
 .opt-name { font-size: 15px; }
-.opt-meta { font-size: 11px; color: #555; margin-top: 3px; text-transform: uppercase; }
+.opt-meta { font-size: 11px; color: #555; margin-top: 3px; text-transform: uppercase; transition: color .1s; }
 .opt-pct { font-family: monospace; font-size: 14px; font-weight: bold; }
-.opt-badge { font-size: 10px; background: var(--ink); color: white; padding: 2px 6px; margin-left: 10px; text-transform: uppercase; }
+.opt-badge { font-size: 10px; background: var(--brand-teal); color: white; padding: 2px 6px; margin-left: 10px; text-transform: uppercase; border-radius: 3px; }
 
-/* Next Actions */
+/* Next Actions & Callouts */
 .next-action-bar {
-  display: none; padding: 15px 20px; background: var(--paper-dark);
+  display: none; padding: 15px 20px; background: var(--brand-gray-dark);
   text-align: right; border-bottom: var(--border-thin);
+  position: sticky; top: 0; z-index: 50;
+  color: white;
 }
 .next-action-bar.on { display: block; }
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(193, 71, 41, 0.7); }
+  70% { box-shadow: 0 0 0 12px rgba(193, 71, 41, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(193, 71, 41, 0); }
+}
+
 .action-btn {
-  background: var(--ink); color: white; border: none; padding: 10px 20px;
-  font-weight: bold; text-transform: uppercase; cursor: pointer;
+  background: var(--ink); color: white; border: 2px solid white; padding: 10px 20px;
+  font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.2s;
 }
 .action-btn:hover { background: #444; }
+.callout-btn {
+  background: var(--brand-red);
+  font-size: 13px;
+  padding: 10px 20px;
+  animation: pulse 2s infinite;
+  border: none;
+}
+.callout-btn:hover { background: var(--brand-red-light); }
 
 /* Stats Panel */
-#stats-panel, #nyc-stats-panel { display: none; border: var(--border-med); padding: 15px; margin-top: 10px; background: white; }
+#stats-panel, #nyc-stats-panel { display: none; border: var(--border-med); padding: 20px; margin-top: 10px; background: white; box-shadow: 4px 4px 0 rgba(0,0,0,0.1); }
 #stats-panel.on, #nyc-stats-panel.on { display: block; }
-.stat-name { font-size: 18px; font-weight: bold; border-bottom: var(--border-thin); padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase; }
-.stat-row { margin-bottom: 12px; }
-.stat-lbl { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; font-weight: bold; margin-bottom: 4px; }
-.stat-bg { height: 10px; background: #eee; border: 1px solid #ccc; }
-.stat-fill { height: 100%; background: var(--ink); transition: width .4s ease; }
+.stat-name { font-size: 22px; font-weight: bold; border-bottom: var(--border-thick); padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase; color: var(--brand-blue); }
+.stat-row { margin-bottom: 15px; }
+.stat-lbl { display: flex; justify-content: space-between; font-size: 12px; text-transform: uppercase; font-weight: bold; margin-bottom: 6px; }
+.stat-bg { height: 12px; background: #eee; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; }
+.stat-fill { height: 100%; background: var(--brand-blue); transition: width .6s cubic-bezier(0.25, 1, 0.5, 1); }
 
 /* Tilemaps */
-.tm-label { font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
-svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--border-thin); }
+.tm-label { font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 5px; }
+svg.tilemap { width: 100%; display: block; background: #fff; border: var(--border-med); }
 .tm-tile rect { transition: fill 0.2s, stroke-width 0.2s; }
 .tm-tile:hover rect { stroke-width: 2px; }
-.tm-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; font-size: 11px; text-transform: uppercase; }
-.tm-le { display: flex; align-items: center; gap: 5px; }
-.tm-sw { width: 12px; height: 12px; border: 1px solid var(--ink); }
+.tm-legend { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; font-size: 12px; text-transform: uppercase; font-weight: bold; }
+.tm-le { display: flex; align-items: center; gap: 6px; }
+.tm-sw { width: 16px; height: 16px; border: 2px solid var(--ink); border-radius: 3px; }
 
 /* NYC Specific Map Styles */
-.nyc-path { transition: all 0.2s; cursor: pointer; stroke: rgba(0,0,0,0.2); stroke-width: 0.2px; }
-.nyc-path:hover { stroke: var(--ink); stroke-width: 0.6px; }
-.nyc-path.sel { stroke: var(--ink); stroke-width: 1px; }
+.nyc-path { transition: all 0.2s; cursor: pointer; stroke: rgba(0,0,0,0.5); stroke-width: 0.2px; }
+.nyc-path:hover { stroke: var(--ink); stroke-width: 0.8px; }
+.nyc-path.sel { stroke: var(--brand-red); stroke-width: 1px; } /* Less bold selection */
 
-/* Source Notes */
-.source-notes {
-  margin-top: auto;
-  padding-top: 15px;
-  border-top: var(--border-thin);
-  font-family: monospace;
-  font-size: 9px;
-  line-height: 1.6;
-  color: #666;
-  text-transform: uppercase;
-}
-.source-notes a {
-  color: var(--civic-blue, #2563eb);
-  text-decoration: none;
-  display: block;
-  margin-bottom: 6px;
-  transition: opacity 0.2s;
-}
-.source-notes a:hover {
-  text-decoration: underline;
-  opacity: 0.8;
-}
-
-/* Stories/Back Updated Styles */
-.story-wrap { border-bottom: var(--border-thin); }
+/* Stories Updated Styles */
+.story-wrap { border-bottom: var(--border-thin); background: white; }
 .story-top { display: flex; align-items: center; gap: 15px; padding: 15px 20px; cursor: pointer; transition: background .1s; }
 .story-top:hover { background: #f0f0f0; }
-.story-top.sel-s { background: #e0e0e0; }
-.story-top.sel-s .oval { background: var(--ink); }
+.story-top.sel-s { background: #f8f8f8; } /* Subtle background */
+.story-top.sel-s .oval { background: var(--brand-purple); border-color: var(--brand-purple); } /* Exception: Purple selection */
+
 .story-body { display: none; }
 .story-body.on { display: block; }
-
-.new-story-body { padding: 30px; background: var(--paper-shade); border-top: var(--border-thin); }
+.new-story-body { padding: 30px; background: white; border-top: var(--border-thin); border-bottom: var(--border-thick); }
 .story-detail-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-.story-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold; font-family: 'Arial', sans-serif; border: 2px solid var(--ink); }
-.story-name { font-size: 20px; font-weight: bold; color: var(--ink); margin-bottom: 2px; }
-.story-role { font-family: monospace; font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
-.story-intro-text { font-size: 14px; line-height: 1.6; margin-bottom: 25px; color: var(--ink); }
+.story-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--brand-purple); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; border: 2px solid var(--ink); }
+.story-name { font-size: 22px; font-weight: bold; color: var(--ink); margin-bottom: 4px; }
+.story-role { font-family: monospace; font-size: 12px; color: var(--brand-teal); text-transform: uppercase; font-weight: bold; }
+.story-intro-text { font-size: 15px; line-height: 1.6; margin-bottom: 25px; color: #333; padding: 15px; background: var(--paper-shade); border-left: 4px solid var(--brand-purple); }
 
-.story-legend { display: flex; gap: 15px; margin-bottom: 25px; font-family: monospace; font-size: 11px; color: var(--ink); align-items: center; font-weight: bold; text-transform: uppercase;}
+.story-legend { display: flex; gap: 15px; margin-bottom: 25px; font-family: monospace; font-size: 11px; color: var(--ink); align-items: center; font-weight: bold; text-transform: uppercase; padding: 10px; border: 1px dashed #ccc; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
-.l-box { width: 12px; height: 12px; border-radius: 50%; }
-.l-box.health { background: var(--ink); }
-.l-box.civic { background: white; border: 2px solid var(--ink); }
+.l-box { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--ink); }
+.l-box.health { background: var(--brand-red); }
+.l-box.civic { background: var(--brand-teal); }
 
-.story-timeline-new { position: relative; padding-left: 20px; margin-bottom: 30px; border-left: 2px solid #ccc; margin-left: 8px; }
-.te-new { position: relative; margin-bottom: 25px; }
-.te-new::before { content: ''; position: absolute; left: -27px; top: 2px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); background: white; }
-.te-new.health::before { background: var(--ink); }
-.te-new.civic::before { background: white; }
-.te-date { font-family: monospace; font-size: 10px; color: #555; margin-bottom: 4px; text-transform: uppercase; font-weight: bold;}
-.te-title { font-weight: bold; font-size: 15px; margin-bottom: 6px; color: var(--ink); }
-.te-detail-text { font-size: 13px; line-height: 1.5; color: #222; padding-left: 12px; border-left: 2px solid transparent; }
-.te-new.health .te-detail-text { border-left-color: var(--ink); }
-.te-new.civic .te-detail-text { border-left-color: #aaa; }
+.story-timeline-new { position: relative; padding-left: 20px; margin-bottom: 30px; border-left: 3px solid #eee; margin-left: 8px; }
+.te-new { position: relative; margin-bottom: 30px; }
+.te-new::before { content: ''; position: absolute; left: -31px; top: 2px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--ink); background: white; }
+.te-new.health::before { background: var(--brand-red); }
+.te-new.civic::before { background: var(--brand-teal); }
+.te-date { font-family: monospace; font-size: 11px; color: var(--brand-gray-dark); margin-bottom: 6px; text-transform: uppercase; font-weight: bold; }
+.te-title { font-weight: bold; font-size: 16px; margin-bottom: 6px; color: var(--ink); }
+.te-detail-text { font-size: 14px; line-height: 1.5; color: #444; padding-left: 15px; border-left: 3px solid transparent; }
+.te-new.health .te-detail-text { border-left-color: var(--brand-red-light); }
+.te-new.civic .te-detail-text { border-left-color: var(--brand-teal-light); }
 
-.story-summary-box { background: white; color: var(--ink); padding: 25px; text-align: center; border: var(--border-thick); margin-top: 10px; }
-.summary-text { font-weight: bold; font-size: 15px; margin-bottom: 10px; line-height: 1.5; text-transform: uppercase;}
-.summary-sub { font-size: 12px; color: #555; font-family: monospace; text-transform: uppercase; }
+.story-summary-box { background: var(--brand-blue); color: white; padding: 25px; text-align: center; border: var(--border-thick); margin-top: 20px; }
+.summary-text { font-weight: bold; font-size: 16px; margin-bottom: 10px; line-height: 1.5; text-transform: uppercase; }
+.summary-sub { font-size: 12px; color: var(--brand-pink); font-family: monospace; text-transform: uppercase; }
 
-@media (max-width: 800px) {
-  .ballot-cols { flex-direction: column; }
-  .bleft { flex: none; border-right: none; border-bottom: var(--border-thick); }
-  .new-story-body { padding: 25px 15px; }
-  
+@media (max-width: 900px) {
+  .ballot-cols { flex-direction: column; overflow-y: auto; }
+  .bleft, .bright { overflow-y: visible; height: auto; flex: none; }
+  .bleft { border-right: none; border-bottom: var(--border-thick); }
   .env-body { padding: 20px; }
   .cha-brand { font-size: 20px; }
   .env-vbm { font-size: 14px; padding: 10px; margin: 0 10px; }
@@ -348,7 +380,7 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
 
 <nav id="navbar">
   <div class="nav-inner">
-    <div class="nav-item" onclick="navToEnvelope()">Civic Health</div>
+    <div class="nav-item" onclick="location.reload()">Civic Health</div>
     <div class="nav-item" id="nav-us" onclick="navToBallot('screen-ballot')">US Partisan Map</div>
     <div class="nav-item" id="nav-nyc" onclick="navToBallot('screen-nyc')">NYC Local Map</div>
     <div class="nav-item" id="nav-hc" onclick="navToBallot('screen-back')">Legislative Side</div>
@@ -356,7 +388,7 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
 </nav>
 
 <div id="screen-envelope" class="screen active">
-  <div class="env-container" id="env-wrap">
+  <div class="env-container shake-anim" id="env-wrap">
     <div class="envelope" id="envelope-elem">
       <div class="env-flap">
         <div class="env-stripe"></div>
@@ -383,7 +415,7 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
             UNITED STATES OF AMERICA
           </div>
         </div>
-        <button class="begin-btn" onclick="navToBallot('screen-ballot')">Proceed to Ballot</button>
+        <button class="env-btn callout-btn" onclick="openEnvelope()" style="width: 100%;">Proceed to Ballot</button>
       </div>
     </div>
   </div>
@@ -399,14 +431,14 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
           <div class="bh-title official-serif">Partisan Elections: National Health Ballot</div>
           <div>Page 1 of 3</div>
         </div>
-        <div class="ballot-instructions">
-          States where residents vote tend to have lower uninsured rates and higher life expectancies. The correlation is striking, and it's not coincidental. Local health policy is shaped by who shows up at the ballot box.
+        <div class="subtitle-banner" style="background: var(--brand-blue);">
+          Discover how national voter turnout rates directly impact state healthcare outcomes.
         </div>
         <div class="ballot-cols">
           <div class="bleft">
             <div>
               <div class="tm-label">Voter Turnout by State · 2020</div>
-              <svg id="tilemap-us" class="tilemap" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" style="background:white; border:none;"></svg>
+              <svg id="tilemap-us" class="tilemap" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg"></svg>
               <div class="tm-legend">
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-low);"></div>&lt; 58%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-med-low);"></div>58–63%</div>
@@ -418,33 +450,22 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
               <div class="stat-name" id="stats-name">—</div>
               <div class="stat-row">
                 <div class="stat-lbl"><span>Voter Turnout</span><span id="sv1">—</span></div>
-                <div class="stat-bg"><div class="stat-fill" id="sb1" style="width:0%"></div></div>
+                <div class="stat-bg"><div class="stat-fill" id="sb1" style="width:0%; background: var(--brand-blue);"></div></div>
               </div>
               <div class="stat-row">
                 <div class="stat-lbl"><span>Uninsured Rate</span><span id="sv2">—</span></div>
-                <div class="stat-bg"><div class="stat-fill" id="sb2" style="width:0%; background:#444;"></div></div>
+                <div class="stat-bg"><div class="stat-fill" id="sb2" style="width:0%; background: var(--brand-red);"></div></div>
               </div>
               <div class="stat-row">
                 <div class="stat-lbl"><span>Life Expectancy</span><span id="sv3">—</span></div>
-                <div class="stat-bg"><div class="stat-fill" id="sb3" style="width:0%; background:#888;"></div></div>
+                <div class="stat-bg"><div class="stat-fill" id="sb3" style="width:0%; background: var(--brand-teal);"></div></div>
               </div>
-            </div>
-            <div class="source-notes">
-              <a href="https://election.lab.ufl.edu/voter-turnout/2020-general-election-turnout/" target="_blank">
-                Voter Turnout -- UF Election Lab, 2020 VEP
-              </a>
-              <a href="https://www.kff.org/state-health-policy-data/state-indicator/total-population/?currentTimeframe=0&sortModel=%7B%22colId%22:%22Location%22,%22sort%22:%22asc%22%7D" target="_blank">
-                Uninsured Rate -- KFF ACS, 2022-2023
-              </a>
-              <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf" target="_blank">
-                Life Expectancy -- CDC NVSR Vol. 74 No. 12, 2022
-              </a>
             </div>
           </div>
           <div class="bright">
             <div id="us-next-bar" class="next-action-bar">
-              <span style="font-size:12px; font-weight:bold; margin-right:15px; text-transform:uppercase;">Special Selection Detected</span>
-              <button class="action-btn" onclick="flipTo('screen-nyc')">Turn Page to NYC Local Ballot →</button>
+              <span style="font-size:13px; font-weight:bold; margin-right:15px; text-transform:uppercase;">Special Local Selection Detected</span>
+              <button class="callout-btn action-btn" onclick="flipTo('screen-nyc')">Turn Page to NYC Local Ballot →</button>
             </div>
             <div class="section-header">National Civic Health Index</div>
             <div class="race-header"><div class="race-title">High Turnout States (70%+)</div></div>
@@ -460,15 +481,13 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
 
     <div id="screen-nyc" class="ballot-screen">
       <div class="ballot-page">
-        <div class="ballot-header">
+        <div class="ballot-header" style="background: var(--brand-teal);">
           <div>Election 2020</div>
           <div class="bh-title official-serif">Local Elections: NYC Health Ballot</div>
           <div>Page 2 of 3</div>
         </div>
-        <div class="ballot-instructions">
-          <strong>1</strong> Fill the oval next to a neighborhood to view local metrics.
-          <strong>2</strong> Notice the gap in life expectancy between high and low turnout areas.
-          <strong>3</strong> Proceed to the Legislative side when finished.
+        <div class="subtitle-banner" style="background: var(--brand-teal-light);">
+          Explore the stark contrast in life expectancy driven by local neighborhood civic engagement.
         </div>
         <div class="ballot-cols">
           <div class="bleft">
@@ -483,41 +502,30 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
               </div>
             </div>
             <div id="nyc-stats-panel">
-              <div class="stat-name" id="nyc-stats-name">—</div>
-              <div style="font-family: monospace; font-size: 10px; color: #666; margin-bottom: 15px; text-transform: uppercase;" id="nyc-stats-boro">—</div>
-              
+              <div class="stat-name" id="nyc-stats-name" style="color: var(--brand-teal);">—</div>
+              <div style="font-family: monospace; font-size: 11px; color: var(--brand-gray-dark); margin-bottom: 15px; text-transform: uppercase; font-weight:bold;" id="nyc-stats-boro">—</div>
               <div class="stat-row">
                 <div class="stat-lbl"><span>Voter Turnout</span><span id="nsv1">—</span></div>
-                <div class="stat-bg"><div class="stat-fill" id="nsb1" style="width:0%"></div></div>
+                <div class="stat-bg"><div class="stat-fill" id="nsb1" style="width:0%; background: var(--brand-blue);"></div></div>
               </div>
               <div class="stat-row">
                 <div class="stat-lbl"><span>Life Expectancy</span><span id="nsv3">—</span></div>
-                <div class="stat-bg"><div class="stat-fill" id="nsb3" style="width:0%; background:#888;"></div></div>
+                <div class="stat-bg"><div class="stat-fill" id="nsb3" style="width:0%; background: var(--brand-teal);"></div></div>
               </div>
-            </div>
-            <div class="source-notes">
-              <a href="https://www.nyccfb.info/nyc-votes/community-profiles/" target="_blank">
-                Voter Turnout -- NYC CFB Community Profiles, 2020
-              </a>
-              <a href="https://a816-health.nyc.gov/hdi/profiles/" target="_blank">
-                Life Expectancy -- NYC DOHMH CHP 2021 (2010-2019 avg)
-              </a>
             </div>
           </div>
           <div class="bright">
-            <div class="next-action-bar on" style="background:var(--paper);">
-              <button class="action-btn" onclick="flipTo('screen-back')">Turn Page to Legislative Side →</button>
+            <div class="next-action-bar on">
+              <span style="font-size:13px; font-weight:bold; margin-right:15px; text-transform:uppercase;">View the Human Cost</span>
+              <button class="callout-btn action-btn" onclick="flipTo('screen-back')">Proceed to Legislative Side →</button>
             </div>
             <div class="section-header">Local Civic Health Index</div>
-            
-            <div style="max-height: 800px; overflow-y: auto;">
-              <div class="race-header"><div class="race-title">High Turnout Neighborhoods (45%+)</div></div>
-              <div id="grp-nyc-high"></div>
-              <div class="race-header"><div class="race-title">Moderate Turnout Neighborhoods (35–44%)</div></div>
-              <div id="grp-nyc-mid"></div>
-              <div class="race-header"><div class="race-title">Lower Turnout Neighborhoods (under 35%)</div></div>
-              <div id="grp-nyc-low"></div>
-            </div>
+            <div class="race-header"><div class="race-title">High Turnout Neighborhoods (45%+)</div></div>
+            <div id="grp-nyc-high"></div>
+            <div class="race-header"><div class="race-title">Moderate Turnout Neighborhoods (35–44%)</div></div>
+            <div id="grp-nyc-mid"></div>
+            <div class="race-header"><div class="race-title">Lower Turnout Neighborhoods (under 35%)</div></div>
+            <div id="grp-nyc-low"></div>
           </div>
         </div>
       </div>
@@ -525,26 +533,24 @@ svg.tilemap { width: 100%; display: block; background: #f9f9f9; border: var(--bo
 
     <div id="screen-back" class="ballot-screen">
       <div class="ballot-page">
-        <div class="ballot-header">
+        <div class="ballot-header" style="background: var(--brand-purple);">
           <div>Election 2020</div>
           <div class="bh-title official-serif">Legislative Measures: Stories</div>
           <div>Page 3 of 3</div>
         </div>
-        <div class="ballot-instructions">
-          <strong>1</strong> Fill the oval beside a patient record to read their full story.
-          <strong>2</strong> These represent the human outcomes of civic disengagement.
+        <div class="subtitle-banner" style="background: #966b90;">
+          Read real patient stories that reveal the profound human cost of public policy decisions.
         </div>
         <div class="ballot-cols">
-          <div class="bleft" style="background: white;">
-            <div class="tm-label" style="font-size:16px;">What's At Stake</div>
-            <div style="font-size:14px; line-height:1.6; color:#444;">
-              <p style="margin-bottom:15px;">Every story in this section shows how policy shapes survival. Medicaid benefit limits, hospital-insurer contract disputes, and state-level decisions about who gets care. These policies determine who lives, who loses their provider, and who finds a home. Dr. Stella Safo witnesses these outcomes daily.</p>
+          <div class="bleft" style="background: white; align-items: flex-start;">
+             <div class="tm-label" style="font-size:18px; color: var(--brand-purple); width: 100%;">What's At Stake</div>
+             <div style="font-size:15px; line-height:1.7; color:#333; margin-bottom: 20px;">
+              <p style="margin-bottom:15px;">Every story in this section shows how policy shapes survival. Medicaid benefit limits, hospital-insurer contract disputes, and state-level decisions about who gets care.</p>
+              <p>These policies determine who lives, who loses their provider, and who finds a home. Dr. Stella Safo witnesses these outcomes daily. <strong>Select a record on the right to view.</strong></p>
             </div>
+            <button class="action-btn" style="background:var(--brand-gray-dark); width: 100%; border:none; padding: 15px;" onclick="flipTo('screen-ballot')">← Return to US Map</button>
           </div>
-          <div class="bright">
-             <div class="next-action-bar on" style="background:var(--paper);">
-              <button class="action-btn" style="background:#666;" onclick="flipTo('screen-ballot')">← Return to Front (US Map)</button>
-            </div>
+          <div class="bright" style="background: var(--paper-dark);">
             <div class="section-header">Initiative Petitions</div>
             <div class="race-header"><div class="race-title">Patient Records</div></div>
             <div id="stories-list"></div>
@@ -590,16 +596,15 @@ const STATES = {
 };
 
 const GRID_US = {
-  ME:[11,0], NH:[11,1], VT:[10,1],
+  AK:[0,0], ME:[11,0], NH:[11,1], VT:[10,1],
   WA:[0,2], MT:[2,2], ND:[3,2], MN:[4,2], WI:[5,2], MI:[6,2], NY:[9,2], MA:[11,2],
   OR:[0,3], ID:[1,3], WY:[2,3], SD:[3,3], IA:[4,3], IL:[5,3], IN:[6,3], OH:[7,3], PA:[8,3], NJ:[9,3], CT:[10,3], RI:[11,3],
   CA:[0,4], NV:[1,4], CO:[2,4], NE:[3,4], MO:[4,4], KY:[5,4], WV:[6,4], VA:[7,4], MD:[8,4], DE:[9,4],
   AZ:[1,5], UT:[2,5], KS:[3,5], AR:[4,5], TN:[5,5], NC:[6,5], SC:[7,5], DC:[8,5],
-  HI:[1,6], NM:[2,6], OK:[3,6], MS:[4,6], AL:[5,6], GA:[6,6],
-  AK:[0,7], TX:[3,7], LA:[4,7], FL:[7,7]
+  HI:[0,6], NM:[2,6], OK:[3,6], MS:[4,6], AL:[5,6], GA:[6,6],
+  TX:[3,7], LA:[4,7], FL:[7,7]
 };
 
-// 51 NYC Neighborhoods Data
 const NYC_DISTRICTS = [
   {id:"BK01",name:"Williamsburg, Greenpoint",borough:"Brooklyn",le:84.4,vt:42.6}, {id:"BK02",name:"Fort Greene, Brooklyn Hts",borough:"Brooklyn",le:86.1,vt:52.5},
   {id:"BK03",name:"Bedford Stuyvesant",borough:"Brooklyn",le:80.0,vt:35.6}, {id:"BK04",name:"Bushwick",borough:"Brooklyn",le:82.0,vt:29.4},
@@ -774,23 +779,27 @@ function setMainScreen(id) {
   document.getElementById(id).classList.add('active');
   const showNav = (id === 'screen-ballot-wrap');
   document.getElementById('navbar').classList.toggle('on', showNav);
-  window.scrollTo(0, 0);
   activeMainScreen = id;
 }
 
 function navToEnvelope() {
   const env = document.getElementById('envelope-elem');
-  env.classList.remove('open');
-  env.classList.remove('fade-out');
+  const envWrap = document.getElementById('env-wrap');
+  env.classList.remove('open', 'fade-out');
+  envWrap.classList.add('shake-anim');
   setMainScreen('screen-envelope');
 }
 
 function openEnvelope() {
   const env = document.getElementById('envelope-elem');
+  const envWrap = document.getElementById('env-wrap');
+  
+  envWrap.classList.remove('shake-anim');
   env.classList.add('open');
+  
   setTimeout(() => {
     env.classList.add('fade-out');
-    setTimeout(() => setMainScreen('screen-intro'), 600);
+    setTimeout(() => navToBallot('screen-ballot'), 600);
   }, 1000);
 }
 
@@ -813,7 +822,6 @@ function flipTo(screenId) {
     flipper.classList.remove('flip-half');
     activeBallotScreen = screenId;
     updateNavStyles(screenId);
-    window.scrollTo(0, 0);
   }, 400); 
 }
 
@@ -825,7 +833,7 @@ function updateNavStyles(screenId) {
 }
 
 // ══════════════════════════════════════════
-// US MAP & BALLOT
+// MAP BUILDERS & INTERACTIVITY
 // ══════════════════════════════════════════
 function tColor(t) {
   if (t >= 70) return 'var(--t-high)';
@@ -841,10 +849,9 @@ function buildUSMap() {
   for (const [abbr, [c, r]] of Object.entries(GRID_US)) {
     const s = STATES[abbr]; if (!s) continue;
     const x = c*(CW+G), y = r*(CH+G);
-    const col = tColor(s.t);
     html += `<g class="tm-tile" onclick="handleUsClick('${abbr}')" style="cursor:pointer">
-      <rect id="tr-${abbr}" x="${x}" y="${y}" width="${CW}" height="${CH}" fill="${col}" stroke="var(--ink)" stroke-width="1"/>
-      <text x="${x+CW/2}" y="${y+CH/2+4}" text-anchor="middle" fill="white" font-size="7" font-weight="bold">${abbr}</text>
+      <rect id="tr-${abbr}" x="${x}" y="${y}" width="${CW}" height="${CH}" fill="${tColor(s.t)}" stroke="var(--ink)" stroke-width="1"/>
+      <text x="${x+CW/2}" y="${y+CH/2+4}" text-anchor="middle" fill="black" font-size="7" font-weight="bold">${abbr}</text>
     </g>`;
   }
   svg.innerHTML = html;
@@ -857,10 +864,12 @@ function buildUSOptions(abbrs, containerId) {
     const div = document.createElement('div');
     div.className = 'bopt';
     div.id = 'opt-'+abbr;
+    // Set a custom property based on the state's specific turnout color
+    div.style.setProperty('--sel-color', tColor(s.t));
     div.innerHTML = `
       <div class="oval"></div>
       <div class="opt-body">
-        <div class="opt-name">${s.name} ${s.special ? '<span class="opt-badge">NY</span>' : ''}</div>
+        <div class="opt-name">${s.name} ${s.special ? '<span class="opt-badge" style="background:var(--brand-red)">NY</span>' : ''}</div>
         <div class="opt-meta">Turnout: ${s.t}%</div>
       </div>
       <div class="opt-pct">${s.t}%</div>
@@ -872,29 +881,19 @@ function buildUSOptions(abbrs, containerId) {
 
 let selUS = null;
 function handleUsClick(abbr) {
+  if (selUS) {
+    document.getElementById('opt-'+selUS)?.classList.remove('sel');
+    document.getElementById('tr-'+selUS)?.setAttribute('stroke-width', '1');
+  }
   if (selUS === abbr) {
-    document.getElementById('opt-'+abbr).classList.remove('sel');
-    document.getElementById('tr-'+abbr).setAttribute('stroke-width', '1');
     document.getElementById('stats-panel').classList.remove('on');
     document.getElementById('us-next-bar').classList.remove('on');
-    selUS = null;
-    return;
-  }
-  
-  if (selUS) {
-    const prevOpt = document.getElementById('opt-'+selUS);
-    const prevTr = document.getElementById('tr-'+selUS);
-    if(prevOpt) prevOpt.classList.remove('sel');
-    if(prevTr) prevTr.setAttribute('stroke-width', '1');
+    selUS = null; return;
   }
 
   const opt = document.getElementById('opt-'+abbr);
-  const tr = document.getElementById('tr-'+abbr);
-  if(opt) {
-      opt.classList.add('sel');
-      opt.scrollIntoView({behavior:'smooth',block:'center'});
-  }
-  if(tr) tr.setAttribute('stroke-width', '3');
+  if(opt) { opt.classList.add('sel'); opt.scrollIntoView({behavior:'smooth',block:'center'}); }
+  document.getElementById('tr-'+abbr)?.setAttribute('stroke-width', '3');
   selUS = abbr;
 
   const s = STATES[abbr];
@@ -910,16 +909,9 @@ function handleUsClick(abbr) {
     document.getElementById('sb3').style.width = ((s.l - 70) / 15 * 100) + '%';
   }, 50);
 
-  if (s.special) {
-    document.getElementById('us-next-bar').classList.add('on');
-  } else {
-    document.getElementById('us-next-bar').classList.remove('on');
-  }
+  document.getElementById('us-next-bar').classList.toggle('on', !!s.special);
 }
 
-// ══════════════════════════════════════════
-// NYC LOCAL MAP & BALLOT (Neighborhoods)
-// ══════════════════════════════════════════
 function tColorNYC(t) {
   if (t >= 45) return 'var(--t-high)';
   if (t >= 40) return 'var(--t-med)';
@@ -933,10 +925,7 @@ function buildNYCMap() {
   for (const abbr in NYC_DATA) {
     const s = NYC_DATA[abbr]; 
     if (!s.p) continue;
-    const col = tColorNYC(s.vt);
-    html += `<g onclick="handleNycClick('${abbr}')">
-      <path id="tr-nyc-${abbr}" class="nyc-path" d="${s.p}" fill="${col}" />
-    </g>`;
+    html += `<g onclick="handleNycClick('${abbr}')"><path id="tr-nyc-${abbr}" class="nyc-path" d="${s.p}" fill="${tColorNYC(s.vt)}" /></g>`;
   }
   svg.innerHTML = html;
 }
@@ -948,10 +937,12 @@ function buildNYCOptions(abbrs, containerId) {
     const div = document.createElement('div');
     div.className = 'bopt';
     div.id = 'opt-nyc-'+abbr;
+    // Set a custom property based on the neighborhood's specific turnout color
+    div.style.setProperty('--sel-color', tColorNYC(s.vt));
     div.innerHTML = `
       <div class="oval"></div>
       <div class="opt-body">
-        <div class="opt-name">${s.name} <span class="opt-badge" style="background:#555;">${s.borough}</span></div>
+        <div class="opt-name">${s.name} <span class="opt-badge" style="background:var(--brand-purple);">${s.borough}</span></div>
         <div class="opt-meta">Turnout: ${s.vt}%</div>
       </div>
       <div class="opt-pct">${s.vt}%</div>
@@ -963,25 +954,18 @@ function buildNYCOptions(abbrs, containerId) {
 
 let selNYC = null;
 function handleNycClick(abbr) {
-  if (selNYC === abbr) {
-    document.getElementById('opt-nyc-'+abbr).classList.remove('sel');
-    document.getElementById('tr-nyc-'+abbr).classList.remove('sel');
-    document.getElementById('nyc-stats-panel').classList.remove('on');
-    selNYC = null;
-    return;
-  }
-  
   if (selNYC) {
-    const prevOpt = document.getElementById('opt-nyc-'+selNYC);
-    const prevTr = document.getElementById('tr-nyc-'+selNYC);
-    if(prevOpt) prevOpt.classList.remove('sel');
-    if(prevTr) prevTr.classList.remove('sel');
+    document.getElementById('opt-nyc-'+selNYC)?.classList.remove('sel');
+    document.getElementById('tr-nyc-'+selNYC)?.classList.remove('sel');
+  }
+  if (selNYC === abbr) {
+    document.getElementById('nyc-stats-panel').classList.remove('on');
+    selNYC = null; return;
   }
 
   const opt = document.getElementById('opt-nyc-'+abbr);
-  const tr = document.getElementById('tr-nyc-'+abbr);
   if(opt) { opt.classList.add('sel'); opt.scrollIntoView({behavior:'smooth',block:'center'}); }
-  if(tr) tr.classList.add('sel');
+  document.getElementById('tr-nyc-'+abbr)?.classList.add('sel');
   selNYC = abbr;
 
   const s = NYC_DATA[abbr];
@@ -997,65 +981,48 @@ function handleNycClick(abbr) {
   }, 50);
 }
 
-// ══════════════════════════════════════════
-// STORIES (LEGISLATIVE SIDE)
-// ══════════════════════════════════════════
 function buildStories() {
   const el = document.getElementById('stories-list');
   STORIES.forEach(story => {
     const wrap = document.createElement('div');
     wrap.className = 'story-wrap';
     
-    const top = document.createElement('div');
-    top.className = 'story-top';
-    top.id = 'stop-'+story.id;
-    top.innerHTML = `
-      <div class="oval"></div>
-      <div class="opt-body">
-        <div class="opt-name"><strong>${story.name}</strong></div>
-        <div class="opt-meta">${story.role}</div>
-      </div>
-    `;
-    top.onclick = () => toggleStory(story.id);
-    
-    const evts = story.timeline.map(e => `
-      <div class="te-new ${e.type}">
-        <div class="te-date">${e.date}</div>
-        <div class="te-title">${e.title}</div>
-        <div class="te-detail-text">${e.detail}</div>
-      </div>
-    `).join('');
-
-    const body = document.createElement('div');
-    body.className = 'story-body new-story-body';
-    body.id = 'sbody-'+story.id;
-    body.innerHTML = `
-      <div class="story-detail-header">
-        <div class="story-avatar">${story.name.charAt(0)}</div>
-        <div>
-          <div class="story-name">${story.name}</div>
-          <div class="story-role">${story.role}</div>
+    wrap.innerHTML = `
+      <div class="story-top" id="stop-${story.id}" onclick="toggleStory('${story.id}')">
+        <div class="oval"></div>
+        <div class="opt-body">
+          <div class="opt-name"><strong>${story.name}</strong></div>
+          <div class="opt-meta">${story.role}</div>
         </div>
       </div>
-      <div class="story-intro-text">${story.intro}</div>
-      
-      <div class="story-legend">
-        <span class="legend-item"><span class="l-box health"></span> Health Event</span>
-        <span class="legend-item"><span class="l-box civic"></span> Civic / Policy</span>
-      </div>
-      
-      <div class="story-timeline-new">
-        ${evts}
-      </div>
-      
-      <div class="story-summary-box">
-        <div class="summary-text">${story.summary}</div>
-        <div class="summary-sub">Civic engagement isn't abstract, it is the mechanism by which need becomes care.</div>
+      <div class="story-body new-story-body" id="sbody-${story.id}">
+        <div class="story-detail-header">
+          <div class="story-avatar">${story.name.charAt(0)}</div>
+          <div>
+            <div class="story-name">${story.name}</div>
+            <div class="story-role">${story.role}</div>
+          </div>
+        </div>
+        <div class="story-intro-text">${story.intro}</div>
+        <div class="story-legend">
+          <span class="legend-item"><span class="l-box health"></span> Health Event</span>
+          <span class="legend-item"><span class="l-box civic"></span> Civic Event</span>
+        </div>
+        <div class="story-timeline-new">
+          ${story.timeline.map(e => `
+            <div class="te-new ${e.type}">
+              <div class="te-date">${e.date}</div>
+              <div class="te-title">${e.title}</div>
+              <div class="te-detail-text">${e.detail}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="story-summary-box">
+          <div class="summary-text">${story.summary}</div>
+          <div class="summary-sub">Civic engagement isn't abstract, it is the mechanism by which need becomes care.</div>
+        </div>
       </div>
     `;
-    
-    wrap.appendChild(top);
-    wrap.appendChild(body);
     el.appendChild(wrap);
   });
 }
@@ -1075,20 +1042,11 @@ function toggleStory(id) {
   }
 }
 
-// ══════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   buildUSMap();
-  buildUSOptions(GRP_HIGH, 'grp-high');
-  buildUSOptions(GRP_MID, 'grp-mid');
-  buildUSOptions(GRP_LOW, 'grp-low');
-  
+  buildUSOptions(GRP_HIGH, 'grp-high'); buildUSOptions(GRP_MID, 'grp-mid'); buildUSOptions(GRP_LOW, 'grp-low');
   buildNYCMap();
-  buildNYCOptions(GRP_NYC_HIGH, 'grp-nyc-high');
-  buildNYCOptions(GRP_NYC_MID, 'grp-nyc-mid');
-  buildNYCOptions(GRP_NYC_LOW, 'grp-nyc-low');
-  
+  buildNYCOptions(GRP_NYC_HIGH, 'grp-nyc-high'); buildNYCOptions(GRP_NYC_MID, 'grp-nyc-mid'); buildNYCOptions(GRP_NYC_LOW, 'grp-nyc-low');
   buildStories();
 });
 </script>
