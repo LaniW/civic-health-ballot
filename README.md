@@ -55,8 +55,31 @@ The data driving this visualization is sourced from official public health and e
 
 ## Running the Project Locally
 
-Because this project is built entirely with plain HTML, CSS, and JavaScript without external build tools or frameworks, running it is incredibly simple:
+There is no build step and no npm install. The site is plain HTML/CSS/JS that loads its datasets from `data/*.json` at startup.
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/yourusername/civic-health-ballot.git](https://github.com/yourusername/civic-health-ballot.git)
+   git clone https://github.com/yourusername/civic-health-ballot.git
+   cd civic-health-ballot
+   ```
+
+2. Serve the directory (any static server works):
+   ```bash
+   python3 -m http.server 8000
+   ```
+
+3. Open <http://localhost:8000/> in a browser.
+
+Note: opening `index.html` directly via `file://` will fail because browsers block `fetch()` on file URLs. The page shows an in-app banner with these instructions if that happens.
+
+### Refreshing the state dataset
+
+The US state numbers can be regenerated from their upstream sources:
+
+```bash
+python3 scripts/build-data.py
+```
+
+This fetches the UF Election Lab turnout CSV and the Census ACS uninsured-rate API, merges them with the committed CDC life-expectancy extract in `data/raw/`, and writes `data/states.json` + `data/sources.json`. Python stdlib only — no dependencies to install.
+
+NYC neighborhood data (`data/nyc.json`) and patient stories (`data/stories.json`) are hand-curated and are not touched by the script.
