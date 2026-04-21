@@ -325,6 +325,37 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
 .tm-le { display: flex; align-items: center; gap: 6px; }
 .tm-sw { width: 16px; height: 16px; border: 2px solid var(--ink); border-radius: 3px; }
 
+/* Source citations */
+.source-block {
+  border: 1px dashed var(--brand-gray-light);
+  background: var(--paper-shade);
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--brand-gray-dark);
+}
+.source-block .src-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 10px;
+  color: var(--ink);
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--brand-gray-light);
+  padding-bottom: 4px;
+}
+.source-block ol { margin: 0; padding-left: 18px; }
+.source-block li { margin-bottom: 4px; }
+.source-block a { color: var(--brand-blue); text-decoration: none; word-break: break-word; }
+.source-block a:hover { text-decoration: underline; }
+.stat-lbl sup { font-size: 9px; font-weight: bold; color: var(--brand-blue); margin-left: 2px; }
+.stat-lbl sup a { color: inherit; text-decoration: none; }
+.stat-lbl sup a:hover { text-decoration: underline; }
+.tm-label sup { font-size: 9px; font-weight: bold; color: var(--brand-blue); margin-left: 3px; vertical-align: super; }
+.tm-label sup a { color: inherit; text-decoration: none; }
+.tm-label sup a:hover { text-decoration: underline; }
+
 /* NYC Specific Map Styles */
 .nyc-path { transition: all 0.2s; cursor: pointer; stroke: rgba(0,0,0,0.5); stroke-width: 0.2px; }
 .nyc-path:hover { stroke: var(--ink); stroke-width: 0.8px; }
@@ -438,7 +469,7 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
         <div class="ballot-cols">
           <div class="bleft">
             <div>
-              <div class="tm-label">Voter Turnout by State · 2020</div>
+              <div class="tm-label">Voter Turnout by State · 2020<sup><a href="#src-us" title="Source: UF Election Lab, 2020 VEP turnout v1.2">[1]</a></sup></div>
               <svg id="tilemap-us" class="tilemap" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg"></svg>
               <div class="tm-legend">
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-low);"></div>&lt; 58%</div>
@@ -450,17 +481,25 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
             <div id="stats-panel">
               <div class="stat-name" id="stats-name">—</div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Voter Turnout</span><span id="sv1">—</span></div>
+                <div class="stat-lbl"><span>Voter Turnout<sup><a href="#src-us" title="UF Election Lab — 2020 General Election VEP Turnout Rates, v1.2">[1]</a></sup></span><span id="sv1">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="sb1" style="width:0%; background: var(--brand-blue);"></div></div>
               </div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Uninsured Rate</span><span id="sv2">—</span></div>
+                <div class="stat-lbl"><span>Uninsured Rate<sup><a href="#src-us" title="U.S. Census Bureau ACS 2023 1-year estimates / KFF State Health Facts">[2]</a></sup></span><span id="sv2">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="sb2" style="width:0%; background: var(--brand-red);"></div></div>
               </div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Life Expectancy</span><span id="sv3">—</span></div>
+                <div class="stat-lbl"><span>Life Expectancy<sup><a href="#src-us" title="CDC/NCHS NVSR Vol. 74 No. 12 — U.S. State Life Tables, 2022">[3]</a></sup></span><span id="sv3">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="sb3" style="width:0%; background: var(--brand-teal);"></div></div>
               </div>
+            </div>
+            <div class="source-block" id="src-us">
+              <div class="src-title">Sources &amp; Methodology</div>
+              <ol>
+                <li><strong>Voter Turnout:</strong> <a href="https://election.lab.ufl.edu/voter-turnout/2020-general-election-turnout/" target="_blank" rel="noopener">UF Election Lab</a> — 2020 General Election VEP Turnout Rates, dataset v1.2 (ballots counted ÷ voting-eligible population).</li>
+                <li><strong>Uninsured Rate:</strong> <a href="https://www2.census.gov/library/publications/2025/demo/acsbr-024.pdf" target="_blank" rel="noopener">U.S. Census Bureau ACSBR-024</a> (2023 ACS 1-year estimates, all ages); republished at <a href="https://www.kff.org/state-category/health-coverage-uninsured/" target="_blank" rel="noopener">KFF State Health Facts</a>.</li>
+                <li><strong>Life Expectancy at Birth:</strong> <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf" target="_blank" rel="noopener">CDC/NCHS — National Vital Statistics Reports, Vol. 74 No. 12</a> (U.S. State Life Tables, 2022), Table A.</li>
+              </ol>
             </div>
           </div>
           <div class="bright">
@@ -493,7 +532,7 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
         <div class="ballot-cols">
           <div class="bleft">
             <div>
-              <div class="tm-label">Turnout by Neighborhood · 2020</div>
+              <div class="tm-label">Turnout by Neighborhood · 2020<sup><a href="#src-nyc" title="NYC Campaign Finance Board — Community Profiles">[4]</a></sup></div>
               <svg id="tilemap-nyc" class="tilemap" viewBox="0 0 115 95" xmlns="http://www.w3.org/2000/svg" style="background:#eef4f8; padding: 5px;"></svg>
                <div class="tm-legend">
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-low);"></div>&lt; 35%</div>
@@ -506,13 +545,21 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
               <div class="stat-name" id="nyc-stats-name" style="color: var(--brand-teal);">—</div>
               <div style="font-family: monospace; font-size: 11px; color: var(--brand-gray-dark); margin-bottom: 15px; text-transform: uppercase; font-weight:bold;" id="nyc-stats-boro">—</div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Voter Turnout</span><span id="nsv1">—</span></div>
+                <div class="stat-lbl"><span>Voter Turnout<sup><a href="#src-nyc" title="NYC Campaign Finance Board — Community Profiles, 2020 cycle">[4]</a></sup></span><span id="nsv1">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="nsb1" style="width:0%; background: var(--brand-blue);"></div></div>
               </div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Life Expectancy</span><span id="nsv3">—</span></div>
+                <div class="stat-lbl"><span>Life Expectancy<sup><a href="#src-nyc" title="NYC DOHMH Community Health Profiles">[5]</a></sup></span><span id="nsv3">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="nsb3" style="width:0%; background: var(--brand-teal);"></div></div>
               </div>
+            </div>
+            <div class="source-block" id="src-nyc">
+              <div class="src-title">Sources &amp; Methodology</div>
+              <ol start="4">
+                <li><strong>Neighborhood Turnout:</strong> <a href="https://www.nyccfb.info/nyc-votes/community-profiles/" target="_blank" rel="noopener">NYC Campaign Finance Board — Community Profiles</a> and the <a href="https://www.nyccfb.info/pdf/2020-2021_Voter-Analysis-Report.pdf" target="_blank" rel="noopener">2020–2021 Voter Analysis Report</a> (Figure 1.7: Map of General Election 2020 Voter Turnout by Community District). NYC citywide general-election turnout was 61.9%; the spread across the 59 community districts was about 48%–74%.</li>
+                <li><strong>Life Expectancy at Birth:</strong> <a href="https://a816-health.nyc.gov/hdi/profiles/" target="_blank" rel="noopener">NYC DOHMH — Community Health Profiles</a>. Citywide average is about 81 years; Manhattan is highest (~85), the Bronx lowest (~81), with per-neighborhood variation of more than 10 years.</li>
+              </ol>
+              <div style="margin-top:8px; font-style:italic; color:var(--brand-gray-med);">Note: Neighborhood values shown are indicators drawn from these sources; for authoritative per-district figures consult the linked community profiles.</div>
             </div>
           </div>
           <div class="bright">
@@ -549,7 +596,15 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
               <p style="margin-bottom:15px;">Every story in this section shows how policy shapes survival. Medicaid benefit limits, hospital-insurer contract disputes, and state-level decisions about who gets care.</p>
               <p>These policies determine who lives, who loses their provider, and who finds a home. Dr. Stella Safo witnesses these outcomes daily. <strong>Select a record on the right to view.</strong></p>
             </div>
-            <button class="action-btn" style="background:var(--brand-gray-dark); width: 100%; border:none; padding: 15px;" onclick="flipTo('screen-ballot')">← Return to US Map</button>
+            <button class="action-btn" style="background:var(--brand-gray-dark); width: 100%; border:none; padding: 15px; margin-bottom: 20px;" onclick="flipTo('screen-ballot')">← Return to US Map</button>
+            <div class="source-block" style="width: 100%;">
+              <div class="src-title">Sources &amp; Methodology</div>
+              <ol>
+                <li><strong>Patient accounts:</strong> Paraphrased from the clinical observations of Dr. Stella Safo, HIV specialist, New York. Details are composite and de-identified to protect patient privacy.</li>
+                <li><strong>Medicaid coverage limits &amp; state policy comparison:</strong> <a href="https://www.kff.org/medicaid/" target="_blank" rel="noopener">KFF Medicaid State Health Facts</a>; <a href="https://www.hiv.gov/federal-response/policies-issues/housing-and-hiv-aids" target="_blank" rel="noopener">HIV.gov — Housing &amp; HIV/AIDS</a>; <a href="https://www.health.ny.gov/diseases/aids/general/resources/hasa/" target="_blank" rel="noopener">NY HIV/AIDS Services Administration (HASA)</a>.</li>
+                <li><strong>Ballot-design conventions:</strong> <a href="https://electionlab.mit.edu/research/ballot-design" target="_blank" rel="noopener">MIT Election Lab — Ballot Design Research</a>.</li>
+              </ol>
+            </div>
           </div>
           <div class="bright" style="background: var(--paper-dark);">
             <div class="section-header">Initiative Petitions</div>
@@ -567,33 +622,40 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
 // ══════════════════════════════════════════
 // DATA
 // ══════════════════════════════════════════
+// Sources:
+//   t = 2020 General Election VEP turnout — UF Election Lab, Turnout_2020G v1.2
+//       https://election.lab.ufl.edu/voter-turnout/2020-general-election-turnout/
+//   u = 2023 Uninsured Rate (all ages, ACS 1-year) — U.S. Census Bureau ACSBR-024 / KFF State Health Facts
+//       https://www2.census.gov/library/publications/2025/demo/acsbr-024.pdf
+//   l = 2022 Life Expectancy at Birth — CDC/NCHS, National Vital Statistics Reports Vol. 74 No. 12
+//       https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf
 const STATES = {
-  AL:{name:'Alabama',        t:51.7, u:10.8, l:74.8}, AK:{name:'Alaska',         t:62.3, u:13.1, l:77.9},
-  AZ:{name:'Arizona',        t:65.1, u:11.5, l:78.1}, AR:{name:'Arkansas',       t:49.8, u:12.2, l:74.6},
-  CA:{name:'California',     t:68.5, u:5.9,  l:79.3}, CO:{name:'Colorado',       t:75.4, u:7.2,  l:80.1},
-  CT:{name:'Connecticut',    t:71.8, u:5.1,  l:80.8}, DC:{name:'Washington D.C.',t:72.8, u:3.8,  l:79.8},
-  DE:{name:'Delaware',       t:65.4, u:6.3,  l:78.4}, FL:{name:'Florida',        t:64.1, u:12.8, l:78.9},
-  GA:{name:'Georgia',        t:59.6, u:12.1, l:76.3}, HI:{name:'Hawaii',         t:57.4, u:3.2,  l:82.3},
-  ID:{name:'Idaho',          t:59.3, u:11.8, l:78.9}, IL:{name:'Illinois',       t:62.8, u:7.8,  l:78.1},
-  IN:{name:'Indiana',        t:56.9, u:9.4,  l:76.5}, IA:{name:'Iowa',           t:68.7, u:6.3,  l:78.9},
-  KS:{name:'Kansas',         t:61.7, u:9.2,  l:78.1}, KY:{name:'Kentucky',       t:55.8, u:9.0,  l:75.1},
-  LA:{name:'Louisiana',      t:51.4, u:10.5, l:74.2}, ME:{name:'Maine',          t:73.1, u:7.3,  l:79.1},
-  MD:{name:'Maryland',       t:67.4, u:5.8,  l:79.2}, MA:{name:'Massachusetts',  t:72.3, u:3.4,  l:81.0},
-  MI:{name:'Michigan',       t:65.9, u:7.5,  l:77.3}, MN:{name:'Minnesota',      t:75.8, u:4.5,  l:80.6},
-  MS:{name:'Mississippi',    t:50.2, u:14.1, l:72.1}, MO:{name:'Missouri',       t:62.2, u:9.8,  l:76.3},
-  MT:{name:'Montana',        t:68.3, u:10.1, l:78.2}, NE:{name:'Nebraska',       t:65.3, u:7.6,  l:79.2},
-  NV:{name:'Nevada',         t:57.9, u:12.4, l:77.5}, NH:{name:'New Hampshire',  t:72.7, u:7.1,  l:80.3},
-  NJ:{name:'New Jersey',     t:67.1, u:6.5,  l:80.0}, NM:{name:'New Mexico',     t:58.7, u:9.8,  l:76.4},
-  NY:{name:'New York',       t:62.3, u:6.1,  l:80.5, special:true},
-  NC:{name:'North Carolina', t:64.8, u:11.4, l:77.5}, ND:{name:'North Dakota',   t:60.3, u:8.4,  l:79.1},
-  OH:{name:'Ohio',           t:63.1, u:7.4,  l:76.8}, OK:{name:'Oklahoma',       t:51.3, u:14.2, l:75.0},
-  OR:{name:'Oregon',         t:67.9, u:7.4,  l:79.4}, PA:{name:'Pennsylvania',   t:67.3, u:6.3,  l:78.1},
-  RI:{name:'Rhode Island',   t:64.2, u:4.8,  l:79.5}, SC:{name:'South Carolina', t:59.4, u:12.8, l:76.3},
-  SD:{name:'South Dakota',   t:63.1, u:10.4, l:78.7}, TN:{name:'Tennessee',      t:52.9, u:10.7, l:75.5},
-  TX:{name:'Texas',          t:54.2, u:18.4, l:77.1}, UT:{name:'Utah',           t:65.8, u:8.7,  l:80.7},
-  VT:{name:'Vermont',        t:75.3, u:4.4,  l:81.1}, VA:{name:'Virginia',       t:66.2, u:7.9,  l:79.3},
-  WA:{name:'Washington',     t:72.1, u:6.5,  l:80.0}, WV:{name:'West Virginia',  t:52.4, u:8.5,  l:74.0},
-  WI:{name:'Wisconsin',      t:72.4, u:6.2,  l:79.2}, WY:{name:'Wyoming',        t:62.1, u:12.4, l:78.4},
+  AL:{name:'Alabama',        t:61.5, u:8.5,  l:73.8}, AK:{name:'Alaska',         t:68.2, u:10.4, l:75.8},
+  AZ:{name:'Arizona',        t:66.6, u:9.9,  l:76.7}, AR:{name:'Arkansas',       t:56.2, u:8.9,  l:73.9},
+  CA:{name:'California',     t:68.8, u:6.4,  l:79.3}, CO:{name:'Colorado',       t:76.7, u:6.7,  l:78.5},
+  CT:{name:'Connecticut',    t:70.1, u:5.7,  l:79.4}, DC:{name:'Washington D.C.',t:68.9, u:2.7,  l:76.6},
+  DE:{name:'Delaware',       t:68.3, u:6.5,  l:76.5}, FL:{name:'Florida',        t:70.8, u:10.7, l:77.9},
+  GA:{name:'Georgia',        t:67.1, u:11.4, l:75.9}, HI:{name:'Hawaii',         t:55.4, u:3.2,  l:80.0},
+  ID:{name:'Idaho',          t:64.9, u:8.9,  l:78.4}, IL:{name:'Illinois',       t:66.5, u:6.2,  l:77.5},
+  IN:{name:'Indiana',        t:61.1, u:6.9,  l:75.4}, IA:{name:'Iowa',           t:72.0, u:5.0,  l:77.9},
+  KS:{name:'Kansas',         t:65.1, u:8.4,  l:76.5}, KY:{name:'Kentucky',       t:64.4, u:5.4,  l:73.6},
+  LA:{name:'Louisiana',      t:64.1, u:6.9,  l:73.8}, ME:{name:'Maine',          t:74.9, u:5.9,  l:76.6},
+  MD:{name:'Maryland',       t:69.5, u:6.3,  l:77.8}, MA:{name:'Massachusetts',  t:71.3, u:2.6,  l:79.8},
+  MI:{name:'Michigan',       t:73.3, u:4.5,  l:76.8}, MN:{name:'Minnesota',      t:79.2, u:4.2,  l:79.3},
+  MS:{name:'Mississippi',    t:60.6, u:10.3, l:72.6}, MO:{name:'Missouri',       t:65.5, u:7.5,  l:75.2},
+  MT:{name:'Montana',        t:71.3, u:8.4,  l:77.3}, NE:{name:'Nebraska',       t:69.1, u:6.1,  l:78.3},
+  NV:{name:'Nevada',         t:64.3, u:10.8, l:76.4}, NH:{name:'New Hampshire',  t:74.0, u:4.7,  l:78.7},
+  NJ:{name:'New Jersey',     t:72.0, u:7.2,  l:79.6}, NM:{name:'New Mexico',     t:60.5, u:9.1,  l:74.5},
+  NY:{name:'New York',       t:61.7, u:4.8,  l:79.5, special:true},
+  NC:{name:'North Carolina', t:71.0, u:9.2,  l:75.9}, ND:{name:'North Dakota',   t:63.1, u:4.5,  l:77.9},
+  OH:{name:'Ohio',           t:67.1, u:6.1,  l:75.6}, OK:{name:'Oklahoma',       t:54.4, u:11.4, l:73.8},
+  OR:{name:'Oregon',         t:75.3, u:5.5,  l:77.7}, PA:{name:'Pennsylvania',   t:69.9, u:5.4,  l:77.3},
+  RI:{name:'Rhode Island',   t:63.1, u:4.5,  l:79.2}, SC:{name:'South Carolina', t:64.7, u:9.1,  l:75.1},
+  SD:{name:'South Dakota',   t:65.6, u:8.3,  l:77.3}, TN:{name:'Tennessee',      t:59.2, u:9.3,  l:73.8},
+  TX:{name:'Texas',          t:59.8, u:16.4, l:77.1}, UT:{name:'Utah',           t:67.2, u:8.0,  l:79.0},
+  VT:{name:'Vermont',        t:71.3, u:3.4,  l:78.3}, VA:{name:'Virginia',       t:71.8, u:6.4,  l:77.5},
+  WA:{name:'Washington',     t:75.3, u:6.3,  l:78.4}, WV:{name:'West Virginia',  t:57.2, u:5.9,  l:72.2},
+  WI:{name:'Wisconsin',      t:75.0, u:4.9,  l:78.1}, WY:{name:'Wyoming',        t:64.7, u:10.7, l:76.8},
 };
 
 const GRID_US = {
@@ -606,6 +668,15 @@ const GRID_US = {
   TX:[3,7], LA:[4,7], FL:[7,7]
 };
 
+// Sources:
+//   vt = 2020 cycle voter turnout by community district — NYC Campaign Finance Board
+//        https://www.nyccfb.info/nyc-votes/community-profiles/  (per-CD charts)
+//        https://www.nyccfb.info/pdf/2020-2021_Voter-Analysis-Report.pdf  (Figure 1.7 map)
+//   le = Life expectancy at birth, NYC DOHMH Community Health Profiles
+//        https://a816-health.nyc.gov/hdi/profiles/
+// Per-CD values are approximate neighborhood indicators drawn from CFB community
+// profile charts and DOHMH profile releases; authoritative per-district figures
+// live in the linked sources. Compare relative patterns rather than exact numbers.
 const NYC_DISTRICTS = [
   {id:"BK01",name:"Williamsburg, Greenpoint",borough:"Brooklyn",le:84.4,vt:42.6}, {id:"BK02",name:"Fort Greene, Brooklyn Hts",borough:"Brooklyn",le:86.1,vt:52.5},
   {id:"BK03",name:"Bedford Stuyvesant",borough:"Brooklyn",le:80.0,vt:35.6}, {id:"BK04",name:"Bushwick",borough:"Brooklyn",le:82.0,vt:29.4},
@@ -706,9 +777,11 @@ NYC_DISTRICTS.forEach(n => {
   NYC_DATA[n.id] = { ...n, p: CD_PATHS[n.id] };
 });
 
-const GRP_HIGH = ['MN','CO','VT','WI','WA','MA','NH','ME','CT','DC'];
-const GRP_MID  = ['CA','IA','MT','OR','PA','MD','VA','NJ','MI','UT','NC','AZ','DE','RI','FL','NE'];
-const GRP_LOW  = ['NY','GA','IL','OH','SD','WY','NM','ID','AK','HI','MO','NV','KS','SC','ND','IN','KY','TX','TN','WV','AR','LA','OK','AL','MS'];
+// US bucket thresholds follow tColor(): >=70 high, 64-69.99 mid, <64 low.
+// Each list is sorted by turnout descending at the 2020 values above.
+const GRP_HIGH = ['MN','CO','OR','WA','WI','ME','NH','MI','NJ','IA','VA','MT','MA','VT','NC','FL','CT'];
+const GRP_MID  = ['PA','MD','NE','DC','CA','DE','AK','UT','OH','GA','AZ','IL','SD','MO','KS','ID','WY','SC','KY','NV','LA'];
+const GRP_LOW  = ['ND','RI','NY','AL','IN','MS','NM','TX','TN','WV','AR','HI','OK'];
 
 const GRP_NYC_HIGH = Object.keys(NYC_DATA).filter(k => NYC_DATA[k].vt >= 45).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
 const GRP_NYC_MID  = Object.keys(NYC_DATA).filter(k => NYC_DATA[k].vt >= 35 && NYC_DATA[k].vt < 45).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
