@@ -1,0 +1,58 @@
+# Source: CDC/NCHS, National Vital Statistics Reports, Vol. 74 No. 12 (Dec 4, 2025)
+#         U.S. State Life Tables, 2022. Table A — Life expectancy at birth, total population.
+#         https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf
+# Note:   CDC publishes NVSR only as PDF. Values hand-extracted from Table A, p. 3.
+#         When CDC releases a newer NVSR, re-extract and update this file; the build
+#         script treats this TSV as the source of truth for life expectancy.
+state_name	abbr	le_2022
+Alabama	AL	73.8
+Alaska	AK	75.8
+Arizona	AZ	76.7
+Arkansas	AR	73.9
+California	CA	79.3
+Colorado	CO	78.5
+Connecticut	CT	79.4
+Delaware	DE	76.5
+District of Columbia	DC	76.6
+Florida	FL	77.9
+Georgia	GA	75.9
+Hawaii	HI	80.0
+Idaho	ID	78.4
+Illinois	IL	77.5
+Indiana	IN	75.4
+Iowa	IA	77.9
+Kansas	KS	76.5
+Kentucky	KY	73.6
+Louisiana	LA	73.8
+Maine	ME	76.6
+Maryland	MD	77.8
+Massachusetts	MA	79.8
+Michigan	MI	76.8
+Minnesota	MN	79.3
+Mississippi	MS	72.6
+Missouri	MO	75.2
+Montana	MT	77.3
+Nebraska	NE	78.3
+Nevada	NV	76.4
+New Hampshire	NH	78.7
+New Jersey	NJ	79.6
+New Mexico	NM	74.5
+New York	NY	79.5
+North Carolina	NC	75.9
+North Dakota	ND	77.9
+Ohio	OH	75.6
+Oklahoma	OK	73.8
+Oregon	OR	77.7
+Pennsylvania	PA	77.3
+Rhode Island	RI	79.2
+South Carolina	SC	75.1
+South Dakota	SD	77.3
+Tennessee	TN	73.8
+Texas	TX	77.1
+Utah	UT	79.0
+Vermont	VT	78.3
+Virginia	VA	77.5
+Washington	WA	78.4
+West Virginia	WV	72.2
+Wisconsin	WI	78.1
+Wyoming	WY	76.8

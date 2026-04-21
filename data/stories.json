@@ -1,0 +1,138 @@
+{
+  "_generated_at": "2026-04-21T23:18:42+00:00",
+  "_note": "Patient accounts are paraphrased, de-identified composites drawn from the clinical observations of Dr. Stella Safo, HIV specialist.",
+  "stories": [
+    {
+      "id": "dr-Safo",
+      "name": "Dr. Stella Safo",
+      "role": "Healthcare Provider, HIV Specialist",
+      "intro": "A HIV specialist at a health center in New York, Dr. Safo cares for some of the city's most vulnerable patients, navigating daily the intersection of public health, insurance policy, and human dignity. These are her patients' stories.",
+      "timeline": [
+        {
+          "type": "health",
+          "date": "Daily",
+          "title": "Carrying the weight of these stories",
+          "detail": "Dr. Safo sees the system from the inside. Every discharge, every coverage lapse, every contract dispute, she witnesses them and continues to care for patients anyway."
+        },
+        {
+          "type": "civic",
+          "date": "Ongoing",
+          "title": "Documenting systemic failures",
+          "detail": "Healthcare providers like Dr. Safo are often the only witnesses to how insurance gaps and state policy differences determine who lives, who loses their doctor, and who finds a home."
+        },
+        {
+          "type": "civic",
+          "date": "Ongoing",
+          "title": "What policy looks like in a room",
+          "detail": "The difference between New York and North Carolina, in housing benefits for people living with HIV, is not an abstraction. It is whether a mother and her unborn child have a roof."
+        },
+        {
+          "type": "health",
+          "date": "Ongoing",
+          "title": "'It ended up being an insurance issue that killed him.'",
+          "detail": "When a Medicaid benefit limit ends a life, it is not a medical failure. It is a policy failure. One made far from the hospital bed, in rooms shaped by who votes and who shows up."
+        }
+      ],
+      "summary": "She sees how insurance gaps, contract disputes, and state policy differences determine who lives, and carries these stories so others might listen."
+    },
+    {
+      "id": "patient-one",
+      "name": "A Man With Pancreatitis",
+      "role": "Medicaid Patient Living With HIV",
+      "intro": "He was admitted with pancreatitis: a serious but treatable condition. He was managing his HIV well. That was not the crisis. His Medicaid benefits ran out before he recovered. The hospital discharged him home. He died that night.",
+      "timeline": [
+        {
+          "type": "health",
+          "date": "Admission",
+          "title": "Admitted for pancreatitis",
+          "detail": "A treatable condition. He was managing his HIV well,that was not in crisis. The hospitalization was for pancreatitis."
+        },
+        {
+          "type": "civic",
+          "date": "Mid-stay",
+          "title": "Medicaid benefits exhausted",
+          "detail": "Coverage ran out before his recovery was complete. No extension was granted. The system had a limit, and he had reached it."
+        },
+        {
+          "type": "civic",
+          "date": "Discharge day",
+          "title": "Hospital discharged him home",
+          "detail": "Without coverage, the hospital sent him home. There was no mechanism in the system to keep him. He left before he was well."
+        },
+        {
+          "type": "health",
+          "date": "That night",
+          "title": "He coded and died",
+          "detail": "He died from pancreatitis complications the same night he was discharged. As Dr. Safo said: 'It wasn't HIV that killed him. It ended up being an insurance issue that killed him.'"
+        }
+      ],
+      "summary": "His HIV was managed. His pancreatitis was treatable. His Medicaid ran out. He was discharged before recovery and died that night."
+    },
+    {
+      "id": "patient-two",
+      "name": "A Young Man Diagnosed",
+      "role": "HIV-Positive, Mid-20s",
+      "intro": "Diagnosed with HIV in his mid-20s, rare today, when PrEP has made new infections among young people uncommon. He was struggling with the diagnosis. But he was excited about his care. He was getting comfortable. Then an insurance contract dispute ended all of that.",
+      "timeline": [
+        {
+          "type": "health",
+          "date": "Last year",
+          "title": "Diagnosed with HIV in his 20s",
+          "detail": "Young people are rarely diagnosed today because of PrEP availability. He was shaken, despondent, but engaging with his care and showing up."
+        },
+        {
+          "type": "health",
+          "date": "Months in",
+          "title": "Finding his footing",
+          "detail": "He was 'very excited' about his care plan. A good plan, good resources, a provider he trusted. He was stabilizing: medically and emotionally."
+        },
+        {
+          "type": "civic",
+          "date": "Contract dispute",
+          "title": "Hospital drops his insurance",
+          "detail": "The hospital and his insurer couldn't reach a contract agreement. The dispute had nothing to do with his health or his choices. He lost his provider anyway."
+        },
+        {
+          "type": "health",
+          "date": "Aftermath",
+          "title": "Starting over, just as he'd found his footing",
+          "detail": "He was 'nervous to have to go to a new HIV doctor.' He'd just gotten comfortable. The relationship that had helped him feel safe. Disrupted not by him, but by a billing negotiation between institutions."
+        }
+      ],
+      "summary": "He was finally comfortable with his HIV care. Then an insurance contract dispute, nothing to do with his health, took his provider away."
+    },
+    {
+      "id": "patient-three",
+      "name": "Pregnant Woman With HIV",
+      "role": "Formerly Homeless, Mother of Six",
+      "intro": "She came to New York pregnant, homeless, and living with HIV. Five children had been removed by child protective services in North Carolina. She was carrying her sixth. New York State's benefits, tied to HIV status and pregnancy, gave her something her home state never had: a home.",
+      "timeline": [
+        {
+          "type": "civic",
+          "date": "North Carolina",
+          "title": "Five children removed by CPS",
+          "detail": "She was living with HIV in a state with limited support programs. Her children were removed. She had few pathways to stability."
+        },
+        {
+          "type": "health",
+          "date": "Arrived in NY",
+          "title": "Homeless and pregnant with her sixth child",
+          "detail": "She arrived without housing. Managing HIV. Pregnant. The odds were steep, but New York has policies that other states do not."
+        },
+        {
+          "type": "civic",
+          "date": "New York",
+          "title": "Housing secured through state benefits",
+          "detail": "New York offers housing support tied to HIV status and pregnancy, a combination of protections not available in North Carolina or many other states. She was housed."
+        },
+        {
+          "type": "health",
+          "date": "Today",
+          "title": "Stable, housed, in care",
+          "detail": "'Lucky for her, New York State offers some good benefits,' Dr. Safo said. What feels like luck is actually policy, and policy is shaped by who votes, who testifies, and who organizes."
+        }
+      ],
+      "summary": "North Carolina took her children and offered no housing. New York, through policy tied to HIV and pregnancy, gave her a home. The difference was not luck, it was legislation."
+    }
+  ]
+}

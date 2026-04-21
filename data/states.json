@@ -1,0 +1,375 @@
+{
+  "_generated_at": "2026-04-21T23:23:56+00:00",
+  "_thresholds": {
+    "high": 70.0,
+    "mid": 64.0
+  },
+  "states": {
+    "AK": {
+      "name": "Alaska",
+      "t": 68.2,
+      "u": 10.4,
+      "l": 75.8
+    },
+    "AL": {
+      "name": "Alabama",
+      "t": 61.5,
+      "u": 8.5,
+      "l": 73.8
+    },
+    "AR": {
+      "name": "Arkansas",
+      "t": 56.2,
+      "u": 8.9,
+      "l": 73.9
+    },
+    "AZ": {
+      "name": "Arizona",
+      "t": 66.6,
+      "u": 9.9,
+      "l": 76.7
+    },
+    "CA": {
+      "name": "California",
+      "t": 68.8,
+      "u": 6.4,
+      "l": 79.3
+    },
+    "CO": {
+      "name": "Colorado",
+      "t": 76.7,
+      "u": 6.7,
+      "l": 78.5
+    },
+    "CT": {
+      "name": "Connecticut",
+      "t": 70.1,
+      "u": 5.7,
+      "l": 79.4
+    },
+    "DC": {
+      "name": "Washington D.C.",
+      "t": 68.9,
+      "u": 2.7,
+      "l": 76.6
+    },
+    "DE": {
+      "name": "Delaware",
+      "t": 68.3,
+      "u": 6.5,
+      "l": 76.5
+    },
+    "FL": {
+      "name": "Florida",
+      "t": 70.8,
+      "u": 10.7,
+      "l": 77.9
+    },
+    "GA": {
+      "name": "Georgia",
+      "t": 67.1,
+      "u": 11.4,
+      "l": 75.9
+    },
+    "HI": {
+      "name": "Hawaii",
+      "t": 55.4,
+      "u": 3.2,
+      "l": 80.0
+    },
+    "IA": {
+      "name": "Iowa",
+      "t": 72.0,
+      "u": 5.0,
+      "l": 77.9
+    },
+    "ID": {
+      "name": "Idaho",
+      "t": 64.9,
+      "u": 8.9,
+      "l": 78.4
+    },
+    "IL": {
+      "name": "Illinois",
+      "t": 66.5,
+      "u": 6.2,
+      "l": 77.5
+    },
+    "IN": {
+      "name": "Indiana",
+      "t": 61.1,
+      "u": 6.9,
+      "l": 75.4
+    },
+    "KS": {
+      "name": "Kansas",
+      "t": 65.1,
+      "u": 8.4,
+      "l": 76.5
+    },
+    "KY": {
+      "name": "Kentucky",
+      "t": 64.4,
+      "u": 5.4,
+      "l": 73.6
+    },
+    "LA": {
+      "name": "Louisiana",
+      "t": 64.1,
+      "u": 6.9,
+      "l": 73.8
+    },
+    "MA": {
+      "name": "Massachusetts",
+      "t": 71.3,
+      "u": 2.6,
+      "l": 79.8
+    },
+    "MD": {
+      "name": "Maryland",
+      "t": 69.5,
+      "u": 6.3,
+      "l": 77.8
+    },
+    "ME": {
+      "name": "Maine",
+      "t": 74.9,
+      "u": 5.9,
+      "l": 76.6
+    },
+    "MI": {
+      "name": "Michigan",
+      "t": 73.3,
+      "u": 4.5,
+      "l": 76.8
+    },
+    "MN": {
+      "name": "Minnesota",
+      "t": 79.2,
+      "u": 4.2,
+      "l": 79.3
+    },
+    "MO": {
+      "name": "Missouri",
+      "t": 65.5,
+      "u": 7.5,
+      "l": 75.2
+    },
+    "MS": {
+      "name": "Mississippi",
+      "t": 60.6,
+      "u": 10.3,
+      "l": 72.6
+    },
+    "MT": {
+      "name": "Montana",
+      "t": 71.3,
+      "u": 8.4,
+      "l": 77.3
+    },
+    "NC": {
+      "name": "North Carolina",
+      "t": 71.0,
+      "u": 9.2,
+      "l": 75.9
+    },
+    "ND": {
+      "name": "North Dakota",
+      "t": 63.1,
+      "u": 4.5,
+      "l": 77.9
+    },
+    "NE": {
+      "name": "Nebraska",
+      "t": 69.1,
+      "u": 6.1,
+      "l": 78.3
+    },
+    "NH": {
+      "name": "New Hampshire",
+      "t": 74.0,
+      "u": 4.7,
+      "l": 78.7
+    },
+    "NJ": {
+      "name": "New Jersey",
+      "t": 72.0,
+      "u": 7.2,
+      "l": 79.6
+    },
+    "NM": {
+      "name": "New Mexico",
+      "t": 60.5,
+      "u": 9.1,
+      "l": 74.5
+    },
+    "NV": {
+      "name": "Nevada",
+      "t": 64.2,
+      "u": 10.8,
+      "l": 76.4
+    },
+    "NY": {
+      "name": "New York",
+      "t": 61.7,
+      "u": 4.8,
+      "l": 79.5,
+      "special": true
+    },
+    "OH": {
+      "name": "Ohio",
+      "t": 67.1,
+      "u": 6.1,
+      "l": 75.6
+    },
+    "OK": {
+      "name": "Oklahoma",
+      "t": 54.4,
+      "u": 11.4,
+      "l": 73.8
+    },
+    "OR": {
+      "name": "Oregon",
+      "t": 75.3,
+      "u": 5.5,
+      "l": 77.7
+    },
+    "PA": {
+      "name": "Pennsylvania",
+      "t": 69.9,
+      "u": 5.4,
+      "l": 77.3
+    },
+    "RI": {
+      "name": "Rhode Island",
+      "t": 63.1,
+      "u": 4.5,
+      "l": 79.2
+    },
+    "SC": {
+      "name": "South Carolina",
+      "t": 64.7,
+      "u": 9.1,
+      "l": 75.1
+    },
+    "SD": {
+      "name": "South Dakota",
+      "t": 65.6,
+      "u": 8.3,
+      "l": 77.3
+    },
+    "TN": {
+      "name": "Tennessee",
+      "t": 59.2,
+      "u": 9.3,
+      "l": 73.8
+    },
+    "TX": {
+      "name": "Texas",
+      "t": 59.8,
+      "u": 16.4,
+      "l": 77.1
+    },
+    "UT": {
+      "name": "Utah",
+      "t": 67.2,
+      "u": 8.0,
+      "l": 79.0
+    },
+    "VA": {
+      "name": "Virginia",
+      "t": 71.8,
+      "u": 6.4,
+      "l": 77.5
+    },
+    "VT": {
+      "name": "Vermont",
+      "t": 71.2,
+      "u": 3.4,
+      "l": 78.3
+    },
+    "WA": {
+      "name": "Washington",
+      "t": 75.3,
+      "u": 6.3,
+      "l": 78.4
+    },
+    "WI": {
+      "name": "Wisconsin",
+      "t": 75.0,
+      "u": 4.9,
+      "l": 78.1
+    },
+    "WV": {
+      "name": "West Virginia",
+      "t": 57.2,
+      "u": 5.9,
+      "l": 72.2
+    },
+    "WY": {
+      "name": "Wyoming",
+      "t": 64.7,
+      "u": 10.7,
+      "l": 76.8
+    }
+  },
+  "groups": {
+    "high": [
+      "MN",
+      "CO",
+      "OR",
+      "WA",
+      "WI",
+      "ME",
+      "NH",
+      "MI",
+      "IA",
+      "NJ",
+      "VA",
+      "MA",
+      "MT",
+      "VT",
+      "NC",
+      "FL",
+      "CT"
+    ],
+    "mid": [
+      "PA",
+      "MD",
+      "NE",
+      "DC",
+      "CA",
+      "DE",
+      "AK",
+      "UT",
+      "GA",
+      "OH",
+      "AZ",
+      "IL",
+      "SD",
+      "MO",
+      "KS",
+      "ID",
+      "SC",
+      "WY",
+      "KY",
+      "NV",
+      "LA"
+    ],
+    "low": [
+      "ND",
+      "RI",
+      "NY",
+      "AL",
+      "IN",
+      "MS",
+      "NM",
+      "TX",
+      "TN",
+      "WV",
+      "AR",
+      "HI",
+      "OK"
+    ]
+  }
+}
