@@ -319,8 +319,8 @@ h1, h2, h3, .official-serif {
 /* Tilemaps */
 .tm-label { font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 5px; }
 svg.tilemap { width: 100%; display: block; background: #fff; border: var(--border-med); }
-.tm-tile rect { transition: fill 0.2s, stroke-width 0.2s; }
-.tm-tile:hover rect { stroke-width: 2px; }
+.tm-tile polygon { transition: fill 0.2s, stroke-width 0.2s; }
+.tm-tile:hover polygon { stroke-width: 2px; }
 .tm-legend { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; font-size: 12px; text-transform: uppercase; font-weight: bold; }
 .tm-le { display: flex; align-items: center; gap: 6px; }
 .tm-sw { width: 16px; height: 16px; border: 2px solid var(--ink); border-radius: 3px; }
@@ -470,7 +470,7 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
           <div class="bleft">
             <div>
               <div class="tm-label">Voter Turnout by State · 2020<sup><a href="#src-us" title="Source: UF Election Lab, 2020 VEP turnout v1.2">[1]</a></sup></div>
-              <svg id="tilemap-us" class="tilemap" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg"></svg>
+              <svg id="tilemap-us" class="tilemap" viewBox="0 0 244 142" xmlns="http://www.w3.org/2000/svg"></svg>
               <div class="tm-legend">
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-low);"></div>&lt; 58%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-med-low);"></div>58–63%</div>
@@ -500,6 +500,7 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
                 <li><strong>Uninsured Rate:</strong> <a href="https://www2.census.gov/library/publications/2025/demo/acsbr-024.pdf" target="_blank" rel="noopener">U.S. Census Bureau ACSBR-024</a> (2023 ACS 1-year estimates, all ages); republished at <a href="https://www.kff.org/state-category/health-coverage-uninsured/" target="_blank" rel="noopener">KFF State Health Facts</a>.</li>
                 <li><strong>Life Expectancy at Birth:</strong> <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf" target="_blank" rel="noopener">CDC/NCHS — National Vital Statistics Reports, Vol. 74 No. 12</a> (U.S. State Life Tables, 2022), Table A.</li>
               </ol>
+              <p style="margin: 8px 0 0;"><strong>Map layout:</strong> Hexagonal tile grid following <a href="https://blog.apps.npr.org/2015/05/11/hex-tile-maps.html" target="_blank" rel="noopener">"Let's Tesselate: Hexagons for Tile Grid Maps"</a> (DeBelius &amp; Hurt, NPR Visuals, 2015); state coordinates transcribed from the <a href="https://github.com/EmilHvitfeldt/tilemapr" target="_blank" rel="noopener">tilemapr</a> R package.</p>
             </div>
           </div>
           <div class="bright">
@@ -627,6 +628,11 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
 // (UF Election Lab, Census ACS, CDC NVSR), run:  python3 scripts/build-data.py
 //
 // GRID_US stays inline because it is layout (cartogram coordinates), not data.
+// Layout: NPR hex-tile grid (pointy-top). Coordinates are [long, lat] where
+// Δlong=1 is one hex width and Δlat=1 is one row of vertical spacing; lat=8
+// is north. Source: Danny DeBelius & Alyson Hurt, "Let's Tesselate: Hexagons
+// for Tile Grid Maps" (NPR Visuals, 2015-05-11), as transcribed in the
+// `tilemapr` R package (github.com/EmilHvitfeldt/tilemapr, MIT-licensed).
 
 let STATES = {};
 let NYC_DATA = {};
@@ -656,13 +662,14 @@ async function loadData() {
 }
 
 const GRID_US = {
-  AK:[0,0], ME:[11,0], NH:[11,1], VT:[10,1],
-  WA:[0,2], MT:[2,2], ND:[3,2], MN:[4,2], WI:[5,2], MI:[6,2], NY:[9,2], MA:[11,2],
-  OR:[0,3], ID:[1,3], WY:[2,3], SD:[3,3], IA:[4,3], IL:[5,3], IN:[6,3], OH:[7,3], PA:[8,3], NJ:[9,3], CT:[10,3], RI:[11,3],
-  CA:[0,4], NV:[1,4], CO:[2,4], NE:[3,4], MO:[4,4], KY:[5,4], WV:[6,4], VA:[7,4], MD:[8,4], DE:[9,4],
-  AZ:[1,5], UT:[2,5], KS:[3,5], AR:[4,5], TN:[5,5], NC:[6,5], SC:[7,5], DC:[8,5],
-  HI:[0,6], NM:[2,6], OK:[3,6], MS:[4,6], AL:[5,6], GA:[6,6],
-  TX:[3,7], LA:[4,7], FL:[7,7]
+  AK:[1.5,8],  ME:[12.5,8],
+  NH:[12,7],   VT:[11,7],
+  WA:[2.5,6],  MT:[3.5,6], ND:[4.5,6], MN:[5.5,6], WI:[6.5,6], MI:[8.5,6], NY:[10.5,6], MA:[11.5,6], RI:[12.5,6],
+  OR:[2.5,4],  ID:[3,5],   WY:[4,5],   SD:[5,5],   IA:[6,5],   IL:[7,5],   IN:[8,5],    OH:[9,5],    PA:[10,5],   NJ:[11,5], CT:[12,5],
+  NV:[3.5,4],  UT:[4,3],   CO:[4.5,4], NE:[5.5,4], MO:[6.5,4], KY:[7.5,4], WV:[8.5,4],  VA:[9.5,4],  MD:[10.5,4], DE:[11.5,4],
+  CA:[3,3],    AZ:[4.5,2], NM:[5,3],   KS:[6,3],   AR:[7,3],   TN:[8,3],   NC:[9,3],    SC:[10,3],   DC:[11,3],
+  HI:[1,1],    OK:[5.5,2], LA:[6.5,2], MS:[7.5,2], AL:[8.5,2], GA:[9.5,2],
+  TX:[6,1],    FL:[9,1]
 };
 
 
@@ -742,14 +749,22 @@ function tColor(t) {
 
 function buildUSMap() {
   const svg = document.getElementById('tilemap-us');
-  const CW = 22, CH = 19, G = 1;
+  const S = 11;                        // hex side (center-to-vertex)
+  const W = S * Math.sqrt(3);          // flat-to-flat width
+  const ROW_Y = 1.5 * S;               // vertical spacing between rows
+  const PAD = 2;
+  const MAX_LAT = 8;
+  // Pointy-top hex vertices, clockwise from top.
+  const V = [[0,-S],[W/2,-S/2],[W/2,S/2],[0,S],[-W/2,S/2],[-W/2,-S/2]];
   let html = '';
-  for (const [abbr, [c, r]] of Object.entries(GRID_US)) {
+  for (const [abbr, [lng, lat]] of Object.entries(GRID_US)) {
     const s = STATES[abbr]; if (!s) continue;
-    const x = c*(CW+G), y = r*(CH+G);
+    const cx = (lng - 1) * W + W/2 + PAD;
+    const cy = (MAX_LAT - lat) * ROW_Y + S + PAD;
+    const pts = V.map(([px, py]) => `${(cx+px).toFixed(2)},${(cy+py).toFixed(2)}`).join(' ');
     html += `<g class="tm-tile" onclick="handleUsClick('${abbr}')" style="cursor:pointer">
-      <rect id="tr-${abbr}" x="${x}" y="${y}" width="${CW}" height="${CH}" fill="${tColor(s.t)}" stroke="var(--ink)" stroke-width="1"/>
-      <text x="${x+CW/2}" y="${y+CH/2+4}" text-anchor="middle" fill="black" font-size="7" font-weight="bold">${abbr}</text>
+      <polygon id="tr-${abbr}" points="${pts}" fill="${tColor(s.t)}" stroke="var(--ink)" stroke-width="1"/>
+      <text x="${cx.toFixed(2)}" y="${(cy+3).toFixed(2)}" text-anchor="middle" fill="black" font-size="7" font-weight="bold">${abbr}</text>
     </g>`;
   }
   svg.innerHTML = html;

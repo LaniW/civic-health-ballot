@@ -17,7 +17,7 @@ This visual investigation demonstrates that states and neighborhoods where resid
 ### 1. The National Picture (US Map)
 <img width="699" height="516" alt="image" src="https://github.com/user-attachments/assets/3ad775c4-57b1-4bab-a023-8bdddf26da5b" />
 
-* Interactive tile map of the United States.
+* Interactive hexagonal tile grid of the United States, laid out per NPR's convention (see Data Sources below).
 * Displays 2020 voter turnout, uninsured rates, and life expectancy for each state.
 * Highlights the correlation between high civic engagement and stronger health metrics.
 
@@ -45,6 +45,9 @@ The data driving this visualization is sourced from official public health and e
 **New York City Data:**
 * **Voter Turnout:** [NYC Campaign Finance Board (CFB) Community Profiles](https://www.nyccfb.info/nyc-votes/community-profiles/), 2020
 * **Life Expectancy:** [NYC DOHMH Community Health Profiles](https://a816-health.nyc.gov/hdi/profiles/), 2021 (2010-2019 average)
+
+**Map Layout:**
+* US state tile grid: hexagonal layout from [Danny DeBelius & Alyson Hurt, "Let's Tesselate: Hexagons for Tile Grid Maps"](https://blog.apps.npr.org/2015/05/11/hex-tile-maps.html) (NPR Visuals, May 2015). Per-state coordinates transcribed from the [`tilemapr`](https://github.com/EmilHvitfeldt/tilemapr) R package.
 
 ## Technologies Used
 
