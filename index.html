@@ -47,7 +47,7 @@ body {
   background: #222;
   min-height: 100vh;
   color: var(--ink);
-  overflow: hidden; /* Prevents body scroll, allowing internal panel scrolling */
+  overflow: hidden; 
 }
 
 h1, h2, h3, .official-serif {
@@ -57,35 +57,48 @@ h1, h2, h3, .official-serif {
 /* ─── SCREENS ─── */
 .screen { display: none; }
 #screen-envelope.active  { display: flex; min-height: 100vh; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, #444 0%, #111 100%); overflow: hidden; }
-#screen-intro.active     { display: flex; min-height: 100vh; align-items: center; justify-content: center; background: #333333; padding: 20px; }
-#screen-ballot-wrap.active { display: block; }
+#screen-ballot-wrap.active { display: flex; flex-direction: column; height: 100vh; }
 
-/* ─── NAVBAR ─── */
+/* ─── NAVBAR (File Folder Tabs) ─── */
 #navbar {
   display: none;
+  background: #222;
   position: sticky;
   top: 0;
   z-index: 200;
-  background: var(--ink);
-  color: white;
-  border-bottom: 2px solid white;
+  padding-top: 15px;
 }
-#navbar.on { display: flex; }
-.nav-inner { display: flex; width: 100%; max-width: 1400px; margin: 0 auto; }
+#navbar.on { display: block; }
+.nav-inner { 
+  display: flex; 
+  width: 96vw; 
+  max-width: 1400px; 
+  margin: 0 auto; 
+  align-items: flex-end;
+  gap: 4px;
+}
 .nav-item {
   flex: 1; padding: 12px 10px; text-align: center;
-  font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
-  cursor: pointer; border-right: 1px solid #444; color: #ccc;
+  font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+  cursor: pointer; color: #ccc; background: #333;
+  border: var(--border-med); 
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
   transition: background .2s, color .2s; user-select: none;
 }
-.nav-item:last-child { border-right: none; }
-.nav-item:hover, .nav-item.on { background: var(--brand-blue); color: white; }
+#nav-env { flex: 0.4; font-size: 11px; }
+
+/* Active & Hover States */
+#nav-env:hover, #nav-env.on { background: var(--brand-yellow); color: var(--ink); }
+#nav-us:hover, #nav-us.on { background: var(--brand-blue); color: white; }
+#nav-nyc:hover, #nav-nyc.on { background: var(--brand-teal); color: white; }
+#nav-hc:hover, #nav-hc.on { background: var(--brand-purple); color: white; }
 
 /* ─── ENVELOPE ANIMATION ─── */
 @keyframes shake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px) rotate(-1deg); }
-  20%, 40%, 60%, 80% { transform: translateX(4px) rotate(1deg); }
+  0%, 30%, 100% { transform: translateX(0) rotate(0deg); }
+  5%, 15%, 25% { transform: translateX(-6px) rotate(-1deg); }
+  10%, 20% { transform: translateX(6px) rotate(1deg); }
 }
 
 .env-container {
@@ -97,9 +110,7 @@ h1, h2, h3, .official-serif {
   justify-content: center;
 }
 
-.shake-anim {
-  animation: shake 2.5s infinite;
-}
+.shake-anim { animation: shake 3s infinite; }
 
 .envelope {
   position: absolute;
@@ -122,10 +133,7 @@ h1, h2, h3, .official-serif {
   z-index: 4;
 }
 
-.envelope.open .env-flap {
-  transform: rotateX(180deg);
-  z-index: 1;
-}
+.envelope.open .env-flap { transform: rotateX(180deg); z-index: 1; }
 
 .env-paper {
   position: absolute;
@@ -136,100 +144,54 @@ h1, h2, h3, .official-serif {
   transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.envelope.open .env-paper {
-  transform: translateY(-35%);
-}
+.envelope.open .env-paper { transform: translateY(-35%); }
+.envelope.fade-out { opacity: 0; transform: scale(1.1) translateY(50px); }
 
-.envelope.fade-out {
-  opacity: 0;
-  transform: scale(1.1) translateY(50px);
-}
-
-/* Envelope Interior Styling */
 .env-stripe { height: 12px; background: repeating-linear-gradient(90deg, var(--brand-purple) 0 20px, #fff 20px 40px); border-bottom: var(--border-med); }
-.env-body { 
-  padding: 40px; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; 
-  height: 100%; 
-  position: relative; 
-  z-index: 5; 
-  background: var(--brand-yellow); 
-}
+.env-body { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; position: relative; z-index: 5; background: var(--brand-yellow); font-family: 'Arial', sans-serif; }
 .env-row { display: flex; justify-content: space-between; font-size: 14px; text-transform: uppercase; }
-
-.cha-brand {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 26px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  display: block;
-  margin-bottom: 6px;
-  color: var(--ink);
-}
-
-.env-vbm { border: var(--border-thick); padding: 15px 20px; text-align: center; font-weight: bold; font-size: 18px; margin: 0 20px; flex-shrink: 0; background: white; color: var(--brand-blue);}
-.env-to { text-align: right; font-size: 16px; margin-top: 10px; }
-.env-to strong { font-size: 24px; display: block; margin-bottom: 5px; }
-
-.env-btn {
-  display: block; width: 100%; padding: 18px; background: var(--brand-red); color: white;
-  font-weight: bold; font-size: 18px; text-transform: uppercase; letter-spacing: 2px;
-  cursor: pointer; border: 2px solid var(--ink); margin-top: 30px; transition: 0.2s;
-}
+.cha-brand { font-size: 22px; font-weight: bold; letter-spacing: 1px; display: block; margin-bottom: 12px; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.env-desc { font-size: 16px; line-height: 1.5; font-weight: 600; color: var(--brand-gray-dark); text-transform: none; }
+.env-stamp { border: var(--border-thick); padding: 10px 15px; text-align: center; background: transparent; color: var(--brand-blue); border-color: var(--brand-blue); transform: rotate(-3deg); margin: 0 10px; flex-shrink: 0; }
+.stamp-small { font-size: 10px; font-weight: bold; border-bottom: 1px solid var(--brand-blue); padding-bottom: 5px; margin-bottom: 5px; }
+.stamp-big { font-size: 38px; font-weight: bold; letter-spacing: 2px; }
+.env-to { text-align: right; margin-top: 15px; min-width: 200px; border-bottom: 2px solid var(--ink); padding-bottom: 5px; padding-right: 10px; }
+.env-to strong { font-size: 32px; display: block; margin-top: 4px; }
+.env-btn { display: block; width: 100%; padding: 18px; background: var(--brand-red); color: white; font-weight: bold; font-size: 18px; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; border: 2px solid var(--ink); margin-top: 20px; transition: 0.2s; }
 .env-btn:hover { background: var(--brand-red-light); }
 
-/* ─── BALLOT FLIPPER ─── */
-#ballot-flipper {
-  transition: transform 0.4s ease-in-out;
-  transform: rotateY(0deg);
-  transform-style: preserve-3d;
-}
-#ballot-flipper.flip-half {
-  transform: rotateY(90deg);
-}
-.ballot-screen { display: none; }
+/* ─── BALLOT SHARED ─── */
+.ballot-screen { display: none; height: 100%; }
 .ballot-screen.active-face { display: block; }
 
-/* ─── BALLOT SHARED ─── */
 .ballot-page {
   max-width: 1400px;
   width: 96vw;
-  height: 90vh; /* Constrains height to force inner scrolling */
-  margin: 2vh auto;
+  height: calc(100vh - 55px);
+  margin: 0 auto;
   background: var(--paper);
-  border: var(--border-thick);
+  border: var(--border-med);
+  border-top: none; 
   box-shadow: 10px 10px 0 rgba(0,0,0,.5);
   display: flex;
   flex-direction: column;
 }
 .ballot-header {
-  display: flex; justify-content: space-between; align-items: center;
-  background: var(--ink); color: white; padding: 15px 20px;
+  display: flex; justify-content: center; align-items: center;
+  color: white; padding: 15px 20px;
   text-transform: uppercase; font-weight: bold; flex-shrink: 0;
+  border-bottom: var(--border-med);
 }
-.bh-title { font-size: 20px; letter-spacing: 1px; }
-
-.subtitle-banner {
-  padding: 12px 20px; 
-  font-size: 16px; 
-  font-weight: bold; 
-  text-align: center;
-  color: white;
-  flex-shrink: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.bh-title { font-size: 22px; letter-spacing: 1px; }
 
 .ballot-cols { 
   display: flex; 
   flex: 1; 
-  overflow: hidden; /* Contains the inner scroll panels */
+  overflow: hidden; 
 }
 .bleft { 
-  flex: 1; 
-  border-right: var(--border-thick); 
+  flex: 2; 
+  border-right: var(--border-med); 
   padding: 20px; 
   display: flex; 
   flex-direction: column; 
@@ -245,13 +207,10 @@ h1, h2, h3, .official-serif {
   position: relative;
 }
 
-.section-header {
-  background: var(--paper-dark); border-bottom: var(--border-med);
-  padding: 10px 20px; font-size: 16px; font-weight: bold; text-transform: uppercase;
-}
 .race-header {
-  border-bottom: var(--border-thin); padding: 10px 20px; background: #fff;
+  padding: 10px 20px; 
   position: sticky; top: 0; z-index: 5;
+  border-bottom: var(--border-thin);
 }
 .race-title { font-size: 14px; font-weight: bold; text-transform: uppercase; }
 
@@ -263,13 +222,12 @@ h1, h2, h3, .official-serif {
   background: white;
 }
 .bopt:hover { background: #f0f0f0; }
-.bopt.sel { background: #f8f8f8; font-weight: bold; } /* Subtle background */
+.bopt.sel { background: #f8f8f8; font-weight: bold; } 
 
 .oval {
   width: 24px; height: 16px; border: 2px solid var(--ink); border-radius: 50%;
   background: white; flex-shrink: 0; transition: background .1s, border-color .1s;
 }
-/* Oval fills dynamically based on custom property injected in JS */
 .bopt.sel .oval { background: var(--sel-color); border-color: var(--sel-color); }
 
 .opt-body { flex: 1; }
@@ -310,110 +268,95 @@ h1, h2, h3, .official-serif {
 /* Stats Panel */
 #stats-panel, #nyc-stats-panel { display: none; border: var(--border-med); padding: 20px; margin-top: 10px; background: white; box-shadow: 4px 4px 0 rgba(0,0,0,0.1); }
 #stats-panel.on, #nyc-stats-panel.on { display: block; }
-.stat-name { font-size: 22px; font-weight: bold; border-bottom: var(--border-thick); padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase; color: var(--brand-blue); }
+.stat-name { font-size: 22px; font-weight: bold; border-bottom: var(--border-med); padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase; color: var(--brand-blue); }
 .stat-row { margin-bottom: 15px; }
 .stat-lbl { display: flex; justify-content: space-between; font-size: 12px; text-transform: uppercase; font-weight: bold; margin-bottom: 6px; }
 .stat-bg { height: 12px; background: #eee; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; }
 .stat-fill { height: 100%; background: var(--brand-blue); transition: width .6s cubic-bezier(0.25, 1, 0.5, 1); }
 
 /* Tilemaps */
-.tm-label { font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 5px; }
-svg.tilemap { width: 100%; display: block; background: #fff; border: var(--border-med); }
-.tm-tile polygon { transition: fill 0.2s, stroke-width 0.2s; }
-.tm-tile:hover polygon { stroke-width: 2px; }
-.tm-legend { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; font-size: 12px; text-transform: uppercase; font-weight: bold; }
+.tm-label { font-size: 14px; font-weight: bold; text-transform: uppercase; color: var(--ink); }
+svg.tilemap { width: 100%; display: block; border: var(--border-med); margin-top: 15px; }
+#tilemap-us { background: #eef4f8; padding: 5px; }
+#tilemap-nyc { background: #eef4f8; padding: 5px; }
+
+/* Map Selection Styles - Hatching Overlay */
+.tm-tile, .tm-tile-nyc { cursor: pointer; }
+.tm-tile .tile-bg { stroke: var(--ink); stroke-width: 1px; transition: fill 0.2s; }
+.tm-tile-nyc .tile-bg { stroke: var(--ink); stroke-width: 0.5px; transition: fill 0.2s; }
+
+/* The invisible overlay that catches the hatch pattern */
+.tile-overlay { fill: transparent; pointer-events: none; transition: fill 0.2s; }
+
+/* Apply hatching on hover and selection */
+.tm-tile:hover .tile-overlay, .tm-tile-nyc:hover .tile-overlay { fill: url(#stripe-hover); }
+.tm-tile.sel .tile-overlay, .tm-tile-nyc.sel .tile-overlay { fill: url(#stripe-sel); }
+
+/* Legend */
+.tm-legend { display: flex; flex-wrap: wrap; gap: 15px; font-size: 12px; text-transform: uppercase; font-weight: bold; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-top: 5px; }
 .tm-le { display: flex; align-items: center; gap: 6px; }
 .tm-sw { width: 16px; height: 16px; border: 2px solid var(--ink); border-radius: 3px; }
 
-/* Source citations */
-.source-block {
-  border: 1px dashed var(--brand-gray-light);
-  background: var(--paper-shade);
-  padding: 12px 14px;
-  margin-top: 14px;
-  font-size: 11px;
-  line-height: 1.55;
-  color: var(--brand-gray-dark);
-}
-.source-block .src-title {
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 10px;
-  color: var(--ink);
-  margin-bottom: 6px;
-  border-bottom: 1px solid var(--brand-gray-light);
-  padding-bottom: 4px;
-}
-.source-block ol { margin: 0; padding-left: 18px; }
-.source-block li { margin-bottom: 4px; }
-.source-block a { color: var(--brand-blue); text-decoration: none; word-break: break-word; }
-.source-block a:hover { text-decoration: underline; }
-.stat-lbl sup { font-size: 9px; font-weight: bold; color: var(--brand-blue); margin-left: 2px; }
-.stat-lbl sup a { color: inherit; text-decoration: none; }
+.stat-lbl sup a { color: var(--brand-blue); text-decoration: none; margin-left: 3px; font-size: 10px; }
 .stat-lbl sup a:hover { text-decoration: underline; }
 .tm-label sup { font-size: 9px; font-weight: bold; color: var(--brand-blue); margin-left: 3px; vertical-align: super; }
 .tm-label sup a { color: inherit; text-decoration: none; }
 .tm-label sup a:hover { text-decoration: underline; }
 
-/* NYC Specific Map Styles */
-.nyc-path { transition: all 0.2s; cursor: pointer; stroke: rgba(0,0,0,0.5); stroke-width: 0.2px; }
-.nyc-path:hover { stroke: var(--ink); stroke-width: 0.8px; }
-.nyc-path.sel { stroke: var(--brand-red); stroke-width: 1px; } /* Less bold selection */
-
 /* Stories Updated Styles */
 .story-wrap { border-bottom: var(--border-thin); background: white; }
 .story-top { display: flex; align-items: center; gap: 15px; padding: 15px 20px; cursor: pointer; transition: background .1s; }
 .story-top:hover { background: #f0f0f0; }
-.story-top.sel-s { background: #f8f8f8; } /* Subtle background */
-.story-top.sel-s .oval { background: var(--brand-purple); border-color: var(--brand-purple); } /* Exception: Purple selection */
+.story-top.sel-s { background: #f8f8f8; } 
+.story-top.sel-s .oval { background: var(--brand-purple); border-color: var(--brand-purple); }
 
 .story-body { display: none; }
 .story-body.on { display: block; }
 .new-story-body { padding: 30px; background: white; border-top: var(--border-thin); border-bottom: var(--border-thick); }
 .story-detail-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-.story-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--brand-purple); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; border: 2px solid var(--ink); }
+
+.story-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--paper-shade); display: flex; align-items: center; justify-content: center; color: var(--brand-purple); border: var(--border-med); }
 .story-name { font-size: 22px; font-weight: bold; color: var(--ink); margin-bottom: 4px; }
 .story-role { font-family: monospace; font-size: 12px; color: var(--brand-teal); text-transform: uppercase; font-weight: bold; }
-.story-intro-text { font-size: 15px; line-height: 1.6; margin-bottom: 25px; color: #333; padding: 15px; background: var(--paper-shade); border-left: 4px solid var(--brand-purple); }
 
-.story-legend { display: flex; gap: 15px; margin-bottom: 25px; font-family: monospace; font-size: 11px; color: var(--ink); align-items: center; font-weight: bold; text-transform: uppercase; padding: 10px; border: 1px dashed #ccc; }
-.legend-item { display: flex; align-items: center; gap: 6px; }
-.l-box { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--ink); }
-.l-box.health { background: var(--brand-red); }
-.l-box.civic { background: var(--brand-teal); }
+.reading-text { max-width: 50ch; line-height: 1.7; font-size: 15px; color: #333; margin-bottom: 15px; }
 
-.story-timeline-new { position: relative; padding-left: 20px; margin-bottom: 30px; border-left: 3px solid #eee; margin-left: 8px; }
-.te-new { position: relative; margin-bottom: 30px; }
-.te-new::before { content: ''; position: absolute; left: -31px; top: 2px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--ink); background: white; }
-.te-new.health::before { background: var(--brand-red); }
-.te-new.civic::before { background: var(--brand-teal); }
+/* Fixed Centered Timeline */
+.story-timeline-new { position: relative; margin-left: 8px; }
+/* Reverted to left: 7px to perfectly center behind a border-box 16px circle */
+.story-timeline-new::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #ccc; }
+.te-new { position: relative; padding-left: 30px; margin-bottom: 30px; }
+.te-new::before { content: ''; position: absolute; left: 0; top: 2px; width: 16px; height: 16px; border-radius: 50%; border: var(--border-med); background: white; z-index: 2; }
 .te-date { font-family: monospace; font-size: 11px; color: var(--brand-gray-dark); margin-bottom: 6px; text-transform: uppercase; font-weight: bold; }
 .te-title { font-weight: bold; font-size: 16px; margin-bottom: 6px; color: var(--ink); }
-.te-detail-text { font-size: 14px; line-height: 1.5; color: #444; padding-left: 15px; border-left: 3px solid transparent; }
-.te-new.health .te-detail-text { border-left-color: var(--brand-red-light); }
-.te-new.civic .te-detail-text { border-left-color: var(--brand-teal-light); }
-
-.story-summary-box { background: var(--brand-blue); color: white; padding: 25px; text-align: center; border: var(--border-thick); margin-top: 20px; }
-.summary-text { font-weight: bold; font-size: 16px; margin-bottom: 10px; line-height: 1.5; text-transform: uppercase; }
-.summary-sub { font-size: 12px; color: var(--brand-pink); font-family: monospace; text-transform: uppercase; }
+.te-detail-text { font-size: 14px; line-height: 1.5; color: #444; max-width: 50ch; } 
 
 @media (max-width: 900px) {
   .ballot-cols { flex-direction: column; overflow-y: auto; }
   .bleft, .bright { overflow-y: visible; height: auto; flex: none; }
-  .bleft { border-right: none; border-bottom: var(--border-thick); }
+  .bleft { border-right: none; border-bottom: var(--border-med); }
   .env-body { padding: 20px; }
   .cha-brand { font-size: 20px; }
-  .env-vbm { font-size: 14px; padding: 10px; margin: 0 10px; }
 }
 </style>
 </head>
 <body>
 
+<svg style="width:0; height:0; position:absolute;" aria-hidden="true">
+  <defs>
+    <pattern id="stripe-hover" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(255,255,255,0.6)" stroke-width="2" />
+    </pattern>
+    <pattern id="stripe-sel" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="var(--brand-red)" stroke-width="3.5" />
+    </pattern>
+  </defs>
+</svg>
+
 <nav id="navbar">
   <div class="nav-inner">
-    <div class="nav-item" onclick="location.reload()">Civic Health</div>
-    <div class="nav-item" id="nav-us" onclick="navToBallot('screen-ballot')">US Partisan Map</div>
+    <div class="nav-item" id="nav-env" onclick="navToEnvelope()">Civic Health</div>
+    <div class="nav-item on" id="nav-us" onclick="navToBallot('screen-ballot')">US Partisan Map</div>
     <div class="nav-item" id="nav-nyc" onclick="navToBallot('screen-nyc')">NYC Local Map</div>
     <div class="nav-item" id="nav-hc" onclick="navToBallot('screen-back')">Legislative Side</div>
   </div>
@@ -427,24 +370,24 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
       </div>
       <div class="env-paper"></div>
       <div class="env-body">
-        <div class="env-row" style="border-bottom: 2px solid var(--ink); padding-bottom: 12px; font-weight: bold;">
-          <span>Official Election Mail</span>
-          <span>United States Postal Service</span>
-        </div>
-        <div class="env-row" style="align-items:flex-start; flex: 1; margin-top: 30px;">
-          <div class="env-from">
+        <div class="env-row" style="align-items:flex-start; flex: 1; margin-top: 15px;">
+          <div class="env-from" style="max-width: 60%;">
             <span class="cha-brand">CIVIC HEALTH ALLIANCE</span>
-            <p>How voter turnout, community organizing, and public testimony shape the healthcare communities receive.</p>
+            <p class="env-desc">
+              How voter turnout,<br>
+              community organizing,<br>
+              and testimony shape healthcare.
+            </p>
           </div>
-          <div class="env-vbm">
-            OFFICIAL BALLOTING MATERIAL<br>
-            DO NOT BEND
+          <div class="env-stamp">
+            <div class="stamp-small">OFFICIAL BALLOT</div>
+            <div class="stamp-big">CHA</div>
           </div>
         </div>
-        <div class="env-row" style="justify-content: flex-end;">
+        <div class="env-row" style="justify-content: flex-end; align-items: flex-end; margin-bottom: 15px;">
           <div class="env-to">
-            <strong>TO: YOU</strong>
-            UNITED STATES OF AMERICA
+            TO:
+            <strong>YOU</strong>
           </div>
         </div>
         <button class="env-btn callout-btn" onclick="openEnvelope()" style="width: 100%;">Proceed to Ballot</button>
@@ -454,66 +397,54 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
 </div>
 
 <div id="screen-ballot-wrap" class="screen">
-  <div id="ballot-flipper">
-
+  
     <div id="screen-ballot" class="ballot-screen active-face">
       <div class="ballot-page">
-        <div class="ballot-header">
-          <div>Election 2020</div>
-          <div class="bh-title official-serif">Partisan Elections: National Health Ballot</div>
-          <div>Page 1 of 3</div>
-        </div>
-        <div class="subtitle-banner" style="background: var(--brand-blue);">
-          Discover how national voter turnout rates directly impact state healthcare outcomes.
+        <div class="ballot-header" style="background: var(--brand-blue);">
+          <div class="bh-title official-serif">Turnout Impacts State Healthcare Outcomes.</div>
         </div>
         <div class="ballot-cols">
-          <div class="bleft">
-            <div>
-              <div class="tm-label">Voter Turnout by State · 2020<sup><a href="#src-us" title="Source: UF Election Lab, 2020 VEP turnout v1.2">[1]</a></sup></div>
-              <svg id="tilemap-us" class="tilemap" viewBox="0 0 244 142" xmlns="http://www.w3.org/2000/svg"></svg>
+          <div class="bleft"> <div>
+              <div class="tm-label">Voter Turnout by State · 2020<sup><a href="https://election.lab.ufl.edu/voter-turnout/2020-general-election-turnout/" target="_blank" title="Source: UF Election Lab, 2020 VEP turnout v1.2">[1]</a></sup></div>
               <div class="tm-legend">
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-low);"></div>&lt; 58%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-med-low);"></div>58–63%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-med);"></div>64–69%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-high);"></div>70%+</div>
               </div>
+              <svg id="tilemap-us" class="tilemap" viewBox="0 0 244 142" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
             <div id="stats-panel">
               <div class="stat-name" id="stats-name">—</div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Voter Turnout<sup><a href="#src-us" title="UF Election Lab — 2020 General Election VEP Turnout Rates, v1.2">[1]</a></sup></span><span id="sv1">—</span></div>
+                <div class="stat-lbl"><span>Voter Turnout<sup><a href="https://election.lab.ufl.edu/voter-turnout/2020-general-election-turnout/" target="_blank">[1]</a></sup></span><span id="sv1">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="sb1" style="width:0%; background: var(--brand-blue);"></div></div>
               </div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Uninsured Rate<sup><a href="#src-us" title="U.S. Census Bureau ACS 2023 1-year estimates / KFF State Health Facts">[2]</a></sup></span><span id="sv2">—</span></div>
+                <div class="stat-lbl"><span>Uninsured Rate<sup><a href="https://www.kff.org/state-category/health-coverage-uninsured/" target="_blank">[2]</a></sup></span><span id="sv2">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="sb2" style="width:0%; background: var(--brand-red);"></div></div>
               </div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Life Expectancy<sup><a href="#src-us" title="CDC/NCHS NVSR Vol. 74 No. 12 — U.S. State Life Tables, 2022">[3]</a></sup></span><span id="sv3">—</span></div>
+                <div class="stat-lbl"><span>Life Expectancy<sup><a href="https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf" target="_blank">[3]</a></sup></span><span id="sv3">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="sb3" style="width:0%; background: var(--brand-teal);"></div></div>
               </div>
             </div>
-            <div class="source-block" id="src-us">
-              <div class="src-title">Sources &amp; Methodology</div>
-              <ol>
-                <li><strong>Voter Turnout:</strong> <a href="https://election.lab.ufl.edu/voter-turnout/2020-general-election-turnout/" target="_blank" rel="noopener">UF Election Lab</a> — 2020 General Election VEP Turnout Rates, dataset v1.2 (ballots counted ÷ voting-eligible population).</li>
-                <li><strong>Uninsured Rate:</strong> <a href="https://www2.census.gov/library/publications/2025/demo/acsbr-024.pdf" target="_blank" rel="noopener">U.S. Census Bureau ACSBR-024</a> (2023 ACS 1-year estimates, all ages); republished at <a href="https://www.kff.org/state-category/health-coverage-uninsured/" target="_blank" rel="noopener">KFF State Health Facts</a>.</li>
-                <li><strong>Life Expectancy at Birth:</strong> <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf" target="_blank" rel="noopener">CDC/NCHS — National Vital Statistics Reports, Vol. 74 No. 12</a> (U.S. State Life Tables, 2022), Table A.</li>
-              </ol>
-              <p style="margin: 8px 0 0;"><strong>Map layout:</strong> Hexagonal tile grid following <a href="https://blog.apps.npr.org/2015/05/11/hex-tile-maps.html" target="_blank" rel="noopener">"Let's Tesselate: Hexagons for Tile Grid Maps"</a> (DeBelius &amp; Hurt, NPR Visuals, 2015); state coordinates transcribed from the <a href="https://github.com/EmilHvitfeldt/tilemapr" target="_blank" rel="noopener">tilemapr</a> R package.</p>
-            </div>
           </div>
-          <div class="bright">
-            <div id="us-next-bar" class="next-action-bar">
+          <div class="bright"> <div id="us-next-bar" class="next-action-bar">
               <span style="font-size:13px; font-weight:bold; margin-right:15px; text-transform:uppercase;">Special Local Selection Detected</span>
-              <button class="callout-btn action-btn" onclick="flipTo('screen-nyc')">Turn Page to NYC Local Ballot →</button>
+              <button class="callout-btn action-btn" onclick="navToBallot('screen-nyc')">Turn Page to NYC Local Ballot →</button>
             </div>
-            <div class="section-header">National Civic Health Index</div>
-            <div class="race-header"><div class="race-title">High Turnout States (70%+)</div></div>
+            
+            <div class="race-header" style="background: var(--t-high); color: white;"><div class="race-title">High Turnout States (70%+)</div></div>
             <div id="grp-high"></div>
-            <div class="race-header"><div class="race-title">Moderate Turnout States (64–69%)</div></div>
+            
+            <div class="race-header" style="background: var(--t-med); color: white;"><div class="race-title">Moderate Turnout States (64–69%)</div></div>
             <div id="grp-mid"></div>
-            <div class="race-header"><div class="race-title">Lower Turnout States (under 64%)</div></div>
+
+            <div class="race-header" style="background: var(--t-med-low); color: var(--ink);"><div class="race-title">Medium-Low Turnout States (58–63%)</div></div>
+            <div id="grp-med-low"></div>
+            
+            <div class="race-header" style="background: var(--t-low); color: var(--ink);"><div class="race-title">Lower Turnout States (under 58%)</div></div>
             <div id="grp-low"></div>
           </div>
         </div>
@@ -523,57 +454,42 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
     <div id="screen-nyc" class="ballot-screen">
       <div class="ballot-page">
         <div class="ballot-header" style="background: var(--brand-teal);">
-          <div>Election 2020</div>
-          <div class="bh-title official-serif">Local Elections: NYC Health Ballot</div>
-          <div>Page 2 of 3</div>
-        </div>
-        <div class="subtitle-banner" style="background: var(--brand-teal-light);">
-          Explore the stark contrast in life expectancy driven by local neighborhood civic engagement.
+          <div class="bh-title official-serif">Civic Engagement Drives Life Expectancy.</div>
         </div>
         <div class="ballot-cols">
-          <div class="bleft">
-            <div>
-              <div class="tm-label">Turnout by Neighborhood · 2020<sup><a href="#src-nyc" title="NYC Campaign Finance Board — Community Profiles">[4]</a></sup></div>
-              <svg id="tilemap-nyc" class="tilemap" viewBox="0 0 115 95" xmlns="http://www.w3.org/2000/svg" style="background:#eef4f8; padding: 5px;"></svg>
+          <div class="bleft"> <div>
+              <div class="tm-label">Turnout by Neighborhood · 2020<sup><a href="https://www.nyccfb.info/nyc-votes/community-profiles/" target="_blank" title="NYC Campaign Finance Board — Community Profiles">[1]</a></sup></div>
                <div class="tm-legend">
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-low);"></div>&lt; 35%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-med-low);"></div>35–39%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-med);"></div>40–44%</div>
                 <div class="tm-le"><div class="tm-sw" style="background:var(--t-high);"></div>45%+</div>
               </div>
+              <svg id="tilemap-nyc" class="tilemap" viewBox="0 0 115 95" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
             <div id="nyc-stats-panel">
               <div class="stat-name" id="nyc-stats-name" style="color: var(--brand-teal);">—</div>
               <div style="font-family: monospace; font-size: 11px; color: var(--brand-gray-dark); margin-bottom: 15px; text-transform: uppercase; font-weight:bold;" id="nyc-stats-boro">—</div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Voter Turnout<sup><a href="#src-nyc" title="NYC Campaign Finance Board — Community Profiles, 2020 cycle">[4]</a></sup></span><span id="nsv1">—</span></div>
+                <div class="stat-lbl"><span>Voter Turnout<sup><a href="https://www.nyccfb.info/nyc-votes/community-profiles/" target="_blank">[1]</a></sup></span><span id="nsv1">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="nsb1" style="width:0%; background: var(--brand-blue);"></div></div>
               </div>
               <div class="stat-row">
-                <div class="stat-lbl"><span>Life Expectancy<sup><a href="#src-nyc" title="NYC DOHMH Community Health Profiles">[5]</a></sup></span><span id="nsv3">—</span></div>
+                <div class="stat-lbl"><span>Life Expectancy<sup><a href="https://a816-health.nyc.gov/hdi/profiles/" target="_blank">[2]</a></sup></span><span id="nsv3">—</span></div>
                 <div class="stat-bg"><div class="stat-fill" id="nsb3" style="width:0%; background: var(--brand-teal);"></div></div>
               </div>
             </div>
-            <div class="source-block" id="src-nyc">
-              <div class="src-title">Sources &amp; Methodology</div>
-              <ol start="4">
-                <li><strong>Neighborhood Turnout:</strong> <a href="https://www.nyccfb.info/nyc-votes/community-profiles/" target="_blank" rel="noopener">NYC Campaign Finance Board — Community Profiles</a> and the <a href="https://www.nyccfb.info/pdf/2020-2021_Voter-Analysis-Report.pdf" target="_blank" rel="noopener">2020–2021 Voter Analysis Report</a> (Figure 1.7: Map of General Election 2020 Voter Turnout by Community District). NYC citywide general-election turnout was 61.9%; the spread across the 59 community districts was about 48%–74%.</li>
-                <li><strong>Life Expectancy at Birth:</strong> <a href="https://a816-health.nyc.gov/hdi/profiles/" target="_blank" rel="noopener">NYC DOHMH — Community Health Profiles</a>. Citywide average is about 81 years; Manhattan is highest (~85), the Bronx lowest (~81), with per-neighborhood variation of more than 10 years.</li>
-              </ol>
-              <div style="margin-top:8px; font-style:italic; color:var(--brand-gray-med);">Note: Neighborhood values shown are indicators drawn from these sources; for authoritative per-district figures consult the linked community profiles.</div>
-            </div>
           </div>
-          <div class="bright">
-            <div class="next-action-bar on">
-              <span style="font-size:13px; font-weight:bold; margin-right:15px; text-transform:uppercase;">View the Human Cost</span>
-              <button class="callout-btn action-btn" onclick="flipTo('screen-back')">Proceed to Legislative Side →</button>
-            </div>
-            <div class="section-header">Local Civic Health Index</div>
-            <div class="race-header"><div class="race-title">High Turnout Neighborhoods (45%+)</div></div>
+          <div class="bright"> <div class="race-header" style="background: var(--t-high); color: white;"><div class="race-title">High Turnout Neighborhoods (45%+)</div></div>
             <div id="grp-nyc-high"></div>
-            <div class="race-header"><div class="race-title">Moderate Turnout Neighborhoods (35–44%)</div></div>
+            
+            <div class="race-header" style="background: var(--t-med); color: white;"><div class="race-title">Moderate Turnout Neighborhoods (40–44%)</div></div>
             <div id="grp-nyc-mid"></div>
-            <div class="race-header"><div class="race-title">Lower Turnout Neighborhoods (under 35%)</div></div>
+
+            <div class="race-header" style="background: var(--t-med-low); color: var(--ink);"><div class="race-title">Medium-Low Turnout Neighborhoods (35–39%)</div></div>
+            <div id="grp-nyc-med-low"></div>
+            
+            <div class="race-header" style="background: var(--t-low); color: var(--ink);"><div class="race-title">Lower Turnout Neighborhoods (under 35%)</div></div>
             <div id="grp-nyc-low"></div>
           </div>
         </div>
@@ -583,62 +499,38 @@ svg.tilemap { width: 100%; display: block; background: #fff; border: var(--borde
     <div id="screen-back" class="ballot-screen">
       <div class="ballot-page">
         <div class="ballot-header" style="background: var(--brand-purple);">
-          <div>Election 2020</div>
-          <div class="bh-title official-serif">Legislative Measures: Stories</div>
-          <div>Page 3 of 3</div>
-        </div>
-        <div class="subtitle-banner" style="background: #966b90;">
-          Read real patient stories that reveal the profound human cost of public policy decisions.
+          <div class="bh-title official-serif">Policy Decisions Carry Human Costs.</div>
         </div>
         <div class="ballot-cols">
-          <div class="bleft" style="background: white; align-items: flex-start;">
-             <div class="tm-label" style="font-size:18px; color: var(--brand-purple); width: 100%;">What's At Stake</div>
-             <div style="font-size:15px; line-height:1.7; color:#333; margin-bottom: 20px;">
-              <p style="margin-bottom:15px;">Every story in this section shows how policy shapes survival. Medicaid benefit limits, hospital-insurer contract disputes, and state-level decisions about who gets care.</p>
-              <p>These policies determine who lives, who loses their provider, and who finds a home. Dr. Stella Safo witnesses these outcomes daily. <strong>Select a record on the right to view.</strong></p>
-            </div>
-            <button class="action-btn" style="background:var(--brand-gray-dark); width: 100%; border:none; padding: 15px; margin-bottom: 20px;" onclick="flipTo('screen-ballot')">← Return to US Map</button>
-            <div class="source-block" style="width: 100%;">
-              <div class="src-title">Sources &amp; Methodology</div>
-              <ol>
-                <li><strong>Patient accounts:</strong> Paraphrased from the clinical observations of Dr. Stella Safo, HIV specialist, New York. Details are composite and de-identified to protect patient privacy.</li>
-                <li><strong>Medicaid coverage limits &amp; state policy comparison:</strong> <a href="https://www.kff.org/medicaid/" target="_blank" rel="noopener">KFF Medicaid State Health Facts</a>; <a href="https://www.hiv.gov/federal-response/policies-issues/housing-and-hiv-aids" target="_blank" rel="noopener">HIV.gov — Housing &amp; HIV/AIDS</a>; <a href="https://www.health.ny.gov/diseases/aids/general/resources/hasa/" target="_blank" rel="noopener">NY HIV/AIDS Services Administration (HASA)</a>.</li>
-                <li><strong>Ballot-design conventions:</strong> <a href="https://electionlab.mit.edu/research/ballot-design" target="_blank" rel="noopener">MIT Election Lab — Ballot Design Research</a>.</li>
-              </ol>
-            </div>
-          </div>
-          <div class="bright" style="background: var(--paper-dark);">
-            <div class="section-header">Initiative Petitions</div>
-            <div class="race-header"><div class="race-title">Patient Records</div></div>
+          <div class="bleft" style="flex: 2; padding: 0; border-right: var(--border-med); background: var(--paper-shade);">
+            <div class="race-header" style="background: #fff;"><div class="race-title">Patient Records</div></div>
             <div id="stories-list"></div>
+          </div>
+          <div class="bright" style="flex: 1; padding: 20px; background: white;">
+             <div class="tm-label" style="font-size:18px; color: var(--brand-purple); width: 100%; border-bottom: none;">What's At Stake</div>
+             <div class="reading-text">
+                <p style="margin-bottom:15px;">Dr. Safo sees the system from the inside. Every discharge, every coverage lapse, every contract dispute, she witnesses them and continues to care for patients anyway.</p>
+                <p>These policies determine who lives, who loses their provider, and who finds a home. <strong>Select a record on the left to view.</strong></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
 </div>
 
 <script>
 // ══════════════════════════════════════════
 // DATA
 // ══════════════════════════════════════════
-// State metrics, NYC districts, and patient stories are loaded from /data/*.json
-// at startup via loadData(). To refresh the state dataset from upstream sources
-// (UF Election Lab, Census ACS, CDC NVSR), run:  python3 scripts/build-data.py
-//
-// GRID_US stays inline because it is layout (cartogram coordinates), not data.
-// Layout: NPR hex-tile grid (pointy-top). Coordinates are [long, lat] where
-// Δlong=1 is one hex width and Δlat=1 is one row of vertical spacing; lat=8
-// is north. Source: Danny DeBelius & Alyson Hurt, "Let's Tesselate: Hexagons
-// for Tile Grid Maps" (NPR Visuals, 2015-05-11), as transcribed in the
-// `tilemapr` R package (github.com/EmilHvitfeldt/tilemapr, MIT-licensed).
-
 let STATES = {};
 let NYC_DATA = {};
 let STORIES = [];
-let GRP_HIGH = [], GRP_MID = [], GRP_LOW = [];
-let GRP_NYC_HIGH = [], GRP_NYC_MID = [], GRP_NYC_LOW = [];
+
+// US state groups
+let GRP_HIGH = [], GRP_MID = [], GRP_MED_LOW = [], GRP_LOW = [];
+// NYC neighborhood groups
+let GRP_NYC_HIGH = [], GRP_NYC_MID = [], GRP_NYC_MED_LOW = [], GRP_NYC_LOW = [];
 
 async function loadData() {
   const paths = ['data/states.json', 'data/nyc.json', 'data/stories.json'];
@@ -649,15 +541,23 @@ async function loadData() {
       return r.json();
     })
   );
+  
   STATES = statesDoc.states;
-  GRP_HIGH = statesDoc.groups.high;
-  GRP_MID  = statesDoc.groups.mid;
-  GRP_LOW  = statesDoc.groups.low;
+  // Dynamic Grouping for US States based on turnout rules
+  const usKeys = Object.keys(STATES);
+  GRP_HIGH    = usKeys.filter(k => STATES[k].t >= 70).sort((a,b) => STATES[b].t - STATES[a].t);
+  GRP_MID     = usKeys.filter(k => STATES[k].t >= 64 && STATES[k].t < 70).sort((a,b) => STATES[b].t - STATES[a].t);
+  GRP_MED_LOW = usKeys.filter(k => STATES[k].t >= 58 && STATES[k].t < 64).sort((a,b) => STATES[b].t - STATES[a].t);
+  GRP_LOW     = usKeys.filter(k => STATES[k].t < 58).sort((a,b) => STATES[b].t - STATES[a].t);
+  
   NYC_DATA = nycDoc.districts;
+  // Dynamic Grouping for NYC Neighborhoods based on turnout rules
   const nycKeys = Object.keys(NYC_DATA);
-  GRP_NYC_HIGH = nycKeys.filter(k => NYC_DATA[k].vt >= 45).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
-  GRP_NYC_MID  = nycKeys.filter(k => NYC_DATA[k].vt >= 35 && NYC_DATA[k].vt < 45).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
-  GRP_NYC_LOW  = nycKeys.filter(k => NYC_DATA[k].vt < 35).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
+  GRP_NYC_HIGH    = nycKeys.filter(k => NYC_DATA[k].vt >= 45).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
+  GRP_NYC_MID     = nycKeys.filter(k => NYC_DATA[k].vt >= 40 && NYC_DATA[k].vt < 45).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
+  GRP_NYC_MED_LOW = nycKeys.filter(k => NYC_DATA[k].vt >= 35 && NYC_DATA[k].vt < 40).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
+  GRP_NYC_LOW     = nycKeys.filter(k => NYC_DATA[k].vt < 35).sort((a,b) => NYC_DATA[b].vt - NYC_DATA[a].vt);
+  
   STORIES = storiesDoc.stories;
 }
 
@@ -672,7 +572,6 @@ const GRID_US = {
   TX:[6,1],    FL:[9,1]
 };
 
-
 // ══════════════════════════════════════════
 // NAVIGATION & ANIMATION
 // ══════════════════════════════════════════
@@ -682,8 +581,7 @@ let activeBallotScreen = 'screen-ballot';
 function setMainScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const showNav = (id === 'screen-ballot-wrap');
-  document.getElementById('navbar').classList.toggle('on', showNav);
+  document.getElementById('navbar').classList.toggle('on', id === 'screen-ballot-wrap');
   activeMainScreen = id;
 }
 
@@ -693,6 +591,7 @@ function navToEnvelope() {
   env.classList.remove('open', 'fade-out');
   envWrap.classList.add('shake-anim');
   setMainScreen('screen-envelope');
+  updateNavStyles('env');
 }
 
 function openEnvelope() {
@@ -710,24 +609,10 @@ function openEnvelope() {
 
 function navToBallot(screenId) {
   setMainScreen('screen-ballot-wrap');
-  if(activeBallotScreen !== screenId) {
-     flipTo(screenId);
-  } else {
-     updateNavStyles(screenId);
-  }
-}
-
-function flipTo(screenId) {
-  const flipper = document.getElementById('ballot-flipper');
-  flipper.classList.add('flip-half');
-  
-  setTimeout(() => {
-    document.querySelectorAll('.ballot-screen').forEach(s => s.classList.remove('active-face'));
-    document.getElementById(screenId).classList.add('active-face');
-    flipper.classList.remove('flip-half');
-    activeBallotScreen = screenId;
-    updateNavStyles(screenId);
-  }, 400); 
+  document.querySelectorAll('.ballot-screen').forEach(s => s.classList.remove('active-face'));
+  document.getElementById(screenId).classList.add('active-face');
+  activeBallotScreen = screenId;
+  updateNavStyles(screenId);
 }
 
 function updateNavStyles(screenId) {
@@ -735,6 +620,7 @@ function updateNavStyles(screenId) {
   if(screenId === 'screen-ballot') document.getElementById('nav-us').classList.add('on');
   if(screenId === 'screen-nyc') document.getElementById('nav-nyc').classList.add('on');
   if(screenId === 'screen-back') document.getElementById('nav-hc').classList.add('on');
+  if(screenId === 'env') document.getElementById('nav-env').classList.add('on');
 }
 
 // ══════════════════════════════════════════
@@ -749,12 +635,11 @@ function tColor(t) {
 
 function buildUSMap() {
   const svg = document.getElementById('tilemap-us');
-  const S = 11;                        // hex side (center-to-vertex)
-  const W = S * Math.sqrt(3);          // flat-to-flat width
-  const ROW_Y = 1.5 * S;               // vertical spacing between rows
+  const S = 11; 
+  const W = S * Math.sqrt(3); 
+  const ROW_Y = 1.5 * S; 
   const PAD = 2;
   const MAX_LAT = 8;
-  // Pointy-top hex vertices, clockwise from top.
   const V = [[0,-S],[W/2,-S/2],[W/2,S/2],[0,S],[-W/2,S/2],[-W/2,-S/2]];
   let html = '';
   for (const [abbr, [lng, lat]] of Object.entries(GRID_US)) {
@@ -762,9 +647,11 @@ function buildUSMap() {
     const cx = (lng - 1) * W + W/2 + PAD;
     const cy = (MAX_LAT - lat) * ROW_Y + S + PAD;
     const pts = V.map(([px, py]) => `${(cx+px).toFixed(2)},${(cy+py).toFixed(2)}`).join(' ');
-    html += `<g class="tm-tile" onclick="handleUsClick('${abbr}')" style="cursor:pointer">
-      <polygon id="tr-${abbr}" points="${pts}" fill="${tColor(s.t)}" stroke="var(--ink)" stroke-width="1"/>
-      <text x="${cx.toFixed(2)}" y="${(cy+3).toFixed(2)}" text-anchor="middle" fill="black" font-size="7" font-weight="bold">${abbr}</text>
+    // Added 'grp-${abbr}' to <g> to act as the primary selection container
+    html += `<g class="tm-tile" id="grp-${abbr}" onclick="handleUsClick('${abbr}')">
+      <polygon class="tile-bg" points="${pts}" fill="${tColor(s.t)}" />
+      <polygon class="tile-overlay" points="${pts}" />
+      <text x="${cx.toFixed(2)}" y="${(cy+3).toFixed(2)}" text-anchor="middle" fill="black" font-size="7" font-weight="bold" pointer-events="none">${abbr}</text>
     </g>`;
   }
   svg.innerHTML = html;
@@ -772,12 +659,12 @@ function buildUSMap() {
 
 function buildUSOptions(abbrs, containerId) {
   const el = document.getElementById(containerId);
+  if(!el) return;
   abbrs.forEach(abbr => {
     const s = STATES[abbr];
     const div = document.createElement('div');
     div.className = 'bopt';
     div.id = 'opt-'+abbr;
-    // Set a custom property based on the state's specific turnout color
     div.style.setProperty('--sel-color', tColor(s.t));
     div.innerHTML = `
       <div class="oval"></div>
@@ -796,7 +683,7 @@ let selUS = null;
 function handleUsClick(abbr) {
   if (selUS) {
     document.getElementById('opt-'+selUS)?.classList.remove('sel');
-    document.getElementById('tr-'+selUS)?.setAttribute('stroke-width', '1');
+    document.getElementById('grp-'+selUS)?.classList.remove('sel');
   }
   if (selUS === abbr) {
     document.getElementById('stats-panel').classList.remove('on');
@@ -806,7 +693,7 @@ function handleUsClick(abbr) {
 
   const opt = document.getElementById('opt-'+abbr);
   if(opt) { opt.classList.add('sel'); opt.scrollIntoView({behavior:'smooth',block:'center'}); }
-  document.getElementById('tr-'+abbr)?.setAttribute('stroke-width', '3');
+  document.getElementById('grp-'+abbr)?.classList.add('sel');
   selUS = abbr;
 
   const s = STATES[abbr];
@@ -821,7 +708,8 @@ function handleUsClick(abbr) {
     document.getElementById('sb2').style.width = Math.min(s.u * 5, 100) + '%';
     document.getElementById('sb3').style.width = ((s.l - 70) / 15 * 100) + '%';
   }, 50);
-
+  
+  // Show NYC Button if it's the special state
   document.getElementById('us-next-bar').classList.toggle('on', !!s.special);
 }
 
@@ -838,19 +726,22 @@ function buildNYCMap() {
   for (const abbr in NYC_DATA) {
     const s = NYC_DATA[abbr]; 
     if (!s.p) continue;
-    html += `<g onclick="handleNycClick('${abbr}')"><path id="tr-nyc-${abbr}" class="nyc-path" d="${s.p}" fill="${tColorNYC(s.vt)}" /></g>`;
+    html += `<g class="tm-tile-nyc" id="grp-nyc-${abbr}" onclick="handleNycClick('${abbr}')">
+      <path class="tile-bg" d="${s.p}" fill="${tColorNYC(s.vt)}" />
+      <path class="tile-overlay" d="${s.p}" />
+    </g>`;
   }
   svg.innerHTML = html;
 }
 
 function buildNYCOptions(abbrs, containerId) {
   const el = document.getElementById(containerId);
+  if(!el) return;
   abbrs.forEach(abbr => {
     const s = NYC_DATA[abbr];
     const div = document.createElement('div');
     div.className = 'bopt';
     div.id = 'opt-nyc-'+abbr;
-    // Set a custom property based on the neighborhood's specific turnout color
     div.style.setProperty('--sel-color', tColorNYC(s.vt));
     div.innerHTML = `
       <div class="oval"></div>
@@ -869,7 +760,7 @@ let selNYC = null;
 function handleNycClick(abbr) {
   if (selNYC) {
     document.getElementById('opt-nyc-'+selNYC)?.classList.remove('sel');
-    document.getElementById('tr-nyc-'+selNYC)?.classList.remove('sel');
+    document.getElementById('grp-nyc-'+selNYC)?.classList.remove('sel');
   }
   if (selNYC === abbr) {
     document.getElementById('nyc-stats-panel').classList.remove('on');
@@ -878,7 +769,7 @@ function handleNycClick(abbr) {
 
   const opt = document.getElementById('opt-nyc-'+abbr);
   if(opt) { opt.classList.add('sel'); opt.scrollIntoView({behavior:'smooth',block:'center'}); }
-  document.getElementById('tr-nyc-'+abbr)?.classList.add('sel');
+  document.getElementById('grp-nyc-'+abbr)?.classList.add('sel');
   selNYC = abbr;
 
   const s = NYC_DATA[abbr];
@@ -900,6 +791,9 @@ function buildStories() {
     const wrap = document.createElement('div');
     wrap.className = 'story-wrap';
     
+    // Replace text avatar with generic user SVG
+    const userSVG = `<svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+
     wrap.innerHTML = `
       <div class="story-top" id="stop-${story.id}" onclick="toggleStory('${story.id}')">
         <div class="oval"></div>
@@ -910,16 +804,11 @@ function buildStories() {
       </div>
       <div class="story-body new-story-body" id="sbody-${story.id}">
         <div class="story-detail-header">
-          <div class="story-avatar">${story.name.charAt(0)}</div>
+          <div class="story-avatar">${userSVG}</div>
           <div>
             <div class="story-name">${story.name}</div>
             <div class="story-role">${story.role}</div>
           </div>
-        </div>
-        <div class="story-intro-text">${story.intro}</div>
-        <div class="story-legend">
-          <span class="legend-item"><span class="l-box health"></span> Health Event</span>
-          <span class="legend-item"><span class="l-box civic"></span> Civic Event</span>
         </div>
         <div class="story-timeline-new">
           ${story.timeline.map(e => `
@@ -929,10 +818,6 @@ function buildStories() {
               <div class="te-detail-text">${e.detail}</div>
             </div>
           `).join('')}
-        </div>
-        <div class="story-summary-box">
-          <div class="summary-text">${story.summary}</div>
-          <div class="summary-sub">Civic engagement isn't abstract, it is the mechanism by which need becomes care.</div>
         </div>
       </div>
     `;
@@ -978,9 +863,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   buildUSMap();
-  buildUSOptions(GRP_HIGH, 'grp-high'); buildUSOptions(GRP_MID, 'grp-mid'); buildUSOptions(GRP_LOW, 'grp-low');
+  buildUSOptions(GRP_HIGH, 'grp-high'); 
+  buildUSOptions(GRP_MID, 'grp-mid'); 
+  buildUSOptions(GRP_MED_LOW, 'grp-med-low'); 
+  buildUSOptions(GRP_LOW, 'grp-low');
+  
   buildNYCMap();
-  buildNYCOptions(GRP_NYC_HIGH, 'grp-nyc-high'); buildNYCOptions(GRP_NYC_MID, 'grp-nyc-mid'); buildNYCOptions(GRP_NYC_LOW, 'grp-nyc-low');
+  buildNYCOptions(GRP_NYC_HIGH, 'grp-nyc-high'); 
+  buildNYCOptions(GRP_NYC_MID, 'grp-nyc-mid'); 
+  buildNYCOptions(GRP_NYC_MED_LOW, 'grp-nyc-med-low'); 
+  buildNYCOptions(GRP_NYC_LOW, 'grp-nyc-low');
+  
   buildStories();
 });
 </script>
