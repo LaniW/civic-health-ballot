@@ -48,6 +48,7 @@ body {
   min-height: 100vh;
   color: var(--ink);
   overflow: hidden; 
+  zoom: 0.9;
 }
 
 h1, h2, h3, .official-serif {
@@ -266,7 +267,7 @@ h1, h2, h3, .official-serif {
 .callout-btn:hover { background: var(--brand-red-light); }
 
 /* Stats Panel */
-#stats-panel, #nyc-stats-panel { display: none; border: var(--border-med); padding: 20px; margin-top: 10px; background: white; box-shadow: 4px 4px 0 rgba(0,0,0,0.1); }
+#stats-panel, #nyc-stats-panel {position: sticky; bottom: -20px; z-index: 20; display: none; border: var(--border-med); padding: 20px; margin-top: 10px; background: white; box-shadow: 4px 4px 0 rgba(0,0,0,0.1); }
 #stats-panel.on, #nyc-stats-panel.on { display: block; }
 .stat-name { font-size: 22px; font-weight: bold; border-bottom: var(--border-med); padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase; color: var(--brand-blue); }
 .stat-row { margin-bottom: 15px; }
@@ -276,7 +277,7 @@ h1, h2, h3, .official-serif {
 
 /* Tilemaps */
 .tm-label { font-size: 14px; font-weight: bold; text-transform: uppercase; color: var(--ink); }
-svg.tilemap { width: 100%; display: block; border: var(--border-med); margin-top: 15px; }
+svg.tilemap { width: 100%; max-height: 45vh; display: block; border: var(--border-med); margin-top: 15px; }
 #tilemap-us { background: #eef4f8; padding: 5px; }
 #tilemap-nyc { background: #eef4f8; padding: 5px; }
 
