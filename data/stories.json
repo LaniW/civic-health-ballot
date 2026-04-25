@@ -1,11 +1,11 @@
 {
-  "_generated_at": "2026-04-21T23:18:42+00:00",
   "_note": "Patient accounts are paraphrased, de-identified composites drawn from the clinical observations of Dr. Stella Safo, HIV specialist.",
   "stories": [
     {
       "id": "dr-Safo",
       "name": "Dr. Stella Safo",
       "role": "Healthcare Provider, HIV Specialist",
+      "name_note": null,
       "intro": "A HIV specialist at a health center in New York, Dr. Safo cares for some of the city's most vulnerable patients, navigating daily the intersection of public health, insurance policy, and human dignity. These are her patients' stories.",
       "timeline": [
         {
@@ -33,12 +33,16 @@
           "detail": "When a Medicaid benefit limit ends a life, it is not a medical failure. It is a policy failure. One made far from the hospital bed, in rooms shaped by who votes and who shows up."
         }
       ],
+      "sources": [
+        { "label": "Anecdotal, from Dr. Stella Safo" }
+      ],
       "summary": "She sees how insurance gaps, contract disputes, and state policy differences determine who lives, and carries these stories so others might listen."
     },
     {
       "id": "patient-one",
       "name": "A Man With Pancreatitis",
       "role": "Medicaid Patient Living With HIV",
+      "name_note": null,
       "intro": "He was admitted with pancreatitis: a serious but treatable condition. He was managing his HIV well. That was not the crisis. His Medicaid benefits ran out before he recovered. The hospital discharged him home. He died that night.",
       "timeline": [
         {
@@ -66,12 +70,16 @@
           "detail": "He died from pancreatitis complications the same night he was discharged. As Dr. Safo said: 'It wasn't HIV that killed him. It ended up being an insurance issue that killed him.'"
         }
       ],
+      "sources": [
+        { "label": "Anecdotal, from Dr. Stella Safo" }
+      ],
       "summary": "His HIV was managed. His pancreatitis was treatable. His Medicaid ran out. He was discharged before recovery and died that night."
     },
     {
       "id": "patient-two",
       "name": "A Young Man Diagnosed",
       "role": "HIV-Positive, Mid-20s",
+      "name_note": null,
       "intro": "Diagnosed with HIV in his mid-20s, rare today, when PrEP has made new infections among young people uncommon. He was struggling with the diagnosis. But he was excited about his care. He was getting comfortable. Then an insurance contract dispute ended all of that.",
       "timeline": [
         {
@@ -99,12 +107,16 @@
           "detail": "He was 'nervous to have to go to a new HIV doctor.' He'd just gotten comfortable. The relationship that had helped him feel safe. Disrupted not by him, but by a billing negotiation between institutions."
         }
       ],
+      "sources": [
+        { "label": "Anecdotal, from Dr. Stella Safo" }
+      ],
       "summary": "He was finally comfortable with his HIV care. Then an insurance contract dispute, nothing to do with his health, took his provider away."
     },
     {
       "id": "patient-three",
       "name": "Pregnant Woman With HIV",
       "role": "Formerly Homeless, Mother of Six",
+      "name_note": null,
       "intro": "She came to New York pregnant, homeless, and living with HIV. Five children had been removed by child protective services in North Carolina. She was carrying her sixth. New York State's benefits, tied to HIV status and pregnancy, gave her something her home state never had: a home.",
       "timeline": [
         {
@@ -132,7 +144,170 @@
           "detail": "'Lucky for her, New York State offers some good benefits,' Dr. Safo said. What feels like luck is actually policy, and policy is shaped by who votes, who testifies, and who organizes."
         }
       ],
+      "sources": [
+        { "label": "Anecdotal, from Dr. Stella Safo" }
+      ],
       "summary": "North Carolina took her children and offered no housing. New York, through policy tied to HIV and pregnancy, gave her a home. The difference was not luck, it was legislation."
+    },
+    {
+      "id": "patient-four",
+      "name": "Andrea Kelley",
+      "role": "Cancer Patient, Insured Through United Healthcare",
+      "name_note": null,
+      "intro": "After a year of stability on her cancer medication, United Healthcare denied Andrea access to both Lupron injection and Vioza. Her doctor prescribed these treatments. They were working. An insurance company stepped between Andrea and the medicine keeping her cancer at bay.",
+      "timeline": [
+        {
+          "type": "health",
+          "date": "One year stable",
+          "title": "Cancer managed with Lupron and Vioza",
+          "detail": "Her doctor prescribed the treatment. It was working. After a year of stability, her cancer was under control. The medication was doing what it was supposed to do."
+        },
+        {
+          "type": "civic",
+          "date": "Then",
+          "title": "United Healthcare denied both medications",
+          "detail": "Despite a year of documented stability, her insurer overrode her doctor's prescription and refused to authorize the treatment keeping her cancer at bay. The denials directly increased her risk of recurrence."
+        },
+        {
+          "type": "civic",
+          "date": "Congressional hearing",
+          "title": "Her case was raised before the U.S. House Ways and Means Committee",
+          "detail": "Rep. Buddy Carter of Georgia brought Andrea's case directly to insurance executives during a hearing on Pharmacy Benefit Managers—the middlemen who manage prescription drug benefits and often stand between patients and their medications. 'This isn't about convenience or cost. This is about whether her cancer comes back.'"
+        },
+        {
+          "type": "civic",
+          "date": "What's at stake",
+          "title": "Congress is considering bipartisan PBM reform. Significant hurdles remain.",
+          "detail": "For Andrea and thousands of patients like her, those reforms can't come soon enough. The question is whether elected officials will act before more patients are forced to choose between fighting their insurer and fighting their disease."
+        }
+      ],
+      "sources": [
+        { "label": "Patients Rising: Louisville Woman's Cancer Treatment Denial", "url": "https://www.patientsrising.org/advocacy-updates/louisville-womans-cancer-treatment-denial-highlights-national-crisis" }
+      ],
+      "summary": "Her cancer was stable for a year. Her insurer denied the medication keeping it that way. Her case was brought before Congress. Reform is pending. For Andrea, it cannot come soon enough."
+    },
+    {
+      "id": "patient-five",
+      "name": "Daniel Corwin",
+      "role": "Living With Common Variable Immune Deficiency Since 2001",
+      "name_note": "The name 'Daniel Corwin' is fictitious. The story is real.",
+      "intro": "For more than two decades, his life has depended on weekly immunoglobulin infusions. There is no alternative treatment. In 2023, his insurance plan quietly implemented a copay accumulator program that rendered his copay assistance meaningless. He is now paying twice for the same treatment.",
+      "timeline": [
+        {
+          "type": "health",
+          "date": "For two decades",
+          "title": "Weekly infusions kept him alive",
+          "detail": "His body cannot fight infections on its own. Since 2001, he has depended on immunoglobulin therapy—there is no alternative treatment. With copay assistance from the manufacturer, the cost was manageable. His condition was serious, but it was not a financial crisis."
+        },
+        {
+          "type": "civic",
+          "date": "Early 2023",
+          "title": "Bills that didn't make sense",
+          "detail": "Charges appeared that seemed wrong. After more than 20 hours of phone calls and fine print, he discovered his plan had quietly implemented a 'specialty copay offset benefit.' The copay assistance he depended on no longer counted toward his deductible or out-of-pocket maximum."
+        },
+        {
+          "type": "civic",
+          "date": "The mechanism",
+          "title": "Paying twice for the same treatment",
+          "detail": "The copay assistance program paid for the medication. The insurance company accepted those payments. But none of it was applied to his financial responsibility. The pharmacy benefit manager captured the difference as 'savings'—savings that never reached him. This practice is known as a copay accumulator program."
+        },
+        {
+          "type": "health",
+          "date": "Now",
+          "title": "For the first time, he worries about access to survival",
+          "detail": "His family now faces the full deductible every year. The financial pressure is real, but so is the fear: whether he will continue to be able to access the treatment that keeps him alive. Nothing about this change was obvious. There were no clear warnings. Patients don't discover these programs until they are already caught in them."
+        }
+      ],
+      "sources": [
+        { "label": "Patients Rising: Copay Accumulator Patient Story", "url": "https://www.patientsrising.org/advocacy-updates/copay-accumulator-patient-story-texas" }
+      ],
+      "summary": "For two decades, copay assistance made his life-sustaining treatment affordable. His insurer quietly implemented a copay accumulator that erased that help. He now faces the full cost alone, and fears losing access to the only treatment keeping him alive."
+    },
+    {
+      "id": "patient-six",
+      "name": "Miriam Reyes",
+      "role": "First-Time Mother, Advocate for Newborn Screening in Pennsylvania",
+      "name_note": "The name 'Miriam Reyes' is fictitious. The story and the name Luella are real.",
+      "intro": "Her daughter Luella was born with low muscle tone and failure to thrive. For six months, every concern was dismissed. When a rare genetic condition was finally identified, they were told it was a 'late diagnosis.' In Pennsylvania, Prader-Willi syndrome is not included in newborn screening. She is now fighting to change that.",
+      "timeline": [
+        {
+          "type": "health",
+          "date": "Pregnancy",
+          "title": "Something was always wrong—but never a clear answer",
+          "detail": "Each new concern was dismissed as coincidence. She and her partner were told not to worry. But something wasn't right, and no one could name it."
+        },
+        {
+          "type": "health",
+          "date": "Birth",
+          "title": "Her daughter Luella was born with low muscle tone",
+          "detail": "She couldn't properly suck, swallow, or stay awake. She required a feeding tube to survive. She was diagnosed with failure to thrive. Discharged from the NICU after six days. They were told she was doing fine."
+        },
+        {
+          "type": "health",
+          "date": "Six months",
+          "title": "The call: 'Your daughter has Prader-Willi syndrome'",
+          "detail": "A rare genetic condition on chromosome 15. It affects muscle tone, feeding, development—and eventually leads to a constant, life-threatening drive to eat without ever feeling full. They were told this was a 'late diagnosis.' The signs had been there from the beginning."
+        },
+        {
+          "type": "civic",
+          "date": "The gap",
+          "title": "Pennsylvania does not include PWS in newborn screening",
+          "detail": "Prader-Willi syndrome can be identified through genetic testing at birth. Early diagnosis can be lifesaving. But in Pennsylvania, it is not part of the standard panel. Families like hers are left searching for answers while critical time is lost."
+        },
+        {
+          "type": "civic",
+          "date": "Today",
+          "title": "Luella is thriving. Her mother is fighting to change the law.",
+          "detail": "She has met with her state senator to advocate for adding PWS to Pennsylvania's newborn screening panel. She is working toward a position on the Pennsylvania Rare Disease Advisory Council. Because no child should wait months for a diagnosis that could save their life."
+        }
+      ],
+      "sources": [
+        { "label": "Patients Rising: Prader-Willi Delayed Diagnosis & Newborn Screening", "url": "https://www.patientsrising.org/advocacy-updates/prader-willi-delayed-diagnosis-newborn-screening" }
+      ],
+      "summary": "Her daughter waited six months for a diagnosis that could have been made at birth. Pennsylvania doesn't screen for Prader-Willi syndrome. She is now advocating to change that—so no other family loses that time."
+    },
+    {
+      "id": "patient-seven",
+      "name": "Joan Hargrove",
+      "role": "Medicare Patient With Complex Health Needs, Homebound",
+      "name_note": "The name 'Joan Hargrove' is fictitious. The story is real.",
+      "intro": "She lives with complex health issues that require ongoing care. She needs home saline infusions to function. But under Medicare, that treatment is an excluded benefit. Infusion pharmacies won't even submit the request—which means she can't get a denial, can't file an appeal, and can't access care.",
+      "timeline": [
+        {
+          "type": "health",
+          "date": "The need",
+          "title": "Her body requires saline infusions to function",
+          "detail": "This is not a luxury or a convenience. It is a basic clinical need tied to her complex, ongoing health conditions. Her providers understand and agree. The treatment itself is straightforward."
+        },
+        {
+          "type": "civic",
+          "date": "The exclusion",
+          "title": "Under Medicare, home saline infusions are an excluded benefit",
+          "detail": "Because of this classification, infusion pharmacies will not even submit the request to insurance. No submission means no denial. No denial means no appeal. She has asked providers, case managers, and pharmacies to submit it anyway. Every time, the answer has been no."
+        },
+        {
+          "type": "civic",
+          "date": "The barrier",
+          "title": "Blocked before the process can even begin",
+          "detail": "The system does not simply deny her care. It prevents her from entering the process that could lead to care. There is no door to knock on, no form to file, no decision to contest. The path does not exist."
+        },
+        {
+          "type": "health",
+          "date": "Compounded",
+          "title": "Her condition makes it nearly impossible to leave home",
+          "detail": "Transportation is not just inconvenient—it is often not possible. What should be routine outpatient care becomes completely out of reach. She has a clear medical need. Her providers understand it. But there is no realistic path to access it."
+        },
+        {
+          "type": "civic",
+          "date": "The reality",
+          "title": "The system does not just make it difficult. It makes it impossible.",
+          "detail": "It's not about whether a treatment exists. It's about whether you can actually get it. Right now, she cannot. That distinction—between existence and access—is where policy either works or fails."
+        }
+      ],
+      "sources": [
+        { "label": "Patients Rising: Blocked Before Care Begins", "url": "https://www.patientsrising.org/advocacy-updates/blocked-before-care-begins-medicare-coverage" }
+      ],
+      "summary": "She needs home saline infusions. Medicare excludes them. Pharmacies won't submit the claim. Without a denial, there is no appeal. The system doesn't just make access difficult—it makes it impossible."
     }
   ]
 }
