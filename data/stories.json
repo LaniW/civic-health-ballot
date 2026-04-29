@@ -3,7 +3,7 @@
   "stories": [
     {
       "id": "dr-Safo",
-      "name": "Dr. Stella Safo",
+      "name": "Stella",
       "role": "Healthcare Provider, HIV Specialist",
       "name_note": null,
       "intro": "A HIV specialist at a health center in New York, Dr. Safo cares for some of the city's most vulnerable patients, navigating daily the intersection of public health, insurance policy, and human dignity. These are her patients' stories.",
@@ -40,7 +40,7 @@
     },
     {
       "id": "patient-one",
-      "name": "A Man With Pancreatitis",
+      "name": "Anonymous",
       "role": "Medicaid Patient Living With HIV",
       "name_note": null,
       "intro": "He was admitted with pancreatitis: a serious but treatable condition. He was managing his HIV well. That was not the crisis. His Medicaid benefits ran out before he recovered. The hospital discharged him home. He died that night.",
@@ -77,7 +77,7 @@
     },
     {
       "id": "patient-two",
-      "name": "A Young Man Diagnosed",
+      "name": "Anonymous",
       "role": "HIV-Positive, Mid-20s",
       "name_note": null,
       "intro": "Diagnosed with HIV in his mid-20s, rare today, when PrEP has made new infections among young people uncommon. He was struggling with the diagnosis. But he was excited about his care. He was getting comfortable. Then an insurance contract dispute ended all of that.",
@@ -114,7 +114,7 @@
     },
     {
       "id": "patient-three",
-      "name": "Pregnant Woman With HIV",
+      "name": "Anonymous",
       "role": "Formerly Homeless, Mother of Six",
       "name_note": null,
       "intro": "She came to New York pregnant, homeless, and living with HIV. Five children had been removed by child protective services in North Carolina. She was carrying her sixth. New York State's benefits, tied to HIV status and pregnancy, gave her something her home state never had: a home.",
@@ -151,7 +151,7 @@
     },
     {
       "id": "patient-four",
-      "name": "Andrea Kelley",
+      "name": "Andrea",
       "role": "Cancer Patient, Insured Through United Healthcare",
       "name_note": null,
       "intro": "After a year of stability on her cancer medication, United Healthcare denied Andrea access to both Lupron injection and Vioza. Her doctor prescribed these treatments. They were working. An insurance company stepped between Andrea and the medicine keeping her cancer at bay.",
@@ -188,7 +188,7 @@
     },
     {
       "id": "patient-five",
-      "name": "Daniel Corwin",
+      "name": "Daniel",
       "role": "Living With Common Variable Immune Deficiency Since 2001",
       "name_note": "The name 'Daniel Corwin' is fictitious. The story is real.",
       "intro": "For more than two decades, his life has depended on weekly immunoglobulin infusions. There is no alternative treatment. In 2023, his insurance plan quietly implemented a copay accumulator program that rendered his copay assistance meaningless. He is now paying twice for the same treatment.",
@@ -225,7 +225,7 @@
     },
     {
       "id": "patient-six",
-      "name": "Miriam Reyes",
+      "name": "Miriam",
       "role": "First-Time Mother, Advocate for Newborn Screening in Pennsylvania",
       "name_note": "The name 'Miriam Reyes' is fictitious. The story and the name Luella are real.",
       "intro": "Her daughter Luella was born with low muscle tone and failure to thrive. For six months, every concern was dismissed. When a rare genetic condition was finally identified, they were told it was a 'late diagnosis.' In Pennsylvania, Prader-Willi syndrome is not included in newborn screening. She is now fighting to change that.",
@@ -268,7 +268,7 @@
     },
     {
       "id": "patient-seven",
-      "name": "Joan Hargrove",
+      "name": "Joan",
       "role": "Medicare Patient With Complex Health Needs, Homebound",
       "name_note": "The name 'Joan Hargrove' is fictitious. The story is real.",
       "intro": "She lives with complex health issues that require ongoing care. She needs home saline infusions to function. But under Medicare, that treatment is an excluded benefit. Infusion pharmacies won't even submit the request—which means she can't get a denial, can't file an appeal, and can't access care.",

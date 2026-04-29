@@ -1,5 +1,5 @@
 {
-  "_generated_at": "2026-04-21T23:23:56+00:00",
+  "_generated_at": "2026-04-28T00:27:34+00:00",
   "us_turnout": {
     "metric_key": "t",
     "description": "2020 general election voter turnout, voting-eligible population.",
@@ -7,7 +7,7 @@
     "dataset": "Turnout_2020G v1.2",
     "landing_url": "https://election.lab.ufl.edu/voter-turnout/2020-general-election-turnout/",
     "fetch_url": "https://election.lab.ufl.edu/data-downloads/turnoutdata/Turnout_2020G_v1.2.csv",
-    "fetched_at": "2026-04-21T23:23:56+00:00"
+    "fetched_at": "2026-04-28T00:27:34+00:00"
   },
   "us_uninsured": {
     "metric_key": "u",
@@ -16,7 +16,7 @@
     "dataset": "S2701 (2023), variable S2701_C05_001E",
     "landing_url": "https://data.census.gov/table/ACSST1Y2023.S2701",
     "fetch_url": "https://api.census.gov/data/2023/acs/acs1/subject?get=NAME,S2701_C05_001E&for=state:*",
-    "fetched_at": "2026-04-21T23:23:56+00:00",
+    "fetched_at": "2026-04-28T00:27:34+00:00",
     "mirror": "https://www.kff.org/state-category/health-coverage-uninsured/"
   },
   "us_life_expectancy": {
@@ -25,7 +25,7 @@
     "publisher": "CDC/NCHS, National Vital Statistics System",
     "dataset": "National Vital Statistics Reports Vol. 74 No. 12 (U.S. State Life Tables, 2022), Table A",
     "landing_url": "https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-12.pdf",
-    "local_extract": "data/raw/cdc_nvsr_74_12_tableA.tsv",
+    "local_extract": "data\\raw\\cdc_nvsr_74_12_tableA.tsv",
     "note": "CDC publishes NVSR only as PDF. The local TSV is the canonical input; re-extract and commit when a newer NVSR is released."
   }
 }
