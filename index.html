@@ -154,18 +154,17 @@ h1, h2, h3, .official-serif {
 .env-stamp { border: 4px solid var(--brand-blue); padding: 15px 25px; text-align: center; background: transparent; transform: rotate(-5deg); margin: 0 10px; flex-shrink: 0; }
 .stamp-big { font-size: 18px; font-weight: bold; font-style: italic; color: var(--brand-blue); line-height: 1.2; }
 
-/* ENVELOPE BUTTON UPDATES */
 .env-btn { 
   display: inline-block; 
   width: auto; 
-  min-width: 320px; /* Made wider */
-  padding: 28px 50px; /* Increased height and width padding */
+  min-width: 320px; 
+  padding: 28px 50px; 
   background: var(--brand-red); 
   color: white; 
   font-weight: bold; 
-  font-size: 24px; /* Increased text size */
+  font-size: 24px; 
   text-transform: uppercase; 
-  letter-spacing: 2px; /* Widened tracking for larger text */
+  letter-spacing: 2px; 
   cursor: pointer; 
   border: none; 
   transition: 0.2s; 
@@ -190,16 +189,17 @@ h1, h2, h3, .official-serif {
 }
 .ballot-header {
   display: flex; justify-content: center; align-items: center;
-  color: white; padding: 15px 20px;
+  color: white; padding: 15px 20px; margin: 0;
   text-transform: uppercase; font-weight: bold; flex-shrink: 0;
   border-bottom: var(--border-med);
 }
-.bh-title { font-size: 22px; letter-spacing: 1px; }
+.bh-title { font-size: 22px; letter-spacing: 1px; margin: 0; }
 
 .ballot-cols { 
   display: flex; 
   flex: 1; 
   overflow: hidden; 
+  margin: 0;
 }
 .bleft { 
   flex: 2; 
@@ -210,28 +210,37 @@ h1, h2, h3, .official-serif {
   gap: 20px; 
   overflow-y: auto; 
   background: white;
+  position: relative; /* Added for absolute positioning inside */
+  margin: 0;
 }
 .bright { 
   flex: 1; 
   padding: 0; 
+  margin: 0;
   overflow-y: auto; 
   background: var(--paper-shade);
   position: relative;
+  display: block; /* Explicitly reset flex gap behaviors */
 }
 
-.race-header {
-  padding: 10px 20px; 
-  position: sticky; top: 0; z-index: 5;
-  border-bottom: var(--border-thin);
+/* Updated sticky header logic to remove the gap */
+.main-list-title {
+  background: #333333; color: white; padding: 0 20px; font-size: 20px;
+  position: sticky; top: 0; z-index: 10;
+  height: 56px; display: flex; align-items: center; box-sizing: border-box; margin: 0; border: none;
 }
-.race-title { font-size: 14px; font-weight: bold; text-transform: uppercase; }
+.race-header {
+  padding: 10px 20px; position: sticky; z-index: 5;
+  border-bottom: var(--border-thin); top: 56px; margin: 0;
+}
+.race-title { font-size: 14px; font-weight: bold; text-transform: uppercase; margin: 0; }
 
 /* Options */
 .bopt {
   display: flex; align-items: center; gap: 15px;
   padding: 12px 20px; border-bottom: var(--border-thin);
   cursor: pointer; transition: background .1s;
-  background: white;
+  background: white; margin: 0;
 }
 .bopt:hover { background: #f0f0f0; }
 .bopt.sel { background: #f8f8f8; font-weight: bold; } 
@@ -248,12 +257,12 @@ h1, h2, h3, .official-serif {
 .opt-pct { font-size: 14px; font-weight: bold; } 
 .opt-badge { font-size: 10px; background: var(--brand-teal); color: white; padding: 2px 6px; margin-left: 10px; text-transform: uppercase; border-radius: 3px; }
 
-/* Next Actions & Callouts */
+/* Next Actions & Callouts - Moved to bottom so it doesn't break top sticky layout */
 .next-action-bar {
   display: none; padding: 15px 20px; background: var(--brand-gray-dark);
-  text-align: right; border-bottom: var(--border-thin);
-  position: sticky; top: 0; z-index: 50;
-  color: white;
+  text-align: right; border-top: var(--border-thin);
+  position: sticky; bottom: 0; z-index: 50;
+  color: white; margin: 0;
 }
 .next-action-bar.on { display: block; }
 
@@ -273,18 +282,28 @@ h1, h2, h3, .official-serif {
 .stat-fill { height: 100%; background: var(--brand-blue); transition: width .6s cubic-bezier(0.25, 1, 0.5, 1); }
 
 /* Tilemaps */
-.tm-label { font-size: 14px; font-weight: bold; text-transform: uppercase; color: var(--ink); }
+.tm-label { font-size: 14px; font-weight: bold; text-transform: uppercase; color: var(--ink); margin: 0; }
 svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; } 
 
-/* Map Selection Styles - Hatching Overlay */
+/* Map Selection Styles - Highlighting */
 .tm-tile, .tm-tile-nyc { cursor: pointer; }
 .tm-tile .tile-bg { stroke: var(--ink); stroke-width: 1px; transition: fill 0.2s; }
 .tm-tile-nyc .tile-bg { stroke: var(--ink); stroke-width: 0.5px; transition: fill 0.2s; }
 
 .tile-overlay { fill: transparent; pointer-events: none; transition: fill 0.2s; }
 
-.tm-tile:hover .tile-overlay, .tm-tile-nyc:hover .tile-overlay { fill: url(#stripe-hover); }
-.tm-tile.sel .tile-overlay, .tm-tile-nyc.sel .tile-overlay { fill: url(#stripe-sel); }
+/* Lightens the cell on hover */
+.tm-tile:hover .tile-overlay, .tm-tile-nyc:hover .tile-overlay { fill: rgba(255,255,255,0.4); }
+
+/* Turns cell white entirely on selection WITHOUT bolding border */
+.tm-tile.sel .tile-bg { fill: #ffffff !important; stroke-width: 1px; }
+.tm-tile-nyc.sel .tile-bg { fill: #ffffff !important; stroke-width: 0.5px; }
+.tm-tile.sel .tile-overlay, .tm-tile-nyc.sel .tile-overlay { fill: transparent; }
+
+/* Map Text Contrast */
+.state-text { fill: var(--ink); text-anchor: middle; font-size: 7px; font-weight: bold; pointer-events: none; }
+.tm-tile.dark-bg .state-text { fill: white; }
+.tm-tile.dark-bg.sel .state-text { fill: var(--ink); }
 
 /* Legend */
 .tm-legend { display: flex; flex-wrap: wrap; gap: 15px; font-size: 12px; text-transform: uppercase; font-weight: bold; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-top: 5px; }
@@ -301,7 +320,7 @@ svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; }
 .story-wrap { 
   display: flex;
   flex-direction: column;
-  flex: 1; /* Instructs the box to stretch and fill all available extra space evenly */
+  flex: 1; 
   border-bottom: var(--border-thin); 
   background: white; 
 }
@@ -309,15 +328,23 @@ svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; }
 .story-top { 
   display: flex; 
   align-items: center; 
-  gap: 15px; 
   padding: 15px 20px; 
   cursor: pointer; 
   transition: background .1s; 
-  flex: 1; /* Makes the clickable area stretch inside the newly enlarged wrap */
+  flex: 1; 
 }
 .story-top:hover { background: #f0f0f0; }
 .story-top.sel-s { background: #f8f8f8; } 
-.story-top.sel-s .oval { background: var(--brand-purple); border-color: var(--brand-purple); }
+
+.story-avatar-small {
+  width: 44px; height: 44px; border-radius: 50%; background: #e8e8e8;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--brand-purple); flex-shrink: 0; margin-right: 15px;
+  border: 2px solid transparent; transition: all 0.2s;
+}
+.story-top.sel-s .story-avatar-small {
+  background: var(--brand-purple); color: white; border-color: var(--brand-purple);
+}
 
 .story-body { display: none; }
 .story-body.on { display: block; }
@@ -351,23 +378,13 @@ svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; }
 @media (max-width: 900px) {
   .ballot-cols { flex-direction: column; overflow-y: auto; }
   .bleft, .bright { overflow-y: visible; height: auto; flex: none; }
-  .bleft { border-right: none; border-bottom: var(--border-med); }
+  .bleft { border-right: none; border-bottom: var(--border-med); padding-bottom: 20px; }
   .env-body { padding: 20px; }
+  #nyc-stats-panel { position: relative !important; right: auto !important; bottom: auto !important; width: 100% !important; margin-top: 15px; }
 }
 </style>
 </head>
 <body>
-
-<svg style="width:0; height:0; position:absolute;" aria-hidden="true">
-  <defs>
-    <pattern id="stripe-hover" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(255,255,255,0.6)" stroke-width="2" />
-    </pattern>
-    <pattern id="stripe-sel" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="6" stroke="white" stroke-width="3.5" />
-    </pattern>
-  </defs>
-</svg>
 
 <nav id="navbar">
   <div class="nav-inner">
@@ -447,23 +464,23 @@ svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; }
             </div>
           </div>
           <div class="bright"> 
+            <div class="main-list-title">States in Order of Turnout</div>
+
+            <div class="race-header" style="background: var(--t-high); color: white;"><div class="race-title">HIGH TURNOUT STATES (70%+)</div></div>
+            <div id="grp-high"></div>
+            
+            <div class="race-header" style="background: var(--t-med); color: white;"><div class="race-title">MODERATE TURNOUT STATES (64–69%)</div></div>
+            <div id="grp-mid"></div>
+
+            <div class="race-header" style="background: var(--t-med-low); color: var(--ink);"><div class="race-title">MEDIUM-LOW TURNOUT STATES (58–63%)</div></div>
+            <div id="grp-med-low"></div>
+            
+            <div class="race-header" style="background: var(--t-low); color: var(--ink);"><div class="race-title">LOWER TURNOUT STATES (under 58%)</div></div>
+            <div id="grp-low"></div>
+
             <div id="us-next-bar" class="next-action-bar">
               <button class="callout-btn action-btn" onclick="navToBallot('screen-nyc')">Turn Page to NYC Local Ballot →</button>
             </div>
-            
-            <div style="background: #333333; color: white; padding: 15px 20px; font-size: 20px; position: sticky; top: 0; z-index: 10;">States in Order of Turnout</div>
-
-            <div class="race-header" style="background: var(--t-high); color: white; top: 54px;"><div class="race-title">HIGH TURNOUT STATES (70%+)</div></div>
-            <div id="grp-high"></div>
-            
-            <div class="race-header" style="background: var(--t-med); color: white; top: 54px;"><div class="race-title">MODERATE TURNOUT STATES (64–69%)</div></div>
-            <div id="grp-mid"></div>
-
-            <div class="race-header" style="background: var(--t-med-low); color: var(--ink); top: 54px;"><div class="race-title">MEDIUM-LOW TURNOUT STATES (58–63%)</div></div>
-            <div id="grp-med-low"></div>
-            
-            <div class="race-header" style="background: var(--t-low); color: var(--ink); top: 54px;"><div class="race-title">LOWER TURNOUT STATES (under 58%)</div></div>
-            <div id="grp-low"></div>
           </div>
         </div>
       </div>
@@ -484,11 +501,11 @@ svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; }
               <div class="tm-le"><div class="tm-sw" style="background:var(--t-high);"></div>45%+</div>
             </div>
             
-            <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 30px; width: 100%;">
-              <div style="flex: 1; min-width: 0;">
-                <svg id="tilemap-nyc" class="tilemap" viewBox="0 0 115 95" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div style="display: flex; flex-direction: row; align-items: flex-start; width: 100%; position: relative; min-height: 450px;">
+              <div style="width: 100%;">
+                <svg id="tilemap-nyc" class="tilemap" viewBox="0 0 115 95" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;"></svg>
               </div>
-              <div id="nyc-stats-panel" style="width: 280px; flex-shrink: 0;">
+              <div id="nyc-stats-panel" style="width: 280px; position: absolute; right: 0; bottom: 0; z-index: 10; background: rgba(255,255,255,0.95); box-shadow: -4px -4px 10px rgba(0,0,0,0.1); border: var(--border-med);">
                 <div class="stat-name" id="nyc-stats-name" style="color: var(--brand-teal);">—</div>
                 <div style="font-family: monospace; font-size: 11px; color: var(--brand-gray-dark); margin-bottom: 15px; text-transform: uppercase; font-weight:bold;" id="nyc-stats-boro">—</div>
                 <div class="stat-row">
@@ -503,16 +520,16 @@ svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; }
             </div>
           </div>
           <div class="bright"> 
-            <div class="race-header" style="background: var(--t-high); color: white;"><div class="race-title">High Turnout Neighborhoods (45%+)</div></div>
+            <div class="race-header" style="background: var(--t-high); color: white; top: 0;"><div class="race-title">High Turnout Neighborhoods (45%+)</div></div>
             <div id="grp-nyc-high"></div>
             
-            <div class="race-header" style="background: var(--t-med); color: white;"><div class="race-title">Moderate Turnout Neighborhoods (40–44%)</div></div>
+            <div class="race-header" style="background: var(--t-med); color: white; top: 0;"><div class="race-title">Moderate Turnout Neighborhoods (40–44%)</div></div>
             <div id="grp-nyc-mid"></div>
 
-            <div class="race-header" style="background: var(--t-med-low); color: var(--ink);"><div class="race-title">Medium-Low Turnout Neighborhoods (35–39%)</div></div>
+            <div class="race-header" style="background: var(--t-med-low); color: var(--ink); top: 0;"><div class="race-title">Medium-Low Turnout Neighborhoods (35–39%)</div></div>
             <div id="grp-nyc-med-low"></div>
             
-            <div class="race-header" style="background: var(--t-low); color: var(--ink);"><div class="race-title">Lower Turnout Neighborhoods (under 35%)</div></div>
+            <div class="race-header" style="background: var(--t-low); color: var(--ink); top: 0;"><div class="race-title">Lower Turnout Neighborhoods (under 35%)</div></div>
             <div id="grp-nyc-low"></div>
           </div>
         </div>
@@ -526,14 +543,14 @@ svg.tilemap { width: 100%; height: auto; display: block; margin-top: 15px; }
         </div>
         <div class="ballot-cols">
           <div class="bleft" style="flex: 2; padding: 0; border-right: var(--border-med); background: var(--paper-shade); display: flex; flex-direction: column; height: 100%;">
-            <div class="race-header" style="background: #e8e8e8;"><div class="race-title">Patient Records</div></div>
+            <div class="race-header" style="background: #e8e8e8; top: 0;"><div class="race-title">Patient Records</div></div>
             <div id="stories-list" style="flex: 1; display: flex; flex-direction: column; overflow-y: auto;"></div>
           </div>
           <div class="bright" style="flex: 1; padding: 30px; background: white;">
              <div class="tm-label" style="font-size:18px; color: var(--brand-purple); width: 100%; border-bottom: none; margin-bottom: 20px;">What's At Stake</div>
              <div class="reading-text">
-                <p style="margin-bottom:15px;">Dr. Safo sees the system from the inside. Every discharge, every coverage lapse, every contract dispute, she witnesses them and continues to care for patients anyway.</p>
-                <p>These policies determine who lives, who loses their provider, and who finds a home. <strong>Select a record on the left to view.</strong></p>
+                <p style="margin-bottom:15px;">Providers and patients experience the realities of the healthcare system firsthand. Every discharge, coverage lapse, and contract dispute represents a human life shaped by policy decisions.</p>
+                <p>These stories reveal what happens when systems fail and communities step in. <strong>Select a record on the left to view the human impact of healthcare policy.</strong></p>
             </div>
           </div>
         </div>
@@ -584,7 +601,7 @@ const GRID_US = {
   AK:[1.5,8],  ME:[12.5,8],
   NH:[12,7],   VT:[11,7],
   WA:[2.5,6],  MT:[3.5,6], ND:[4.5,6], MN:[5.5,6], WI:[6.5,6], MI:[8.5,6], NY:[10.5,6], MA:[11.5,6], RI:[12.5,6],
-  OR:[2.5,4],  ID:[3,5],   WY:[4,5],   SD:[5,5],   IA:[6,5],   IL:[7,5],   IN:[8,5],    OH:[9,5],    PA:[10,5],   NJ:[11,5], CT:[12,5],
+  OR:[2.5,4],  ID:[3,5],   WY:[4,5],   SD:[5,5],   IA:[6,5],   IL:[7,5],   IN:[8,5],    OH:[9,5],    PA:[10,5],  NJ:[11,5], CT:[12,5],
   NV:[3.5,4],  UT:[4,3],   CO:[4.5,4], NE:[5.5,4], MO:[6.5,4], KY:[7.5,4], WV:[8.5,4],  VA:[9.5,4],  MD:[10.5,4], DE:[11.5,4],
   CA:[3,3],    AZ:[4.5,2], NM:[5,3],   KS:[6,3],   AR:[7,3],   TN:[8,3],   NC:[9,3],    SC:[10,3],   DC:[11,3],
   HI:[1,1],    OK:[5.5,2], LA:[6.5,2], MS:[7.5,2], AL:[8.5,2], GA:[9.5,2],
@@ -644,6 +661,17 @@ function updateNavStyles(screenId) {
 // ══════════════════════════════════════════
 // MAP BUILDERS & INTERACTIVITY
 // ══════════════════════════════════════════
+
+// Custom Scroll Logic avoids body jump caused by native scrollIntoView
+function safeScrollTo(element) {
+  const container = element.closest('.bright') || element.closest('.bleft') || element.closest('.ballot-cols');
+  if (!container) return;
+  const offsetTop = element.offsetTop;
+  const containerHalf = container.clientHeight / 2;
+  const elHalf = element.clientHeight / 2;
+  container.scrollTo({ top: offsetTop - containerHalf + elHalf, behavior: 'smooth' });
+}
+
 function tColor(t) {
   if (t >= 70) return 'var(--t-high)';
   if (t >= 64) return 'var(--t-med)';
@@ -665,10 +693,11 @@ function buildUSMap() {
     const cx = (lng - 1) * W + W/2 + PAD;
     const cy = (MAX_LAT - lat) * ROW_Y + S + PAD;
     const pts = V.map(([px, py]) => `${(cx+px).toFixed(2)},${(cy+py).toFixed(2)}`).join(' ');
-    html += `<g class="tm-tile" id="grp-${abbr}" onclick="handleUsClick('${abbr}')">
+    const isDarkBg = s.t >= 70; // Identifies dark background tiles for text color adjustment
+    html += `<g class="tm-tile ${isDarkBg ? 'dark-bg' : ''}" id="grp-${abbr}" onclick="handleUsClick('${abbr}')">
       <polygon class="tile-bg" points="${pts}" fill="${tColor(s.t)}" />
       <polygon class="tile-overlay" points="${pts}" />
-      <text x="${cx.toFixed(2)}" y="${(cy+3).toFixed(2)}" text-anchor="middle" fill="black" font-size="7" font-weight="bold" pointer-events="none">${abbr}</text>
+      <text class="state-text" x="${cx.toFixed(2)}" y="${(cy+3).toFixed(2)}">${abbr}</text>
     </g>`;
   }
   svg.innerHTML = html;
@@ -708,7 +737,7 @@ function handleUsClick(abbr) {
   }
 
   const opt = document.getElementById('opt-'+abbr);
-  if(opt) { opt.classList.add('sel'); opt.scrollIntoView({behavior:'smooth',block:'center'}); }
+  if(opt) { opt.classList.add('sel'); safeScrollTo(opt); }
   document.getElementById('grp-'+abbr)?.classList.add('sel');
   selUS = abbr;
 
@@ -782,7 +811,7 @@ function handleNycClick(abbr) {
   }
 
   const opt = document.getElementById('opt-nyc-'+abbr);
-  if(opt) { opt.classList.add('sel'); opt.scrollIntoView({behavior:'smooth',block:'center'}); }
+  if(opt) { opt.classList.add('sel'); safeScrollTo(opt); }
   document.getElementById('grp-nyc-'+abbr)?.classList.add('sel');
   selNYC = abbr;
 
@@ -805,7 +834,7 @@ function buildStories() {
     const wrap = document.createElement('div');
     wrap.className = 'story-wrap';
     
-    const userSVG = `<svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+    const userSVG = `<svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
 
     const nameNoteHtml = story.name_note
       ? `<div class="story-name-note">${story.name_note}</div>`
@@ -823,7 +852,7 @@ function buildStories() {
 
     wrap.innerHTML = `
       <div class="story-top" id="stop-${story.id}" onclick="toggleStory('${story.id}')">
-        <div class="oval"></div>
+        <div class="story-avatar-small">${userSVG}</div>
         <div class="opt-body">
           <div class="opt-name"><strong>${story.name}</strong></div>
           <div class="opt-meta">${story.role}</div>
@@ -865,7 +894,7 @@ function toggleStory(id) {
   if (!isOpen) {
     body.classList.add('on');
     top.classList.add('sel-s');
-    setTimeout(() => body.scrollIntoView({behavior:'smooth',block:'center'}), 100);
+    setTimeout(() => safeScrollTo(top), 100);
   }
 }
 

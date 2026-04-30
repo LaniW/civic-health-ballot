@@ -40,14 +40,14 @@
     },
     {
       "id": "patient-one",
-      "name": "Anonymous",
+      "name": "Medicaid Patient Living With HIV",
       "role": "Medicaid Patient Living With HIV",
       "name_note": null,
       "intro": "He was admitted with pancreatitis: a serious but treatable condition. He was managing his HIV well. That was not the crisis. His Medicaid benefits ran out before he recovered. The hospital discharged him home. He died that night.",
       "timeline": [
         {
           "type": "health",
-          "date": "Admission",
+          "date": "Man with Pancreatitis",
           "title": "Admitted for pancreatitis",
           "detail": "A treatable condition. He was managing his HIV well,that was not in crisis. The hospitalization was for pancreatitis."
         },
@@ -77,7 +77,7 @@
     },
     {
       "id": "patient-two",
-      "name": "Anonymous",
+      "name": "Man in his Mid-20s Living With HIV",
       "role": "HIV-Positive, Mid-20s",
       "name_note": null,
       "intro": "Diagnosed with HIV in his mid-20s, rare today, when PrEP has made new infections among young people uncommon. He was struggling with the diagnosis. But he was excited about his care. He was getting comfortable. Then an insurance contract dispute ended all of that.",
@@ -114,7 +114,7 @@
     },
     {
       "id": "patient-three",
-      "name": "Anonymous",
+      "name": "A Mother Living With HIV",
       "role": "Formerly Homeless, Mother of Six",
       "name_note": null,
       "intro": "She came to New York pregnant, homeless, and living with HIV. Five children had been removed by child protective services in North Carolina. She was carrying her sixth. New York State's benefits, tied to HIV status and pregnancy, gave her something her home state never had: a home.",
