@@ -1,6 +1,6 @@
 # 🗳️ Civic Health Alliance: Official Health Ballot
 
-<img width="759" height="528" alt="image" src="https://github.com/user-attachments/assets/b3d22ea2-2066-4706-9d42-27f6360a6297" />
+<img width="1317" height="836" alt="image" src="https://github.com/user-attachments/assets/ade2bb28-4449-4207-940b-81cf9cdf7480" />
 
 An interactive, ballot-style web experience exploring the critical intersection of civic participation and healthcare outcomes in the United States. 
 
@@ -15,20 +15,20 @@ This visual investigation demonstrates that states and neighborhoods where resid
 ## Key Features & Walkthrough
 
 ### 1. The National Picture (US Map)
-<img width="699" height="516" alt="image" src="https://github.com/user-attachments/assets/3ad775c4-57b1-4bab-a023-8bdddf26da5b" />
+<img width="1688" height="870" alt="image" src="https://github.com/user-attachments/assets/6e87099f-0647-4687-b7f2-375602bcc531" />
 
 * Interactive hexagonal tile grid of the United States, laid out per NPR's convention (see Data Sources below).
 * Displays 2020 voter turnout, uninsured rates, and life expectancy for each state.
 * Highlights the correlation between high civic engagement and stronger health metrics.
 
 ### 2. The Local Picture (NYC Map)
-<img width="698" height="644" alt="image" src="https://github.com/user-attachments/assets/59437dad-ede2-42d3-b7a4-5c008cdf598c" />
+<img width="1412" height="1293" alt="image" src="https://github.com/user-attachments/assets/74d251e8-90b0-4fd2-beb9-d5223c92a957" />
 
 * Brings the national data down to a granular, local level using New York City neighborhoods.
 * Shows the stark life expectancy gaps (e.g., the 12-year gap between adjacent neighborhoods) and how they map to local voter turnout.
 
 ### 3. Legislative Measures (Patient Stories)
-<img width="426" height="637" alt="image" src="https://github.com/user-attachments/assets/b82ab18e-d5b6-4243-8ecd-c4cda4241161" />
+<img width="1292" height="1091" alt="image" src="https://github.com/user-attachments/assets/fa839a12-0f13-4502-9156-8195c7314683" />
 
 * Grounds the statistical data in real human experiences.
 * Features interactive patient records documenting how civic failures (like Medicaid benefit limits or state-level housing policies) result in direct, often fatal, health outcomes.
